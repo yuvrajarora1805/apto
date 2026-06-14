@@ -54,7 +54,7 @@ class ApiService {
     
     // Always return local state to show unsynced records
     final localData = await DatabaseHelper.instance.getAppointments();
-    return {'appointments': localData};
+    return {'success': true, 'data': localData};
   }
 
   static Future<Map<String, dynamic>> scheduleAppointment(Map<String, dynamic> data) async {
@@ -107,7 +107,7 @@ class ApiService {
     }
     
     final localData = await DatabaseHelper.instance.getPatients();
-    return {'patients': localData};
+    return {'success': true, 'data': localData};
   }
 
   static Future<Map<String, dynamic>> addPatient(Map<String, dynamic> data) async {
