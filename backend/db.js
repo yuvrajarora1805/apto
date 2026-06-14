@@ -145,6 +145,34 @@ async function initDB() {
       )
     `);
 
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS clinical_notes (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT,
+        patient_id INT,
+        appointment_id INT,
+        chief_complaint TEXT,
+        diagnosis TEXT,
+        treatment_done TEXT,
+        prescription TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS payments (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT,
+        patient_id INT,
+        appointment_id INT,
+        total_amount DECIMAL(10,2),
+        paid_amount DECIMAL(10,2),
+        balance_due DECIMAL(10,2),
+        payment_method VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
     try { await connection.query('ALTER TABLE patients ADD COLUMN admin_id INT'); } catch (e) {}
     try { await connection.query('ALTER TABLE appointments ADD COLUMN admin_id INT'); } catch (e) {}
 

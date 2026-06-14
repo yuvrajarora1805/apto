@@ -13,35 +13,49 @@ class PatientDetailScreen extends StatefulWidget {
 
 class _PatientDetailScreenState extends State<PatientDetailScreen> {
   List<dynamic> _patientAppointments = [];
+  List<dynamic> _historyNotes = [];
+  List<dynamic> _historyPayments = [];
+  double _totalDue = 0.0;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchPatientAppointments();
+    _fetchData();
   }
 
-  Future<void> _fetchPatientAppointments() async {
+  Future<void> _fetchData() async {
     try {
       final session = await AuthService.getSession();
       final adminId = session != null ? session['id'] : 1;
-      final res = await ApiService.fetchAppointments(adminId);
-      if (res['success'] == true && mounted) {
-        final allAppointments = res['data'] as List<dynamic>;
+      
+      final resAppt = await ApiService.fetchAppointments(adminId);
+      final resHist = await ApiService.fetchPatientHistory(widget.patient['id'], adminId);
+
+      if (mounted) {
         setState(() {
-          _patientAppointments = allAppointments.where((app) => app['patient_id'] == widget.patient['id']).toList();
-          // Sort by date descending
-          _patientAppointments.sort((a, b) {
-            final dateA = DateTime.tryParse(a['appointment_date'].toString()) ?? DateTime(2000);
-            final dateB = DateTime.tryParse(b['appointment_date'].toString()) ?? DateTime(2000);
-            return dateB.compareTo(dateA);
-          });
+          if (resAppt['success'] == true) {
+            final allAppointments = resAppt['data'] as List<dynamic>;
+            _patientAppointments = allAppointments.where((app) => app['patient_id'] == widget.patient['id']).toList();
+            _patientAppointments.sort((a, b) {
+              final dateA = DateTime.tryParse(a['appointment_date'].toString()) ?? DateTime(2000);
+              final dateB = DateTime.tryParse(b['appointment_date'].toString()) ?? DateTime(2000);
+              return dateB.compareTo(dateA);
+            });
+          }
+
+          if (resHist['success'] == true) {
+            _historyNotes = resHist['notes'];
+            _historyPayments = resHist['payments'];
+            _totalDue = double.tryParse(resHist['total_due'].toString()) ?? 0.0;
+          }
+          
           _isLoading = false;
         });
       }
     } catch (e) {
       if (mounted) setState(() => _isLoading = false);
-      debugPrint("Error fetching appointments: $e");
+      debugPrint("Error fetching data: $e");
     }
   }
 
@@ -90,23 +104,75 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
               ),
               const Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Text("Recent Appointments", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A))),
+                child: Text("Financial Overview", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A))),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Card(
+                  color: _totalDue > 0 ? Colors.red.shade50 : Colors.green.shade50,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: _totalDue > 0 ? Colors.red.shade200 : Colors.green.shade200)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Total Outstanding Dues:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text("₹$_totalDue", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: _totalDue > 0 ? Colors.red : Colors.green)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text("Clinical History", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A))),
               ),
               Expanded(
-                child: _patientAppointments.isEmpty
-                  ? const Center(child: Text("No appointments found for this patient."))
+                child: _historyNotes.isEmpty
+                  ? const Center(child: Text("No past clinical visits recorded."))
                   : ListView.builder(
-                      itemCount: _patientAppointments.length,
+                      itemCount: _historyNotes.length,
                       itemBuilder: (context, index) {
-                        final app = _patientAppointments[index];
-                        final dateStr = app['appointment_date'].toString().split('T')[0];
+                        final note = _historyNotes[index];
+                        final dateStr = note['created_at'].toString().split('T')[0];
+                        
+                        // Find corresponding payment for this appointment
+                        final paymentList = _historyPayments.where((p) => p['appointment_id'] == note['appointment_id']).toList();
+                        final payment = paymentList.isNotEmpty ? paymentList.first : null;
+                        
                         return Card(
                           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: ListTile(
-                            leading: const Icon(Icons.calendar_today, color: Color(0xFF0284C7)),
-                            title: Text("$dateStr at ${app['start_time']}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            subtitle: Text("Purpose: ${app['purpose'] ?? 'N/A'}\nStatus: ${app['status']}"),
-                            isThreeLine: true,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Visit Date: $dateStr", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0284C7))),
+                                    if (payment != null)
+                                      Text("Paid: ₹${payment['paid_amount']}", style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                                const Divider(),
+                                if (note['chief_complaint'] != null && note['chief_complaint'].toString().isNotEmpty)
+                                  Padding(padding: const EdgeInsets.only(top: 4), child: Text("Complaint: ${note['chief_complaint']}")),
+                                if (note['diagnosis'] != null && note['diagnosis'].toString().isNotEmpty)
+                                  Padding(padding: const EdgeInsets.only(top: 4), child: Text("Diagnosis: ${note['diagnosis']}")),
+                                if (note['treatment_done'] != null && note['treatment_done'].toString().isNotEmpty)
+                                  Padding(padding: const EdgeInsets.only(top: 4), child: Text("Treatment: ${note['treatment_done']}")),
+                                if (note['prescription'] != null && note['prescription'].toString().isNotEmpty)
+                                  Padding(padding: const EdgeInsets.only(top: 4), child: Text("Prescription: ${note['prescription']}")),
+                                
+                                if (payment != null && (double.tryParse(payment['balance_due'].toString()) ?? 0) > 0)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text("Balance from this visit: ₹${payment['balance_due']}", style: const TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold)),
+                                  )
+                              ],
+                            ),
                           ),
                         );
                       },

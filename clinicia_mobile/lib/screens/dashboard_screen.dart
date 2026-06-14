@@ -3,6 +3,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
+import 'record_visit_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -298,6 +299,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             PopupMenuButton<String>(
                               icon: const Icon(Icons.more_vert),
                               onSelected: (String status) async {
+                                if (status == 'Completed') {
+                                  final recorded = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => RecordVisitScreen(appointment: app)),
+                                  );
+                                  if (recorded != true) return; // cancelled
+                                }
+                                
                                 final res = await ApiService.updateAppointmentStatus(app['id'], status);
                                 _fetchAppointments();
                                 

@@ -325,6 +325,83 @@ app.put('/api/update-clinic-name', async (req, res) => {
   }
 });
 
+app.post('/api/record-visit', async (req, res) => {
+  try {
+    const { 
+      admin_id, patient_id, appointment_id,
+      chief_complaint, diagnosis, treatment_done, prescription,
+      total_amount, paid_amount, payment_method
+    } = req.body;
+
+    const balance_due = total_amount - paid_amount;
+
+    await dbPool.query(
+      'INSERT INTO clinical_notes (admin_id, patient_id, appointment_id, chief_complaint, diagnosis, treatment_done, prescription) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [admin_id, patient_id, appointment_id, chief_complaint, diagnosis, treatment_done, prescription]
+    );
+
+    await dbPool.query(
+      'INSERT INTO payments (admin_id, patient_id, appointment_id, total_amount, paid_amount, balance_due, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [admin_id, patient_id, appointment_id, total_amount, paid_amount, balance_due, payment_method]
+    );
+
+    res.json({ success: true, message: 'Visit recorded successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to record visit' });
+  }
+});
+
+app.get('/api/patient-history/:id', async (req, res) => {
+  try {
+    const patient_id = req.params.id;
+    const admin_id = req.query.admin_id;
+    
+    const [notes] = await dbPool.query('SELECT * FROM clinical_notes WHERE patient_id = ? AND admin_id = ? ORDER BY created_at DESC', [patient_id, admin_id]);
+    const [payments] = await dbPool.query('SELECT * FROM payments WHERE patient_id = ? AND admin_id = ? ORDER BY created_at DESC', [patient_id, admin_id]);
+    const [balanceResult] = await dbPool.query('SELECT SUM(balance_due) as total_due FROM payments WHERE patient_id = ? AND admin_id = ?', [patient_id, admin_id]);
+    
+    res.json({ 
+      success: true, 
+      notes: notes, 
+      payments: payments,
+      total_due: balanceResult[0].total_due || 0
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to fetch history' });
+  }
+});
+
+app.get('/api/analytics', async (req, res) => {
+  try {
+    const admin_id = req.query.admin_id;
+    const today = new Date().toISOString().split('T')[0];
+
+    const [todayAppts] = await dbPool.query('SELECT COUNT(*) as count FROM appointments WHERE admin_id = ? AND appointment_date = ?', [admin_id, today]);
+    const [todayCompleted] = await dbPool.query('SELECT COUNT(*) as count FROM appointments WHERE admin_id = ? AND appointment_date = ? AND status = "Completed"', [admin_id, today]);
+    const [totalPatients] = await dbPool.query('SELECT COUNT(*) as count FROM patients WHERE admin_id = ?', [admin_id]);
+    const [totalAppts] = await dbPool.query('SELECT COUNT(*) as count FROM appointments WHERE admin_id = ?', [admin_id]);
+    
+    const [revenue] = await dbPool.query('SELECT SUM(paid_amount) as total_paid, SUM(balance_due) as total_due FROM payments WHERE admin_id = ?', [admin_id]);
+
+    res.json({
+      success: true,
+      data: {
+        today_total: todayAppts[0].count,
+        today_completed: todayCompleted[0].count,
+        total_patients: totalPatients[0].count,
+        total_appointments: totalAppts[0].count,
+        total_revenue: revenue[0].total_paid || 0,
+        total_outstanding: revenue[0].total_due || 0
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to fetch analytics' });
+  }
+});
+
 // Restart the backend process since we changed server.js
 app.get('/api/ping', (req, res) => res.send('pong'));
 

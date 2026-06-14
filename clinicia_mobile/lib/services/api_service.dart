@@ -42,6 +42,25 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
+  static Future<Map<String, dynamic>> recordVisit(Map<String, dynamic> data) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/record-visit'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+    return jsonDecode(response.body);
+  }
+
+  static Future<Map<String, dynamic>> fetchPatientHistory(int patientId, int adminId) async {
+    final response = await http.get(Uri.parse('$baseUrl/patient-history/$patientId?admin_id=$adminId'));
+    return jsonDecode(response.body);
+  }
+
+  static Future<Map<String, dynamic>> fetchAnalytics(int adminId) async {
+    final response = await http.get(Uri.parse('$baseUrl/analytics?admin_id=$adminId'));
+    return jsonDecode(response.body);
+  }
+
   static Future<Map<String, dynamic>> fetchDoctors(int adminId) async {
     final response = await http.get(Uri.parse('$baseUrl/doctors?admin_id=$adminId'));
     return jsonDecode(response.body);
