@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'database_helper.dart';
+import 'auth_service.dart';
 
 class ApiService {
   static const String baseUrl = 'https://apto.voreva.in/api';
@@ -166,6 +167,9 @@ class ApiService {
   static Future<void> syncOfflineData() async {
     if (!(await isConnected())) return;
 
+    final session = await AuthService.getSession();
+    int currentAdminId = session != null ? session['id'] : 1;
+
     final unsyncedPatients = await DatabaseHelper.instance.getUnsyncedPatients();
     Map<int, int> patientIdMap = {};
 
@@ -175,7 +179,7 @@ class ApiService {
         int tempId = data['id'];
         data.remove('id');
         data.remove('sync_status');
-        data['admin_id'] = 1;
+        data['admin_id'] = currentAdminId;
 
         final response = await http.post(
           Uri.parse('$baseUrl/patients'),
@@ -200,7 +204,7 @@ class ApiService {
         int tempId = data['id'];
         data.remove('id');
         data.remove('sync_status');
-        data['admin_id'] = 1;
+        data['admin_id'] = currentAdminId;
         
         if (data['patient_id'] != null && data['patient_id'] < 0 && patientIdMap.containsKey(data['patient_id'])) {
            data['patient_id'] = patientIdMap[data['patient_id']];
