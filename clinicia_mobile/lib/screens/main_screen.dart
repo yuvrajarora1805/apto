@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:async';
+import '../services/api_service.dart';
 import 'dashboard_screen.dart';
 import 'patients_screen.dart';
 import 'settings_screen.dart';
