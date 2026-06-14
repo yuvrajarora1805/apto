@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_generate_bill" layout="@layout/toolbar_patients" />
+    <com.google.android.material.textfield.TextInputLayout android:id="@id/til_select_patient_bill" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:hint="@string/search_patient">
+        <AutoCompleteTextView android:textSize="18.0dip" android:id="@id/et_select_patient_bill" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:inputType="textCapWords" android:dropDownHeight="300.0dip" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_title" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="@string/invoices" android:layout_weight="1.0" />
+        <ListView android:id="@id/lv_bill_generate_bill" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="80.0dip" android:layout_below="@id/tv_title" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:layout_alignParentBottom="true">
+            <Button android:textColor="#ffffffff" android:gravity="center" android:id="@id/btn_bill_preview" android:background="@drawable/red_patch" android:layout_width="150.0dip" android:layout_height="wrap_content" android:text="@string/preview" android:onClick="PreviewInvoice" android:textAllCaps="false" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

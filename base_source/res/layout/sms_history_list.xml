@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="5.0dip">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="100.0">
+            <TextView android:textSize="16.0dip" android:textStyle="bold" android:id="@id/smshistorydate" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="39.0" />
+            <TextView android:textSize="16.0dip" android:textStyle="bold" android:gravity="right" android:id="@id/smshistoryselected" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="61.0" />
+        </LinearLayout>
+        <TextView android:textSize="15.0dip" android:id="@id/smshistorymessage" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:singleLine="false" />
+    </LinearLayout>
+    <View android:background="@android:color/darker_gray" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+</LinearLayout>

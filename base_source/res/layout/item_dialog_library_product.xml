@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textColor="@color/black" android:id="@id/tv_product_item_code" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" />
+    <TextView android:textColor="@color/black" android:id="@id/tv_status" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <View android:background="@color/gray" android:layout_width="fill_parent" android:layout_height="@dimen/margin_1dp" android:layout_marginTop="@dimen/margin_10dp" />
+</LinearLayout>

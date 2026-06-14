@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatTextView android:id="@id/tv_top" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="18" app:layout_constraintEnd_toEndOf="@id/iv_base_teeth" app:layout_constraintStart_toStartOf="@id/iv_base_teeth" app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageView android:id="@id/iv_base_teeth" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tv_top" app:srcCompat="@drawable/t18" />
+    <androidx.appcompat.widget.AppCompatTextView android:id="@id/tv_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="18" app:layout_constraintEnd_toEndOf="@id/iv_base_teeth" app:layout_constraintStart_toStartOf="@id/iv_base_teeth" app:layout_constraintTop_toBottomOf="@id/iv_base_teeth" />
+</androidx.constraintlayout.widget.ConstraintLayout>

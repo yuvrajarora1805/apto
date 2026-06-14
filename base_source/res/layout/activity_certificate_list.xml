@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="@dimen/margin_20dp"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_certi" layout="@layout/toolbar" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@id/rvCertificates" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_margin="@dimen/margin_10dp" app:layout_constraintBottom_toTopOf="@id/btnGenerate" app:layout_constraintTop_toBottomOf="@id/toolbar_certi" />
+    <Button android:textSize="14.0sp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btnGenerate" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginTop="10.0dip" android:text="Generate Certificate" android:textAllCaps="false" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

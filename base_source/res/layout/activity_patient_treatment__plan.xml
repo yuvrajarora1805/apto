@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff0f0f0" android:focusable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_tp" layout="@layout/toolbar" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+            <include android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/complaint_observation" />
+            <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" layout="@layout/treatment_layout" />
+            <LinearLayout android:gravity="center" android:layout_gravity="bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:layout_marginBottom="@dimen/margin_20dp">
+                <Button android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@id/btn_submit_estimate" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/submit" android:textAllCaps="false" />
+            </LinearLayout>
+            <TextView android:textSize="18.0sp" android:textColor="@color/hyperlink_blue" android:id="@id/tv_convert_to_tp" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="20.0dip" android:text="@string/convert_to_treatment" android:onClick="ConvertToTreatmentPlan" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

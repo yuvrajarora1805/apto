@@ -1,0 +1,155 @@
+.class Lcom/clinicia/activity/ReleaseNote$2;
+.super Landroid/webkit/WebViewClient;
+.source "ReleaseNote.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/clinicia/activity/ReleaseNote;->startWebView(Ljava/lang/String;)V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
+
+# instance fields
+.field progressDialog:Landroid/app/ProgressDialog;
+
+.field final synthetic this$0:Lcom/clinicia/activity/ReleaseNote;
+
+
+# direct methods
+.method constructor <init>(Lcom/clinicia/activity/ReleaseNote;)V
+    .locals 0
+
+    .line 75
+    iput-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->this$0:Lcom/clinicia/activity/ReleaseNote;
+
+    invoke-direct {p0}, Landroid/webkit/WebViewClient;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public onLoadResource(Landroid/webkit/WebView;Ljava/lang/String;)V
+    .locals 0
+
+    .line 89
+    :try_start_0
+    iget-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->this$0:Lcom/clinicia/activity/ReleaseNote;
+
+    iget p1, p1, Lcom/clinicia/activity/ReleaseNote;->w:I
+
+    if-nez p1, :cond_0
+
+    .line 90
+    iget-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->progressDialog:Landroid/app/ProgressDialog;
+
+    if-nez p1, :cond_0
+
+    .line 92
+    new-instance p1, Landroid/app/ProgressDialog;
+
+    iget-object p2, p0, Lcom/clinicia/activity/ReleaseNote$2;->this$0:Lcom/clinicia/activity/ReleaseNote;
+
+    invoke-direct {p1, p2}, Landroid/app/ProgressDialog;-><init>(Landroid/content/Context;)V
+
+    iput-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->progressDialog:Landroid/app/ProgressDialog;
+
+    .line 93
+    const-string p2, "Loading..."
+
+    invoke-virtual {p1, p2}, Landroid/app/ProgressDialog;->setMessage(Ljava/lang/CharSequence;)V
+
+    .line 94
+    iget-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->progressDialog:Landroid/app/ProgressDialog;
+
+    invoke-virtual {p1}, Landroid/app/ProgressDialog;->show()V
+
+    .line 95
+    iget-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->this$0:Lcom/clinicia/activity/ReleaseNote;
+
+    const/4 p2, 0x1
+
+    iput p2, p1, Lcom/clinicia/activity/ReleaseNote;->w:I
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    :catch_0
+    move-exception p1
+
+    .line 99
+    invoke-virtual {p1}, Ljava/lang/Exception;->printStackTrace()V
+
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public onPageFinished(Landroid/webkit/WebView;Ljava/lang/String;)V
+    .locals 0
+
+    .line 105
+    :try_start_0
+    iget-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->progressDialog:Landroid/app/ProgressDialog;
+
+    if-eqz p1, :cond_0
+
+    invoke-virtual {p1}, Landroid/app/ProgressDialog;->isShowing()Z
+
+    move-result p1
+
+    if-eqz p1, :cond_0
+
+    .line 106
+    iget-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->progressDialog:Landroid/app/ProgressDialog;
+
+    invoke-virtual {p1}, Landroid/app/ProgressDialog;->dismiss()V
+
+    const/4 p1, 0x0
+
+    .line 107
+    iput-object p1, p0, Lcom/clinicia/activity/ReleaseNote$2;->progressDialog:Landroid/app/ProgressDialog;
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    :catch_0
+    move-exception p1
+
+    .line 110
+    invoke-virtual {p1}, Ljava/lang/Exception;->printStackTrace()V
+
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z
+    .locals 0
+
+    .line 80
+    :try_start_0
+    invoke-virtual {p1, p2}, Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    :catch_0
+    move-exception p1
+
+    .line 82
+    invoke-virtual {p1}, Ljava/lang/Exception;->printStackTrace()V
+
+    :goto_0
+    const/4 p1, 0x1
+
+    return p1
+.end method

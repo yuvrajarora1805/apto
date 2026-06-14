@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_physio" layout="@layout/toolbar" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:padding="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/tv_pain" android:background="@drawable/green" android:padding="5.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text=" + Pain" android:onClick="pain" />
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_pain" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:background="@android:color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_5dp" android:layout_marginTop="10.0dip" android:text="Pain Area :" />
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <Spinner android:id="@id/sp_pain_area" android:background="@drawable/bg_edittext" android:layout_width="0.0dip" android:layout_height="@dimen/margin_40dp" android:layout_marginTop="5.0dip" android:layout_weight="1.0" style="@style/spinner_style" />
+                        <Spinner android:id="@id/sp_pain_side" android:background="@drawable/bg_edittext" android:layout_width="@dimen/margin_150dp" android:layout_height="@dimen/margin_40dp" android:layout_marginTop="5.0dip" android:layout_marginStart="@dimen/margin_15dp" style="@style/spinner_style" />
+                    </LinearLayout>
+                    <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_5dp" android:layout_marginTop="10.0dip" android:text="VAS :" />
+                    <TextView android:textSize="@dimen/font_20sp" android:gravity="center" android:id="@id/tv_vas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:layout_marginStart="@dimen/margin_10dp" />
+                    <SeekBar android:id="@id/sb_vas" android:layout_width="fill_parent" android:layout_height="@dimen/margin_20dp" android:layout_marginTop="10.0dip" android:max="10" android:progress="0" android:layout_marginStart="@dimen/margin_10dp" android:layout_marginEnd="@dimen/margin_10dp" />
+                    <RelativeLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_10dp" android:layout_marginEnd="@dimen/margin_10dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Min" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Max" android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                    <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_5dp" android:layout_marginTop="10.0dip" android:text="Pain Quality :" />
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <CheckBox android:id="@id/cb_soar" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Soar" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_pulled" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Pulled" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_taut" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Taut" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_shooting" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Shooting" android:layout_weight="1.0" style="@style/radio_button_style" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <CheckBox android:id="@id/cb_pricking" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Pricking" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_pressing" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Pressing" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_pinching" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Pinching" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_numbing" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Numbing" android:layout_weight="1.0" style="@style/radio_button_style" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <CheckBox android:id="@id/cb_dull" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Dull" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_sharp" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Sharp" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_drilling" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Drilling" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_spasm" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Spasm" android:layout_weight="1.0" style="@style/radio_button_style" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <CheckBox android:id="@id/cb_itching" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Itching" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_burning" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Burning" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_cutting" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Cutting" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_cramping" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Cramping" android:layout_weight="1.0" style="@style/radio_button_style" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <CheckBox android:id="@id/cb_throbbing" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Throbbing" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:id="@id/cb_radiating" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Radiating" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:visibility="invisible" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Throbbing" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            <CheckBox android:visibility="invisible" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Throbbing" android:layout_weight="1.0" style="@style/radio_button_style" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No. of Days since pain :" />
+                            <EditText android:id="@id/et_no_of_days_since_pain" android:layout_width="70.0dip" android:layout_height="wrap_content" android:maxLines="1" android:inputType="number" />
+                        </LinearLayout>
+                        <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Other Information :" />
+                        <EditText android:gravity="top" android:id="@id/et_other_information" android:background="@drawable/bg_edittext" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_5dp" android:minHeight="@dimen/margin_60dp" android:paddingStart="@dimen/margin_10dp" />
+                    </LinearLayout>
+                    <Button android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btn_add_pain" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginTop="15.0dip" android:layout_marginRight="5.0dip" android:text="Add" android:layout_weight="0.0" android:textAllCaps="false" />
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="@dimen/margin_30dp" android:layout_marginTop="10.0dip" android:paddingStart="@dimen/margin_10dp" android:paddingEnd="@dimen/margin_10dp">
+                        <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Pain Area" android:layout_weight="1.0" />
+                        <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="VAS" android:layout_weight="0.5" />
+                        <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Days" android:layout_weight="0.5" />
+                    </LinearLayout>
+                    <com.clinicia.view.NonScrollListView android:id="@id/lv_pain" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/tv_special_testing" android:background="@drawable/green" android:padding="5.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text=" + Special Testing" android:onClick="special_testing" />
+            <EditText android:gravity="top" android:id="@id/et_special_testing" android:background="@drawable/bg_edittext" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:minHeight="@dimen/margin_80dp" android:inputType="textCapSentences" android:paddingStart="5.0dip" />
+            <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/tv_functional_evaluation" android:background="@drawable/green" android:padding="5.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text=" + Functional Evaluation" android:onClick="functional_evaluation" />
+            <EditText android:gravity="top" android:id="@id/et_functional_evaluation" android:background="@drawable/bg_edittext" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:minHeight="@dimen/margin_80dp" android:inputType="textCapSentences" android:paddingStart="5.0dip" />
+            <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/tv_muscle_testing" android:background="@drawable/green" android:padding="5.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text=" + Muscle Testing &amp; Muscle Tone" android:onClick="muscle_testing" />
+            <EditText android:gravity="top" android:id="@id/et_muscle_testing" android:background="@drawable/bg_edittext" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:minHeight="@dimen/margin_80dp" android:inputType="textCapSentences" android:paddingStart="5.0dip" />
+            <TextView android:textSize="18.0dip" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/tv_gait_analysis" android:background="@drawable/green" android:padding="5.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:text=" + GAIT Analysis" android:onClick="gait_analysis" />
+            <EditText android:gravity="top" android:id="@id/et_gait_analysis" android:background="@drawable/bg_edittext" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:minHeight="@dimen/margin_80dp" android:inputType="textCapSentences" android:paddingStart="5.0dip" />
+            <Button android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btn_submit_examination" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginTop="15.0dip" android:layout_marginRight="5.0dip" android:text="Submit" android:layout_weight="0.0" android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

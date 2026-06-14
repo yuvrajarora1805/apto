@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_transaction_title" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="@dimen/margin_40dp" android:text="@string/inward_outward" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@id/lv_inventory" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/tv_transaction_title" android:nestedScrollingEnabled="false" />
+    <ImageView android:layout_gravity="end|bottom|center" android:id="@id/iv_add" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_margin="15.0dip" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" app:srcCompat="@drawable/plus_filled" />
+</RelativeLayout>

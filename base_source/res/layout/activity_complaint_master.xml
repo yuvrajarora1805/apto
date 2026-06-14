@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include android:id="@id/toolbar_complaint_master" layout="@layout/toolbar_patients" />
+        <LinearLayout android:gravity="center_vertical" android:layout_gravity="center" android:orientation="horizontal" android:background="@drawable/green" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip">
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="left" android:id="@id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/complaint_list" android:layout_weight="1.0" />
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/tv_dental_chart" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/dental_chart" android:layout_marginEnd="@dimen/margin_8dp" />
+        </LinearLayout>
+        <ListView android:id="@id/lv_complaints" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" />
+    </LinearLayout>
+    <ImageView android:layout_gravity="end|bottom|center" android:id="@id/iv_add" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginBottom="30.0dip" android:layout_alignParentBottom="true" android:layout_marginEnd="@dimen/margin_15dp" android:layout_alignParentEnd="true" app:srcCompat="@drawable/plus_filled" />
+</RelativeLayout>

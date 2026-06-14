@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <include android:id="@id/toolbar_bills" layout="@layout/toolbar_patients" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <AutoCompleteTextView android:id="@id/et_search_billing" android:layout_width="0.0dip" android:layout_height="46.0dip" android:layout_marginTop="10.0dip" android:hint="@string/search_by_patient" android:singleLine="true" android:drawableLeft="@null" android:layout_weight="1.0" />
+                <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_filter_billing" android:tag="0" android:layout_width="30.0dip" android:layout_height="25.0dip" android:layout_marginTop="5.0dip" app:srcCompat="@drawable/filter" />
+            </LinearLayout>
+            <TextView android:textSize="20.0dip" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:background="@drawable/green" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="Bills" />
+            <ListView android:id="@id/lv_bills" android:layout_width="fill_parent" android:layout_height="wrap_content" android:choiceMode="multipleChoice" />
+            <View android:background="@android:color/darker_gray" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+        </LinearLayout>
+    </RelativeLayout>
+    <ImageView android:layout_gravity="end|bottom|center" android:id="@id/iv_generate_bill" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginBottom="30.0dip" android:layout_marginEnd="@dimen/margin_15dp" app:srcCompat="@drawable/plus_filled" />
+</FrameLayout>

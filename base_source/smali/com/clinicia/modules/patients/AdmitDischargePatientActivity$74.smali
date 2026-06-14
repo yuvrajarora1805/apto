@@ -1,0 +1,49 @@
+.class Lcom/clinicia/modules/patients/AdmitDischargePatientActivity$74;
+.super Ljava/lang/Object;
+.source "AdmitDischargePatientActivity.java"
+
+# interfaces
+.implements Landroid/view/View$OnClickListener;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/clinicia/modules/patients/AdmitDischargePatientActivity;->show_dental_chart_dialog(Lcom/clinicia/pojo/ProductPojo;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
+
+# instance fields
+.field final synthetic this$0:Lcom/clinicia/modules/patients/AdmitDischargePatientActivity;
+
+
+# direct methods
+.method constructor <init>(Lcom/clinicia/modules/patients/AdmitDischargePatientActivity;)V
+    .locals 0
+
+    .line 4983
+    iput-object p1, p0, Lcom/clinicia/modules/patients/AdmitDischargePatientActivity$74;->this$0:Lcom/clinicia/modules/patients/AdmitDischargePatientActivity;
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public onClick(Landroid/view/View;)V
+    .locals 0
+
+    .line 4986
+    iget-object p1, p0, Lcom/clinicia/modules/patients/AdmitDischargePatientActivity$74;->this$0:Lcom/clinicia/modules/patients/AdmitDischargePatientActivity;
+
+    iget-object p1, p1, Lcom/clinicia/modules/patients/AdmitDischargePatientActivity;->dialog_dental:Landroid/app/Dialog;
+
+    invoke-virtual {p1}, Landroid/app/Dialog;->dismiss()V
+
+    return-void
+.end method

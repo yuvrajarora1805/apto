@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="3.0dip" android:layout_marginRight="10.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/tvTitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toStartOf="@id/close">
+        <androidx.appcompat.widget.AppCompatTextView android:textSize="14.0dip" android:textColor="#ff000000" android:id="@id/tv_medicine_name" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="medicine name" android:layout_weight="1.0" />
+        <androidx.appcompat.widget.AppCompatTextView android:textSize="14.0dip" android:textColor="#ff000000" android:id="@id/tv_medicine_amount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="medicine amount" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/llDosage" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/tvTitle" android:layout_marginStart="@dimen/margin_20dp">
+        <androidx.appcompat.widget.AppCompatTextView android:textSize="12.0sp" android:id="@id/tv_dosage_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="dosage" />
+        <androidx.appcompat.widget.AppCompatTextView android:textSize="12.0sp" android:id="@id/tv_dosage_qty" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="quantity" android:layout_marginStart="10.0dip" />
+    </LinearLayout>
+    <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="@dimen/margin_1dp" android:layout_marginTop="@dimen/margin_3dp" android:layout_below="@id/llDosage" />
+    <androidx.appcompat.widget.AppCompatImageView android:id="@id/close" android:layout_width="@dimen/margin_30dp" android:layout_height="@dimen/margin_30dp" android:layout_centerVertical="true" android:layout_marginStart="@dimen/margin_5dp" android:layout_alignParentEnd="true" app:srcCompat="@null" />
+</RelativeLayout>

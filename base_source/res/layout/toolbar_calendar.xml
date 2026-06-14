@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar android:background="@drawable/actionbar_bg" android:layout_width="fill_parent" android:layout_height="?actionBarSize" android:minHeight="?actionBarSize" local:popupTheme="@style/ThemeOverlay.AppCompat.Light" local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:local="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:id="@id/iv_back" android:layout_width="20.0dip" android:layout_height="fill_parent" local:srcCompat="@drawable/go_back" />
+            <ImageView android:id="@id/logoimage_patients" android:layout_width="@dimen/_30sdp" android:layout_height="@dimen/_30sdp" android:layout_marginLeft="10.0dip" android:src="@drawable/white_red_logo" />
+        </LinearLayout>
+        <LinearLayout android:gravity="end|center" android:layout_gravity="end|center" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="2.0">
+            <com.clinicia.custom_classes.TextViewBold android:textSize="16.0sp" android:textStyle="normal" android:textColor="#ffffffff" android:ellipsize="end" android:id="@id/title_patients" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView android:layout_gravity="center_vertical" android:id="@id/iv_patients" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:tint="@color/white" android:layout_marginEnd="@dimen/margin_4dp" local:srcCompat="@drawable/down_arrow_green" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_date" android:visibility="gone" android:layout_width="20.0dip" android:layout_height="20.0dip" android:layout_marginLeft="10.0dip" local:srcCompat="@drawable/calendar_white" />
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>

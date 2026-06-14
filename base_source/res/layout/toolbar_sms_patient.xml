@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar android:background="@drawable/actionbar_bg" android:layout_width="fill_parent" android:layout_height="?actionBarSize" android:minHeight="?actionBarSize" local:popupTheme="@style/ThemeOverlay.AppCompat.Light" local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:local="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/iv_back" android:layout_width="20.0dip" android:layout_height="fill_parent" local:srcCompat="@drawable/go_back" />
+        <ImageView android:id="@id/logoimage" android:layout_width="@dimen/_30sdp" android:layout_height="@dimen/_30sdp" android:layout_marginLeft="10.0dip" android:src="@drawable/white_red_logo" />
+        <com.clinicia.custom_classes.TextViewBold android:textSize="20.0sp" android:textStyle="normal" android:textColor="#ffffffff" android:ellipsize="end" android:gravity="center_vertical" android:layout_gravity="center_vertical" android:id="@id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="Clinicia" android:singleLine="true" android:layout_toRightOf="@id/logoimage" android:layout_centerInParent="true" />
+        <LinearLayout android:gravity="right" android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="15.0dip">
+            <com.clinicia.custom_classes.TextViewBold android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center_vertical" android:layout_gravity="center_vertical" android:id="@id/tv_save" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Save" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>

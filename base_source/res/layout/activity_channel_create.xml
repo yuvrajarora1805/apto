@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingTop="@dimen/activity_vertical_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:paddingBottom="@dimen/activity_vertical_margin" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@id/channel_create_progress" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" style="?android:progressBarStyleLarge" />
+    <ScrollView android:id="@id/channel_create_scroll" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/channel_create_form" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <Spinner android:entries="@array/dropdown_channel" android:id="@id/spinner_channel" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/spinner_style" />
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <AutoCompleteTextView android:id="@id/channel_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Group Name" android:maxLines="1" android:singleLine="true" android:completionHint="Name" android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <Switch android:id="@id/switch_distinct" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Distinct" android:layout_weight="1.0" />
+                <AutoCompleteTextView android:id="@id/channel_participants" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="User Ids" android:maxLines="1" android:singleLine="true" android:completionHint="Participant IDs" android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button android:textStyle="bold" android:id="@id/button_channel_create" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/action_sign_in" style="?android:textAppearanceSmall" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

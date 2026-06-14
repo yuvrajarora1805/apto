@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_90dp" android:layout_height="wrap_content" android:text="@string/quantity" />
+        <EditText android:textSize="14.0dip" android:textColor="#ff000000" android:gravity="right" android:id="@id/et_quantity" android:layout_width="@dimen/margin_80dp" android:layout_height="wrap_content" android:inputType="number" android:paddingStart="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp" />
+        <Spinner android:id="@id/sp_unit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_5dp" style="@style/spinner_style" />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_11sp" android:textColor="@color/red" android:id="@id/tv_qty_error" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_90dp" android:layout_height="wrap_content" android:text="@string/rate_price_each" />
+        <EditText android:textSize="14.0dip" android:textColor="#ff000000" android:gravity="right" android:id="@id/et_rate" android:layout_width="@dimen/margin_80dp" android:layout_height="wrap_content" android:inputType="number" android:paddingStart="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp" />
+        <CheckBox android:id="@id/chkbx_inclusive_tax" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Incl. of Taxes" style="@style/radio_button_style" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_90dp" android:layout_height="wrap_content" android:text="@string/amount_colon" />
+        <EditText android:enabled="false" android:textSize="14.0dip" android:textColor="#ff000000" android:gravity="right" android:id="@id/et_amount" android:layout_width="@dimen/margin_80dp" android:layout_height="wrap_content" android:inputType="number" android:paddingStart="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_discount" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_90dp" android:layout_height="wrap_content" android:text="@string/discount_colon" />
+        <EditText android:textSize="14.0dip" android:textColor="#ff000000" android:gravity="right" android:id="@id/et_discount" android:layout_width="@dimen/margin_80dp" android:layout_height="wrap_content" android:inputType="number" android:paddingStart="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp" />
+        <Spinner android:id="@id/sp_discount_type" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/spinner_style" />
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout android:id="@id/til_taxes" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/tax_details">
+        <EditText android:textSize="14.0dip" android:id="@id/et_taxes" android:padding="10.0dip" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="false" android:onClick="showTaxesDialog" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout android:id="@id/til_other_charges" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/other_charges">
+        <EditText android:textSize="16.0sp" android:id="@id/et_other_charges" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:singleLine="false" android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout android:id="@id/til_remarks" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/remarks">
+        <EditText android:textSize="16.0sp" android:id="@id/et_remarks" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:singleLine="false" android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_90dp" android:layout_height="wrap_content" android:text="@string/total_colon" />
+        <EditText android:textSize="14.0dip" android:gravity="right" android:id="@id/et_total" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="@dimen/margin_80dp" android:layout_height="wrap_content" android:singleLine="false" android:inputType="textPostalAddress|textCapSentences|textMultiLine" android:paddingStart="10.0dip" android:layout_marginStart="@dimen/margin_10dp" />
+    </LinearLayout>
+</LinearLayout>

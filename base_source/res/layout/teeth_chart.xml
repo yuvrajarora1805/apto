@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:id="@id/tv_top" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="18" />
+    <FrameLayout android:id="@id/fl_top" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/iv_reg_crown_top" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/reg_crown_top_view" />
+        <ImageView android:id="@id/iv_top_crown_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_top_crown" />
+        <ImageView android:id="@id/iv_right_crown_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_right_crown" />
+        <ImageView android:id="@id/iv_bottom_crown_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_bottom_crown" />
+        <ImageView android:id="@id/iv_left_crown_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_left_crown" />
+        <ImageView android:id="@id/iv_center_crown_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_center_crown" />
+        <ImageView android:id="@id/iv_reg_crown_missing_top" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/cross_crown_red" />
+    </FrameLayout>
+    <FrameLayout android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/iv_base_teeth" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/t18" />
+        <ImageView android:id="@id/iv_root" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/rr_18" />
+        <ImageView android:id="@id/iv_root_post" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:rotation="180.0" app:srcCompat="@drawable/post_red" />
+        <ImageView android:id="@id/iv_root_crown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/rc_18" />
+        <ImageView android:id="@id/iv_core" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:rotation="180.0" app:srcCompat="@drawable/core_red" />
+        <ImageView android:id="@id/iv_implant" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/implant_red" />
+        <ImageView android:id="@id/iv_br_center" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_br_center" />
+        <ImageView android:id="@id/iv_br_left" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_br_left" />
+        <ImageView android:id="@id/iv_br_right" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_br_right" />
+        <ImageView android:id="@id/missing" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/cross_red" />
+    </FrameLayout>
+    <FrameLayout android:id="@id/fl_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/iv_reg_crown" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/reg_crown_top_view" />
+        <ImageView android:id="@id/iv_top_crown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_top_crown" />
+        <ImageView android:id="@id/iv_right_crown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_right_crown" />
+        <ImageView android:id="@id/iv_bottom_crown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_bottom_crown" />
+        <ImageView android:id="@id/iv_left_crown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_left_crown" />
+        <ImageView android:id="@id/iv_center_crown" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/r_center_crown" />
+        <ImageView android:id="@id/iv_reg_crown_missing" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:srcCompat="@drawable/cross_crown_red" />
+    </FrameLayout>
+    <TextView android:id="@id/tv_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="18" />
+</LinearLayout>

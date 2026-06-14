@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBox android:textSize="16.0sp" android:textStyle="bold" android:textColor="@color/black" android:id="@id/chkbx_clinic_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/app_name" android:singleLine="true" style="@style/radio_button_style" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="10.0dip" android:paddingEnd="@dimen/margin_10dp">
+        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_amount" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/price" android:layout_weight="1.0">
+            <EditText android:textSize="@dimen/font_14sp" android:id="@id/et_amount" android:paddingRight="@dimen/margin_10dp" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" android:inputType="number" android:paddingStart="@dimen/margin_10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_purchase" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/purchase_price" android:layout_weight="1.0">
+            <EditText android:textSize="@dimen/font_14sp" android:id="@id/et_purchase" android:paddingRight="@dimen/margin_10dp" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" android:inputType="number" android:paddingStart="@dimen/margin_10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_initial_stock" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/initial_stock_in_hand" android:layout_weight="1.0">
+            <EditText android:textSize="@dimen/font_14sp" android:id="@id/et_initial_stock" android:paddingRight="@dimen/margin_10dp" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" android:inputType="number" android:paddingStart="@dimen/margin_10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:orientation="vertical" android:background="@color/bg_color" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/dialog_title_view" />
+        <LinearLayout android:orientation="vertical" android:paddingTop="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/margin_20dp" android:paddingEnd="@dimen/margin_20dp">
+            <CheckBox android:textStyle="bold" android:id="@id/chkbx_show_dental_chart" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/show_dental_chart" android:layout_marginStart="-8.0dip" style="@style/radio_button_style" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/llDentalType" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_30dp">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="Type:" />
+                <Spinner android:id="@id/spDentalType" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/spinner_style" />
+            </LinearLayout>
+            <TextView android:textStyle="bold" android:textColor="@color/link_color" android:id="@id/tv_show_dental_chart" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/dental_chart_underline" />
+            <include layout="@layout/product_rate_qty_details" />
+            <CheckBox android:id="@id/chkbx_save_for_future" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/save_details_for_future_use" style="@style/radio_button_style" />
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_20dp" android:layout_marginBottom="@dimen/margin_20dp">
+                <Button android:textSize="14.0dip" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="left" android:id="@id/btn_cancel" android:background="@drawable/red_patch" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/margin_40dp" android:layout_marginLeft="10.0dip" android:layout_marginTop="2.0dip" android:layout_marginRight="50.0dip" android:layout_marginBottom="2.0dip" android:text="@string/cancel" android:textAllCaps="false" />
+                <Button android:textSize="14.0dip" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="left" android:id="@id/btn_submit" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="@dimen/margin_40dp" android:layout_marginLeft="50.0dip" android:layout_marginTop="2.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="2.0dip" android:text="@string/submit" android:textAllCaps="false" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

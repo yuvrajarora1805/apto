@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_docterreg" layout="@layout/toolbar_registration" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/toolbar_docterreg">
+        <LinearLayout android:orientation="vertical" android:padding="@dimen/_12sdp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RadioGroup android:orientation="horizontal" android:id="@id/rg_type" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.clinicia.custom_classes.RadioButtonRegular android:textSize="@dimen/_14sdp" android:id="@id/rd_single" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/doctor" />
+                <com.clinicia.custom_classes.RadioButtonRegular android:textSize="@dimen/_14sdp" android:id="@id/rd_multiple" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_20sdp" android:text="@string/polyclinic" />
+            </RadioGroup>
+            <com.google.android.material.textfield.TextInputLayout android:id="@id/til_pc" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/_5sdp" android:hint="@string/practicing_category_please_select">
+                <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_practicing_category" style="@style/clickableEditTextStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:id="@id/til_business_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:hint="@string/business_name">
+                <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_business_name" android:inputType="textCapWords" style="@style/editTextStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:id="@id/til_business_contact_no" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:hint="@string/business_contact_no">
+                <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_business_contact_no" android:inputType="phone" style="@style/editTextStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.clinicia.custom_classes.ButtonRegular android:id="@id/btn_submit" android:layout_marginTop="@dimen/_10sdp" android:text="@string/submit" style="@style/primaryButtonStyleFull">
+                <requestFocus />
+            </com.clinicia.custom_classes.ButtonRegular>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

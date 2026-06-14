@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_inventory" layout="@layout/toolbar_patients" />
+    <com.clinicia.view.CustomViewPager android:id="@id/viewpager" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <com.google.android.material.tabs.TabLayout android:id="@id/tabs" android:background="@color/tab_background" android:layout_width="fill_parent" android:layout_height="wrap_content" app:tabGravity="fill" app:tabIndicatorHeight="@dimen/margin_3dp" app:tabMode="fixed" app:tabSelectedTextColor="@color/black" app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" app:tabTextColor="@color/gray" />
+</LinearLayout>

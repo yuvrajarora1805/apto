@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:orientation="horizontal" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="40.0sp">
+        <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="@color/white" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Body Temperature" android:layout_centerInParent="true" />
+        <ImageView android:layout_gravity="right" android:id="@id/iv_close" android:layout_width="@dimen/margin_20dp" android:layout_height="@dimen/margin_20dp" android:layout_marginRight="@dimen/margin_20dp" android:layout_centerVertical="true" android:layout_alignParentEnd="true" app:srcCompat="@drawable/close_white" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="vertical" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <com.clinicia.view.DatePickerDob android:textColor="#ff000000" android:id="@id/tv_date" android:layout_width="0.0dip" android:layout_height="32.0dip" android:layout_marginTop="5.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="5.0dip" android:hint="Date" android:maxLines="1" android:drawableRight="@null" android:layout_weight="1.0" style="@android:style/Widget.Holo.Spinner" />
+            <EditText android:textColor="#ff000000" android:id="@id/et_time" android:focusable="true" android:focusableInTouchMode="false" android:clickable="true" android:layout_width="0.0dip" android:layout_height="32.0dip" android:layout_marginLeft="10.0dip" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:hint="Time" android:maxLines="1" android:drawableRight="@null" android:layout_weight="1.0" style="@android:style/Widget.Holo.Spinner" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_blood_sugar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Blood Sugar:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_blood_sugar" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="mg/dl" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_body_temp" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Body Temperature:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_body_temp" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" android:inputType="numberDecimal" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="°F" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_pulse_rate" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pulse Rate:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_pulse_rate" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" android:inputType="number" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="pulse/min" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_respi_rate" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Respiration Rate:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_respi_rate" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" android:inputType="number" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="number/min" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_bp" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Systolic :" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_bp_sys" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="5.0dip" android:inputType="number" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:text="Diastolic : " />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_bp_dia" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" android:inputType="number" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_weight" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Weight:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_weight" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" android:inputType="numberDecimal" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="kg" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_height" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Height:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_height" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:layout_marginLeft="10.0dip" android:inputType="number" />
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="cm" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_spo2" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:text="SpO2:" />
+            <EditText android:textSize="14.0sp" android:gravity="center" android:id="@id/et_spo2" android:background="@drawable/border_dark" android:layout_width="60.0dip" android:layout_height="28.0dip" android:inputType="number" />
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="%" />
+        </LinearLayout>
+        <Button android:textSize="16.0sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@id/btn_add" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="30.0dip" android:layout_marginTop="20.0dip" android:layout_marginBottom="10.0dip" android:text="Add" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="400.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_phn_no" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" />
+    <ListView android:id="@id/lv_patientlist" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/tv_skip" android:layout_below="@id/tv_phn_no" />
+    <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="@color/accent" android:gravity="right" android:id="@id/tv_skip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="20.0dip" android:text="Skip >>" android:layout_alignParentBottom="true" />
+</RelativeLayout>

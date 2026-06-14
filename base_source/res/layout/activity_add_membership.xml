@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_add_membership" layout="@layout/toolbar" />
+    <ScrollView android:orientation="vertical" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/ll_buttons" android:layout_below="@id/toolbar_add_membership">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/font_18sp" android:textStyle="bold" android:textColor="@color/black" android:gravity="center_vertical" android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="@dimen/margin_40dp" android:text="@string/membership_details" android:paddingStart="@dimen/margin_10dp" />
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/membership_name">
+                <com.clinicia.custom_classes.EditTextRegular android:textSize="16.0sp" android:id="@id/et_membership_name" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="@dimen/margin_120dp" android:layout_height="wrap_content" android:hint="@string/fees">
+                    <com.clinicia.custom_classes.EditTextRegular android:textSize="16.0sp" android:id="@id/et_membership_fees" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <CheckBox android:id="@id/chkbx_iclusive_of_tax" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/fees_inclusive_of_taxes" android:layout_marginStart="@dimen/margin_10dp" style="@style/radio_button_style" />
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout android:id="@id/til_taxes" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/tax_details">
+                <EditText android:textSize="16.0sp" android:id="@id/et_taxes" android:padding="10.0dip" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="false" android:onClick="showTaxesDialog" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="@dimen/margin_120dp" android:layout_height="wrap_content" android:hint="@string/validity">
+                    <com.clinicia.custom_classes.EditTextRegular android:textSize="16.0sp" android:id="@id/et_membership_duration" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Spinner android:id="@id/sp_duration_type" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_10dp" style="@style/spinner_style" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="16.0sp" android:textColor="@color/black" android:id="@id/tv_clinic_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clinic_colon" android:layout_marginStart="5.0dip" />
+                <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_weight="1.0">
+                    <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:id="@id/tv_clinic_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="" android:drawableRight="@drawable/down_arrow_green" android:drawablePadding="10.0dip" app:drawableTint="@color/colorPrimaryGreen" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView android:textSize="@dimen/font_18sp" android:textStyle="bold" android:textColor="@color/black" android:gravity="center_vertical" android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="@dimen/margin_40dp" android:layout_marginTop="@dimen/margin_20dp" android:text="@string/benefits" android:paddingStart="@dimen/margin_10dp" />
+            <TextView android:textSize="@dimen/font_16sp" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:text="1. Bill Amount Level :" android:layout_marginStart="5.0dip" android:layout_marginEnd="@dimen/margin_10dp" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_20dp">
+                <EditText android:textSize="16.0sp" android:id="@id/et_discount" android:layout_width="@dimen/margin_60dp" android:layout_height="wrap_content" android:inputType="number" />
+                <TextView android:textSize="@dimen/font_16sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/discount_on_total_billing" android:layout_marginStart="5.0dip" android:layout_marginEnd="@dimen/margin_10dp" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_30dp">
+                <TextView android:textSize="@dimen/font_16sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Subject to max. discount of " />
+                <TextView android:textSize="@dimen/font_16sp" android:id="@id/tv_rs_symbol" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rs." android:layout_marginEnd="@dimen/margin_5dp" />
+                <EditText android:id="@id/et_max_discount" android:layout_width="@dimen/margin_100dp" android:layout_height="wrap_content" android:inputType="number" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:layout_marginStart="5.0dip">
+                <TextView android:textSize="@dimen/font_16sp" android:textColor="@color/black" android:id="@id/tv_product_level_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2. Item Level :" />
+                <ImageView android:id="@id/iv_product_level" android:layout_width="@dimen/margin_25dp" android:layout_height="@dimen/margin_25dp" android:src="@drawable/red_plus" android:layout_marginStart="5.0dip" />
+            </LinearLayout>
+            <com.clinicia.view.NonScrollListView android:orientation="vertical" android:id="@id/lv_selected_products" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/ll_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/margin_20dp" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <Button android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@id/btn_submit" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="@string/submit" android:textAllCaps="false" />
+        <Button android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@id/btn_delete" android:background="@drawable/red_patch" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="@string/delete" android:textAllCaps="false" android:layout_marginStart="@dimen/margin_20dp" />
+    </LinearLayout>
+</RelativeLayout>

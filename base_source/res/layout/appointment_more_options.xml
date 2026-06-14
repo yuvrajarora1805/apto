@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:gravity="center_vertical" android:layout_gravity="center" android:orientation="horizontal" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="20.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_title_more_appts" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Multiple Appointments" android:layout_weight="1.0" />
+        <ImageView android:layout_gravity="right" android:id="@id/iv_close_multi_dialog" android:layout_width="40.0dip" android:layout_height="40.0dip" app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+    </FrameLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_more_appt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip">
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_repeat_every" android:paddingLeft="5.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+            <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3.0dip" android:text="Repeat every:" />
+            <EditText android:gravity="center" android:id="@id/et_days_repeat_every" android:layout_width="40.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="2" />
+            <TextView android:layout_gravity="center" android:id="@id/tv_days_repeat_every" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginBottom="3.0dip" android:text="days" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_repeat_on" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+            <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3.0dip" android:text="On:" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginRight="5.0dip" android:layout_marginBottom="5.0dip" android:weightSum="7.0">
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_mon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="M" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_tue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="T" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_wed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="W" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_thu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="T" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_fri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="F" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_sat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+                <CheckBox android:textColor="#ff000000" android:id="@id/cb_sun" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:layout_weight="1.0" android:buttonTint="#ff000000" style="@style/radio_button_style" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_ends" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ff000000" android:gravity="left" android:id="@id/tv_title_ends_more_appts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ends:" />
+            <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <RadioButton android:id="@id/rb_after_more_appt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="After" style="@style/radio_button_style" />
+                    <EditText android:id="@id/et_after_more_appt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="" android:inputType="numberDecimal" />
+                    <TextView android:textSize="16.0sp" android:layout_gravity="center" android:id="@id/tv_title_sessions_more_appts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="sessions" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <RadioButton android:id="@id/rb_on_more_appt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="On" style="@style/radio_button_style" />
+                    <com.clinicia.view.DateDisplayPicker android:textColor="#ff000000" android:id="@id/date_on_more_appt" android:layout_width="wrap_content" android:layout_height="32.0dip" android:layout_marginLeft="5.0dip" android:hint="Date" android:drawableRight="@null" style="@android:style/Widget.Holo.Spinner" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip">
+            <TextView android:textStyle="bold" android:id="@id/tv_dialog_summary_more_appt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginBottom="3.0dip" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <Button android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/btn_submit_more_appt" android:background="@drawable/red_patch" android:layout_width="100.0dip" android:layout_height="wrap_content" android:layout_marginRight="20.0dip" android:text="Submit" android:textAllCaps="false" />
+            <Button android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/btn_clear_more_appt" android:background="@drawable/red_patch" android:visibility="gone" android:layout_width="100.0dip" android:layout_height="wrap_content" android:text="Clear" android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

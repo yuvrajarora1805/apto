@@ -1,0 +1,40 @@
+.class Lcom/clinicia/activity/AddBookActivity$13;
+.super Lcom/google/gson/reflect/TypeToken;
+.source "AddBookActivity.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/clinicia/activity/AddBookActivity;->sendData(Ljava/lang/String;Ljava/lang/String;)V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Lcom/google/gson/reflect/TypeToken<",
+        "Ljava/util/List<",
+        "Lcom/clinicia/pojo/CategoryPojo;",
+        ">;>;"
+    }
+.end annotation
+
+
+# instance fields
+.field final synthetic this$0:Lcom/clinicia/activity/AddBookActivity;
+
+
+# direct methods
+.method constructor <init>(Lcom/clinicia/activity/AddBookActivity;)V
+    .locals 0
+
+    .line 634
+    iput-object p1, p0, Lcom/clinicia/activity/AddBookActivity$13;->this$0:Lcom/clinicia/activity/AddBookActivity;
+
+    invoke-direct {p0}, Lcom/google/gson/reflect/TypeToken;-><init>()V
+
+    return-void
+.end method

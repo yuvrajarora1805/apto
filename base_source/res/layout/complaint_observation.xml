@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="@drawable/border_dark" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40.0dip">
+            <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ff000000" android:gravity="center_vertical" android:id="@id/tv_complaint_collapse" android:paddingLeft="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/clinical_notes_colon" android:layout_weight="1.0" android:onClick="collapseComplaintBox" />
+            <TextView android:textSize="20.0sp" android:textStyle="bold" android:textColor="#ff000000" android:gravity="center|right" android:layout_gravity="center_vertical" android:id="@id/tv_complaint_collapse_plus" android:paddingRight="20.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text=" + " android:onClick="collapseComplaintBox" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_complaint_collapse" android:paddingLeft="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_marginBottom="5.0dip">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_complaint_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/complaint" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <AutoCompleteTextView android:textSize="16.0sp" android:gravity="top" android:id="@id/et_complaint" android:background="@drawable/rectengle" android:paddingLeft="3.0dip" android:paddingRight="@null" android:layout_width="0.0dip" android:layout_height="30.0dip" android:singleLine="false" android:layout_weight="1.0" android:inputType="textCapSentences|textMultiLine" />
+                    <Button android:textSize="12.0sp" android:textColor="#ff000080" android:id="@id/btn_add_complaint" android:background="@drawable/clinicborder" android:visibility="visible" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/add" android:textAllCaps="false" />
+                </LinearLayout>
+                <com.clinicia.view.NonScrollListView android:id="@id/lv_complaint" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="2.0dip" android:divider="@null" android:dividerHeight="0.0dip" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="10.0dip">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_observation_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/observation_notes" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <AutoCompleteTextView android:textSize="16.0sp" android:gravity="top" android:id="@id/et_observation" android:background="@drawable/rectengle" android:paddingLeft="3.0dip" android:paddingRight="@null" android:layout_width="0.0dip" android:layout_height="30.0dip" android:singleLine="false" android:layout_weight="1.0" android:inputType="textCapSentences|textMultiLine" />
+                    <Button android:textSize="12.0sp" android:textColor="#ff000080" android:id="@id/btn_add_observation" android:background="@drawable/clinicborder" android:visibility="visible" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/add" android:textAllCaps="false" />
+                </LinearLayout>
+                <com.clinicia.view.NonScrollListView android:id="@id/lv_observation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="2.0dip" android:divider="@null" android:dividerHeight="0.0dip" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_investigation" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="10.0dip">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_investigation_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/investigations_suggested" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <AutoCompleteTextView android:textSize="16.0sp" android:gravity="top" android:id="@id/et_investigation_suggested" android:background="@drawable/rectengle" android:paddingLeft="3.0dip" android:paddingRight="@null" android:layout_width="0.0dip" android:layout_height="30.0dip" android:singleLine="false" android:layout_weight="1.0" android:inputType="textCapSentences|textMultiLine" />
+                    <Button android:textSize="12.0sp" android:textColor="#ff000080" android:id="@id/btn_add_investigation_suggested" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/add" android:textAllCaps="false" />
+                </LinearLayout>
+                <com.clinicia.view.NonScrollListView android:id="@id/lv_investigation_suggested" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="2.0dip" android:divider="@null" android:dividerHeight="0.0dip" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_diagnosis" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="10.0dip">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_diagnosis_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/diagnosis" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <AutoCompleteTextView android:textSize="16.0sp" android:gravity="top" android:id="@id/et_diagnosis" android:background="@drawable/rectengle" android:paddingLeft="3.0dip" android:paddingRight="@null" android:layout_width="0.0dip" android:layout_height="30.0dip" android:singleLine="false" android:layout_weight="1.0" android:inputType="textCapSentences|textMultiLine" />
+                    <Button android:textSize="12.0sp" android:textColor="#ff000080" android:id="@id/btn_add_diagnosis" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/add" android:textAllCaps="false" />
+                </LinearLayout>
+                <com.clinicia.view.NonScrollListView android:id="@id/lv_diagnosis" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="2.0dip" android:divider="@null" android:dividerHeight="0.0dip" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:layout_gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/remark" />
+                <EditText android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/Remark" android:background="@drawable/rectengle" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_marginBottom="5.0dip" android:maxLines="6" android:minLines="2" android:inputType="textCapWords|textMultiLine" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView android:layout_gravity="center" android:id="@id/card_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="2.0dip" android:layout_marginRight="5.0dip" card_view:cardCornerRadius="2.0dip" card_view:contentPadding="5.0dip">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip">
+                <RadioButton android:id="@id/rd_default_clinic" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/radio_button_style" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/linearcliniclist" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:layout_weight="1.0">
+                <TextView android:textSize="18.0dip" android:textStyle="bold" android:ellipsize="end" android:id="@id/cliniclist" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="8.0dip" android:singleLine="true" android:layout_weight="1.0" />
+                <TextView android:ellipsize="end" android:id="@id/li_cli_location" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="3.0dip" android:singleLine="true" />
+                <TextView android:textSize="12.0sp" android:gravity="center_vertical" android:layout_gravity="right" android:id="@id/li_cli_approved" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_marginRight="10.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip">
+            <TextView android:textColor="#ffe90c0c" android:gravity="center" android:id="@id/btn_more_info" android:background="@drawable/clinicborder" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingRight="10.0dip" android:paddingBottom="5.0dip" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="More Info" />
+            <TextView android:textColor="#ffe90c0c" android:gravity="center" android:id="@id/btn_preferences_clinic_details" android:background="@drawable/clinicborder" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingRight="10.0dip" android:paddingBottom="5.0dip" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:text="Preferences" />
+            <TextView android:textColor="#ffe90c0c" android:gravity="center" android:id="@id/addtimeclinic" android:background="@drawable/clinicborder" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingRight="10.0dip" android:paddingBottom="5.0dip" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:text="Timmings" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

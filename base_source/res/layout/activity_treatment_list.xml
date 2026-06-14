@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_alignParentStart="true">
+        <include android:id="@id/toolbar_addtreatment" layout="@layout/toolbar_patients" />
+        <LinearLayout android:orientation="vertical" android:id="@id/addpatientgray" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <EditText android:id="@id/addtreatname" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/treatment_name" android:inputType="textCapWords" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <EditText android:id="@id/addtreatfees" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/fees" android:layout_weight="1.0" android:inputType="number" />
+                    <CheckBox android:id="@id/addtreatcheck" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/include_dental_chart" android:layout_weight="1.0" style="@style/radio_button_style" />
+                </LinearLayout>
+                <LinearLayout android:gravity="right" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip">
+                    <Button android:textColor="#ffffffff" android:id="@id/addtreatclear" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="@string/clear" android:layout_weight="0.0" />
+                    <Button android:textColor="#ffffffff" android:id="@id/addtreatdelete" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="@string/delete" android:layout_weight="0.0" />
+                    <Button android:textColor="#ffffffff" android:id="@id/addtreatadd" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="@string/add" android:layout_weight="0.0" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:background="@drawable/green" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="40.0dip" android:weightSum="100.0">
+                <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="left" android:id="@id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/treatment_list" android:layout_weight="30.0" android:layout_alignParentLeft="true" />
+                <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="right" android:id="@id/tv_fees" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="20.0dip" android:text="@string/fees" android:layout_weight="70.0" android:layout_alignParentRight="true" />
+                <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="right" android:id="@id/addtreatchat_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="@string/chart" android:layout_alignParentRight="true" />
+            </LinearLayout>
+            <ListView android:id="@id/addtreatlist" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" />
+            <TextView android:gravity="center" android:id="@id/tv_no_data_found" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="20.0dip" android:text="@string/no_treatment_found_in_this_clinic_please_add_new_treatments" />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView android:layout_gravity="end|bottom|center" android:id="@id/iv_add" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginBottom="30.0dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:layout_marginEnd="@dimen/margin_15dp" app:srcCompat="@drawable/plus_filled" />
+</RelativeLayout>

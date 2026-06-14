@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_registration_step1" layout="@layout/toolbar_registration" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/toolbar_registration_step1">
+        <LinearLayout android:orientation="vertical" android:padding="@dimen/_12sdp" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/business_category_please_select">
+                <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_business_category" style="@style/clickableEditTextStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp">
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_doc_title" style="@style/clickableEditTextStyleWithoutArrow" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_5sdp" android:layout_marginRight="@dimen/_5sdp" android:layout_weight="1.0" android:focusedByDefault="false">
+                    <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_fname" android:hint="@string/first_name" android:inputType="textCapWords" android:defaultFocusHighlightEnabled="false" style="@style/editTextStyle" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_lname" android:hint="@string/last_name" android:inputType="textCapWords" style="@style/editTextStyle" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:baselineAligned="false">
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_dial_code" style="@style/clickableEditTextStyleWithoutArrow" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="@dimen/_5sdp">
+                    <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_mobile" android:hint="@string/mobile_no" android:inputType="phone" style="@style/editTextStyle" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp">
+                <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_email" android:hint="@string/email_id" android:inputType="textEmailAddress" style="@style/editTextStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <FrameLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp">
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.clinicia.custom_classes.EditTextRegular android:id="@id/et_password" android:hint="@string/password" android:inputType="textPassword" style="@style/editTextStyle" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <ImageView android:layout_gravity="center|right" android:id="@id/iv_show_pwd" android:focusable="true" android:clickable="true" android:layout_width="@dimen/_15sdp" android:layout_height="@dimen/_15sdp" android:layout_marginEnd="@dimen/_20sdp" app:srcCompat="@drawable/eye1" />
+            </FrameLayout>
+            <com.clinicia.custom_classes.TextViewRegular android:textSize="@dimen/_10sdp" android:textColor="@color/black" android:textColorLink="@color/link_color" android:autoLink="web" android:id="@id/chkbx_privacy_policy" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_10sdp" android:text="@string/privacy_policy" />
+            <com.clinicia.custom_classes.ButtonSemiBold android:id="@id/btn_submit" android:layout_marginTop="@dimen/_10sdp" android:text="@string/submit" style="@style/primaryButtonStyleFull" />
+            <com.clinicia.custom_classes.TextViewSemiBold android:textSize="@dimen/_13sdp" android:textColor="@color/black" android:textColorLink="@color/colorPrimary" android:gravity="center" android:autoLink="web" android:id="@id/tv_login_link" android:focusable="true" android:focusableInTouchMode="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_10sdp" android:text="Already have an account? Sign in" />
+            <LinearLayout android:orientation="vertical" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

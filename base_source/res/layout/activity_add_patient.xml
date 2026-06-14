@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_addpatient" layout="@layout/toolbar" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.clinicia.view.ZoomageView android:layout_gravity="center" android:id="@id/iv_imageview_patient" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitCenter" app:zoomage_animateOnReset="true" app:zoomage_autoCenter="true" app:zoomage_autoResetMode="UNDER" app:zoomage_doubleTapToZoom="false" app:zoomage_maxScale="8.0" app:zoomage_minScale="0.6" app:zoomage_restrictBounds="false" app:zoomage_translatable="true" app:zoomage_zoomable="true" />
+        <ScrollView android:orientation="vertical" android:id="@id/addpatientgray" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="10.0dip" android:fillViewport="true">
+            <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="10.0dip">
+                <com.google.android.material.textfield.TextInputLayout android:id="@id/til_patient_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/patient_name_star">
+                    <EditText android:id="@id/edtpFirstName" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" android:inputType="textCapWords" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                        <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_dial_code" android:padding="10.0dip" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <EditText android:id="@id/edtpMobile" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/mobile_no_star" android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <EditText android:id="@id/edtpEmail" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/email_id" android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView android:textSize="18.0sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="@dimen/margin_5dp" android:text="@string/date_of_birth_colon" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <EditText android:id="@id/et_dob" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="@string/dob_hint" android:inputType="number" android:paddingStart="5.0dip" />
+                    <ImageView android:id="@id/iv_dob" android:layout_width="@dimen/margin_20dp" android:layout_height="@dimen/margin_20dp" android:src="@drawable/calendar_white" app:tint="@color/black" />
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:hint="@string/age" android:layout_weight="1.0" android:layout_marginStart="5.0dip">
+                        <EditText android:id="@id/pdob" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/age" android:maxLength="3" android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <Spinner android:id="@id/sp_age_type" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/spinner_style" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout android:id="@id/til_patient_id" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/patient_id" android:layout_weight="1.0">
+                        <EditText android:id="@id/edtpNo" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <RadioGroup android:orientation="horizontal" android:id="@id/pgender_rg" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginTop="@dimen/activity_vertical_margin" android:layout_weight="1.0">
+                        <RadioButton android:id="@id/pradioButton1" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/male" style="@style/radio_button_style" />
+                        <RadioButton android:id="@id/pradioButton2" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/female" style="@style/radio_button_style" />
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_polyclinic_addpatient" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="16.0sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="Branch:" />
+                    <Spinner android:id="@id/sp_polyclinic_addpatient" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_weight="1.0" style="@style/spinner_style" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="16.0sp" android:textStyle="bold" android:id="@id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/clinic_colon" />
+                    <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_weight="1.0">
+                        <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:id="@id/tv_clinicname_addpatient" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="" android:drawableRight="@drawable/down_arrow_green" android:drawablePadding="10.0dip" app:drawableTint="@color/colorPrimaryGreen" />
+                    </LinearLayout>
+                    <Button android:textColor="#ffffffff" android:layout_gravity="right" android:id="@id/addpatientquick" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginLeft="5.0dip" android:text="@string/quick_add" android:textAllCaps="false" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/ll_more_information" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="20.0dip" android:textColor="#ffffffff" android:gravity="center" android:background="@drawable/green" android:padding="5.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/medical_history" />
+                    <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatientpersonal" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_20dp" android:text="@string/plus_personal_information" android:onClick="personal" />
+                    <LinearLayout android:orientation="horizontal" android:id="@id/addpatientlinearimage" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:layout_width="130.0dip" android:layout_height="wrap_content">
+                            <ImageView android:id="@id/addpatientimageview" android:tag="ic" android:padding="10.0dip" android:layout_width="130.0dip" android:layout_height="150.0dip" android:layout_marginRight="5.0dip" android:scaleType="fitXY" android:adjustViewBounds="true" app:srcCompat="@drawable/upload" />
+                            <TextView android:textSize="12.0sp" android:textStyle="bold" android:textColor="@color/link_color" android:gravity="center" android:id="@id/tv_edit_profile_pic" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/edit" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                            <com.clinicia.view.DatePickerDob android:textSize="18.0dip" android:id="@id/et_anniversary_date" android:padding="1.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="14.0dip" android:layout_marginTop="3.0dip" android:hint="@string/anniversary_date" android:drawableRight="@null" style="@android:style/Widget.Holo.Spinner" />
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <com.google.android.material.textfield.TextInputLayout android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                    <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_dial_code_eme" android:padding="10.0dip" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="" android:singleLine="false" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                    <EditText android:id="@id/edtpemergencyContact" android:padding="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/emergency_contact" android:inputType="phone" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <com.google.android.material.textfield.TextInputLayout android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                    <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_dial_code_alt" android:padding="10.0dip" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="" android:singleLine="false" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                    <EditText android:id="@id/edtpAltContactNo" android:padding="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/contact_no_alternate" android:inputType="numberDecimal" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:id="@id/ll_personal_info" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_category" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:hint="Category">
+                            <EditText android:id="@id/et_category" android:padding="15.0dip" android:focusable="true" android:focusableInTouchMode="false" android:visibility="visible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="false" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout android:orientation="horizontal" android:paddingLeft="5.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                            <TextView android:textSize="16.0sp" android:textStyle="bold" android:layout_gravity="center" android:id="@id/tv_patient_category_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/category_colon" />
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="10.0dip">
+                                <Spinner android:id="@id/sp_patient_category" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/spinner_style" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <EditText android:id="@id/edtpBloodGroup" android:padding="15.0dip" android:focusable="true" android:focusableInTouchMode="false" android:visibility="visible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Blood Group" android:singleLine="false" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <EditText android:id="@id/edtpaddress" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/address" android:singleLine="false" android:inputType="textPostalAddress|textCapWords|textMultiLine" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_icmr_id" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/icmr_id">
+                            <EditText android:id="@id/et_icmr_id" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="false" android:maxLength="100" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <EditText android:id="@id/patientremarks" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/notes" android:singleLine="false" android:inputType="textCapWords|textMultiLine" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/referred_by" android:layout_weight="1.0">
+                                <AutoCompleteTextView android:textSize="18.0sp" android:id="@id/et_referred_by" android:padding="15.0dip" android:paddingLeft="6.0dip" android:paddingRight="6.0dip" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/margin_40dp" android:singleLine="false" android:inputType="textCapSentences|textMultiLine" android:isScrollContainer="true" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <Button android:textSize="12.0sp" android:textColor="#ff000080" android:id="@id/btnAddRefDoc" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/add" android:textAllCaps="false" />
+                        </LinearLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_legal_entity" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/legal_entity_name">
+                            <EditText android:id="@id/et_legal_entity" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:id="@id/til_registration_details" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/registration_details">
+                            <EditText android:id="@id/et_registration_details" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout android:orientation="vertical" android:id="@id/ll_family_id" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <AutoCompleteTextView android:id="@id/et_family_id" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/head_of_family" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <TextView android:textStyle="bold" android:textColor="@color/black" android:id="@id/tv_family_list_title" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:text="@string/family_members" />
+                        <com.clinicia.view.NonScrollListView android:id="@id/lv_family_member" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginStart="10.0dip" />
+                    </LinearLayout>
+                    <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_allmedicaldetails" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:visibility="visible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text="@string/plus_medical_details" android:onClick="allmedicaldetails" />
+                    <LinearLayout android:orientation="vertical" android:id="@id/ll_all_medical_details" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip">
+                        <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatientIllness" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:visibility="visible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Illness" android:onClick="illness" />
+                        <LinearLayout android:orientation="vertical" android:id="@id/ll_patient_checkbox" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientdiabetes" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Diabetes" android:layout_weight="1.0" style="@style/radio_button_style" />
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientTuberculosis" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Tuberculosis" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientHeartPatient" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Heart Patient" android:layout_weight="1.0" style="@style/radio_button_style" />
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientBloodPressure" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Blood Pressure" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientMigrain" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Migraine" android:layout_weight="1.0" style="@style/radio_button_style" />
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientLungs" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Lungs related" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientHIV" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="HIV" android:layout_weight="1.0" style="@style/radio_button_style" />
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientTB" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="TB" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientAntiPlatelet" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Anti-Platelet Medication" android:layout_weight="1.0" style="@style/radio_button_style" />
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientAntiCoagulant" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Anti-Coagulant Medication" android:layout_weight="1.0" style="@style/radio_button_style" />
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <CheckBox android:textSize="18.0dip" android:id="@id/addpatientPregnancy" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="Pregnancy" style="@style/radio_button_style" />
+                                <com.google.android.material.textfield.TextInputLayout android:id="@id/ll_pregnancy_month" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                    <EditText android:id="@id/addpatientPregnancyMonth" android:padding="15.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Pregnancy Month" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <com.google.android.material.textfield.TextInputLayout android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientillothers" android:padding="15.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="others" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatientAllergies" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:visibility="visible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Allergies" android:onClick="allergies" />
+                        <LinearLayout android:orientation="vertical" android:id="@id/ll_Allergies" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <com.google.android.material.textfield.TextInputLayout android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientfood" android:padding="15.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Food" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientdrugs" android:padding="15.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Drugs" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientalleothers" android:padding="15.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="others" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatientHabbits" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:visibility="visible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Habits" android:onClick="habbits" />
+                        <LinearLayout android:orientation="vertical" android:id="@id/ll_habits" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:textSize="16.0dip" android:layout_gravity="left" android:id="@id/addpaitentsmoking" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Smoking" />
+                            <RadioGroup android:orientation="horizontal" android:id="@id/radiogroupsmoking" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <RadioButton android:id="@id/r_smo_never" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Never" style="@style/radio_button_style" />
+                                <RadioButton android:id="@id/r_smo_Occational" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Occasional" style="@style/radio_button_style" />
+                                <RadioButton android:id="@id/r_smo_Habitual" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Habitual" style="@style/radio_button_style" />
+                            </RadioGroup>
+                            <TextView android:textSize="16.0dip" android:layout_gravity="left" android:id="@id/addpaitentdrinking" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/activity_vertical_margin" android:text="Drinking" />
+                            <RadioGroup android:orientation="horizontal" android:id="@id/radiogroupdrinking" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <RadioButton android:id="@id/r_dri_never" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Never" style="@style/radio_button_style" />
+                                <RadioButton android:id="@id/r_dri_Occational" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Occasional" style="@style/radio_button_style" />
+                                <RadioButton android:id="@id/r_dri_Habitual" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Habitual" style="@style/radio_button_style" />
+                            </RadioGroup>
+                            <TextView android:textSize="16.0dip" android:layout_gravity="left" android:id="@id/addpaitenttobacco" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/activity_vertical_margin" android:text="Tobacco" />
+                            <RadioGroup android:orientation="horizontal" android:id="@id/radiogrouptobacco" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <RadioButton android:id="@id/r_tob_never" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Never" style="@style/radio_button_style" />
+                                <RadioButton android:id="@id/r_tob_Occational" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Occasional" style="@style/radio_button_style" />
+                                <RadioButton android:id="@id/r_tob_Habitual" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Habitual" style="@style/radio_button_style" />
+                            </RadioGroup>
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatienthabothers" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="others" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatientmedication" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Medical History" android:onClick="medication" />
+                        <LinearLayout android:orientation="vertical" android:id="@id/ll_medical_details" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientmedical" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Medical History" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientcurrentmedication" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Current Medication" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatienthabits" android:padding="15.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Habits and Allergies" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <EditText android:id="@id/addpatientdental" android:padding="15.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Dental History" android:layout_weight="1.0" android:inputType="textCapWords" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatienthospitalization" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Hospitalization History:" android:onClick="hospitalization" />
+                        <com.google.android.material.textfield.TextInputLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <EditText android:id="@id/addpatienthistory" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="History" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/addpatientattachment" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Attachments:" android:onClick="attachments" />
+                    <LinearLayout android:orientation="horizontal" android:id="@id/patientattachlinear" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:weightSum="100.0">
+                        <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:padding="5.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="Select attachment (max. 10)" android:layout_weight="70.0" android:onClick="attach_linear_click" />
+                        <ImageView android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="30.0" android:onClick="attach_linear_click" app:srcCompat="@null" />
+                    </LinearLayout>
+                    <com.clinicia.view.ExpandableHeightGridView android:gravity="center" android:id="@id/patient_grid" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchMode="columnWidth" android:columnWidth="100.0dip" android:numColumns="3" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@id/recyclerview" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="10.0dip" />
+                    <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_family_member" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Family Members:" android:onClick="familyMember" />
+                    <LinearLayout android:orientation="vertical" android:id="@id/ll_family_member" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" />
+                    <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_consent" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Consent:" android:onClick="consentForm" />
+                    <LinearLayout android:orientation="vertical" android:id="@id/ll_consent" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip">
+                        <com.clinicia.view.NonScrollListView android:id="@id/lv_consent" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                        <Button android:textSize="14.0sp" android:textColor="#ffffffff" android:layout_gravity="right" android:id="@id/btn_get_consent" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="30.0dip" android:layout_marginTop="5.0dip" android:text="Get Consent" android:textAllCaps="false" />
+                    </LinearLayout>
+                    <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/preference" android:background="#fff5f5f5" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text=" + Preference:" android:onClick="preference" />
+                    <LinearLayout android:orientation="vertical" android:id="@id/ll_preference" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="horizontal" android:id="@id/ll_sms_lang_add_patient" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_5dp" android:paddingStart="5.0dip">
+                            <TextView android:textSize="16.0sp" android:textStyle="bold" android:layout_gravity="center" android:layout_width="@dimen/margin_140dp" android:layout_height="wrap_content" android:text="@string/sms_language_colon" />
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                <Spinner android:id="@id/sp_sms_lang_addpatient" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/spinner_style" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:paddingLeft="5.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                            <TextView android:textSize="16.0sp" android:textStyle="bold" android:layout_gravity="center" android:layout_width="@dimen/margin_140dp" android:layout_height="wrap_content" android:text="@string/membership_colon" />
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                <Spinner android:id="@id/sp_membership" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/spinner_style" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <include android:id="@id/ll_membership_date" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_20dp" layout="@layout/dialog_custom_range_date" />
+                        <LinearLayout android:orientation="horizontal" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip">
+                            <TextView android:textSize="16.0sp" android:textStyle="bold" android:id="@id/tv_group_title" android:layout_width="@dimen/margin_140dp" android:layout_height="wrap_content" android:text="@string/group_colon" android:layout_marginStart="5.0dip" />
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                <TextView android:textSize="16.0sp" android:ellipsize="end" android:id="@id/tv_group" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/no_group_selected" android:drawablePadding="10.0dip" android:drawableEnd="@drawable/down_arrow_green" android:layout_marginStart="10.0dip" app:drawableTint="@color/colorPrimaryGreen" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:gravity="bottom|center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip">
+                    <Button android:textColor="#ffffffff" android:id="@id/btn_submit" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="Submit" android:textAllCaps="false" />
+                    <Button android:textColor="#ffffffff" android:id="@id/deletepatient" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginLeft="5.0dip" android:text="Delete" android:onClick="deletepatient" android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

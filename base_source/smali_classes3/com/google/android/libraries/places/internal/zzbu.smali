@@ -1,0 +1,34 @@
+.class public final synthetic Lcom/google/android/libraries/places/internal/zzbu;
+.super Ljava/lang/Object;
+.source "com.google.android.libraries.places:places@@2.6.0"
+
+# interfaces
+.implements Lcom/android/volley/Response$ErrorListener;
+
+
+# instance fields
+.field public final synthetic zza:Lcom/google/android/gms/tasks/TaskCompletionSource;
+
+
+# direct methods
+.method public synthetic constructor <init>(Lcom/google/android/gms/tasks/TaskCompletionSource;)V
+    .locals 0
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    iput-object p1, p0, Lcom/google/android/libraries/places/internal/zzbu;->zza:Lcom/google/android/gms/tasks/TaskCompletionSource;
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final onErrorResponse(Lcom/android/volley/VolleyError;)V
+    .locals 1
+
+    iget-object v0, p0, Lcom/google/android/libraries/places/internal/zzbu;->zza:Lcom/google/android/gms/tasks/TaskCompletionSource;
+
+    invoke-static {v0, p1}, Lcom/google/android/libraries/places/internal/zzby;->zza(Lcom/google/android/gms/tasks/TaskCompletionSource;Lcom/android/volley/VolleyError;)V
+
+    return-void
+.end method

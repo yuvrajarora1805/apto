@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.8">
+            <CheckBox android:gravity="left" android:id="@id/chkbx_history" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/radio_button_style" />
+            <TextView android:textColor="#ff000000" android:gravity="left" android:id="@id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="2018-01-16" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:gravity="left" android:id="@id/tv_treatment" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Treatment" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:gravity="left" android:id="@id/tv_treatment_details" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Treatment Details" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/iv_delete" android:layout_width="30.0dip" android:layout_height="30.0dip" app:srcCompat="@null" />
+        </LinearLayout>
+    </LinearLayout>
+    <View android:background="#ffcccccc" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+</LinearLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_docterreg" layout="@layout/toolbar" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/toolbar_docterreg" android:layout_alignParentLeft="true" android:layout_alignParentStart="true">
+        <LinearLayout android:orientation="vertical" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <ImageView android:id="@id/view_current_up" android:background="#ff444444" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <ImageView android:id="@id/view_all_up" android:background="#ff444444" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_title_doctor" android:background="@drawable/green" android:padding="5.0dip" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="Doctor" android:layout_weight="1.0" />
+                <View android:background="#ff444444" android:layout_width="3.0dip" android:layout_height="40.0dip" />
+                <TextView android:textSize="18.0sp" android:textStyle="normal" android:textColor="#ffcccccc" android:gravity="center" android:id="@id/tv_title_polyclinic" android:background="#ff567e3a" android:padding="5.0dip" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="Polyclinic" android:layout_weight="1.0" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <ImageView android:id="@id/view_current_down" android:background="#ff444444" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <ImageView android:id="@id/view_all_down" android:background="#ff444444" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="1.0">
+                <LinearLayout android:orientation="vertical" android:id="@id/ll_doctor_registration" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="50.0dip" android:layout_height="wrap_content">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_doc_title" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Title" android:singleLine="false" android:onClick="showDoctorTitleDialog" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/edtFirstName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="First Name" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/edtLastName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Last Name" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_dial_code" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="" android:singleLine="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/edtMobile" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Mobile No" android:inputType="phone" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/edtClinicName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Clinic Name" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/Specilisation1" android:focusable="true" android:focusableInTouchMode="false" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Practicing Category (Please select)" android:singleLine="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/ll_polyclinic_registration" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="16.0sp" android:textStyle="bold" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="Clinic :" />
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Name" android:inputType="textCapWords" android:imeOptions="actionNext" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_dial_code_clinic" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="" android:singleLine="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_phone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Phone No" android:singleLine="false" android:inputType="phone" android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <TextView android:textSize="16.0sp" android:textStyle="bold" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="Contact Person :" />
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="50.0dip" android:layout_height="wrap_content">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_doc_title_polyclinic" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Title" android:singleLine="false" android:onClick="showDoctorTitleDialogPolyClinic" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_fname" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="First Name" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_lname" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Last Name" android:inputType="textCapWords" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_dial_code" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="" android:singleLine="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_polyclinic_person_mobile" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Mobile No" android:singleLine="false" android:inputType="phone" android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/edtEmail" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Email ID" android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/Password" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Password" android:singleLine="false" android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView android:layout_gravity="center" android:id="@id/showpassword" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" app:srcCompat="@drawable/eye1" />
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <EditText android:textSize="16.0sp" android:textColorHint="@android:color/secondary_text_light_nodisable" android:id="@id/et_country" android:focusable="true" android:focusableInTouchMode="false" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Country" android:singleLine="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <EditText android:textSize="16.0sp" android:id="@id/refercode" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:hint="Referral code(Optional)" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout android:textColorHint="@android:color/secondary_text_light_nodisable" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                    <CheckBox android:textSize="15.0dip" android:id="@id/termscheck" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="I agree to the Clinicia " style="@style/radio_button_style" />
+                    <TextView android:textSize="15.0dip" android:textStyle="bold" android:textColor="#ff61b3ff" android:autoLink="web" android:id="@id/termsandcondition" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Terms of Service " android:onClick="termsandcondition" />
+                    <TextView android:textSize="15.0dip" android:textColor="#ff000000" android:autoLink="web" android:id="@id/and" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="and" />
+                </LinearLayout>
+                <TextView android:textSize="15.0dip" android:textStyle="bold" android:textColor="#ff61b3ff" android:autoLink="web" android:id="@id/privacy" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:text="Privacy Policy " android:onClick="Privacy" />
+                <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="10.0dip">
+                    <Button android:textColor="#ffffffff" android:id="@id/next" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="Submit" android:onClick="regnext" android:textAllCaps="false" />
+                    <requestFocus />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

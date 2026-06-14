@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:orientation="vertical" android:padding="@dimen/margin_5dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="@dimen/margin_8dp" app:cardBackgroundColor="@color/white" app:cardCornerRadius="@dimen/margin_8dp" app:contentPadding="@dimen/margin_8dp"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff61b3ff" android:gravity="left" android:id="@id/tvBookName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Book Name" android:layout_weight="2.0" />
+        <TextView android:textSize="18.0dip" android:gravity="left" android:id="@id/tvBookCode" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Book Code" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="18.0dip" android:gravity="left" android:id="@id/tvClinicNameTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Clinic Name : " />
+            <TextView android:textSize="18.0dip" android:gravity="left" android:id="@id/tvClinicName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ABC" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="18.0dip" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Issued date : " />
+            <TextView android:textSize="18.0dip" android:gravity="left" android:id="@id/tvIssueDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ABC" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_return_date" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="18.0dip" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Returned date : " />
+            <TextView android:textSize="18.0dip" android:gravity="left" android:id="@id/tvReturnDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ABC" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

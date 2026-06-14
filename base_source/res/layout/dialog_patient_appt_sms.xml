@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/border" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="20.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_missed_appointment_title" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Missed Appointment" />
+    <TextView android:textSize="18.0sp" android:textColor="#ff000000" android:id="@id/tv_marked_appt_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="10.0dip" android:text="Mark appointment as missed?" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/llSendTo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+        <androidx.appcompat.widget.AppCompatTextView android:textSize="18.0sp" android:textColor="#ff000000" android:layout_gravity="center" android:id="@id/tvSendToTitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/send_sms_to" />
+        <CheckBox android:textSize="15.0sp" android:id="@id/sms" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:checked="true" android:text="@string/sms_whatsapp" style="@style/radio_button_style" />
+        <CheckBox android:textSize="15.0sp" android:id="@id/chkbx_email" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:text="@string/email" style="@style/radio_button_style" />
+        <CheckBox android:textSize="15.0sp" android:id="@id/chkbx_whatsapp" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/share_on" android:drawablePadding="@dimen/margin_5dp" android:drawableEnd="@drawable/whatsapp_share" style="@style/radio_button_style" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip">
+        <Button android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/btn_no" android:background="@drawable/red_patch" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="Cancel" android:textAllCaps="false" />
+        <Button android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/btn_yes" android:background="@drawable/red_patch" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginLeft="20.0dip" android:text="Confirm" android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>

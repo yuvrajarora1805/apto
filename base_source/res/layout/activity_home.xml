@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout android:id="@id/drawer_layout1" android:background="@color/bg_color" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:card_view="http://schemas.android.com/apk/res-auto" xmlns:fab="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:background="@color/bg_color" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include android:id="@id/toolbar_home" layout="@layout/toolbar_home" />
+        <RelativeLayout android:orientation="vertical" android:background="@color/bg_color" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_dashboard" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/ll_login_details" android:layout_alignParentTop="true">
+                <androidx.core.widget.NestedScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="vertical" android:id="@id/ll_dashboard_inside" android:background="@color/gray_light" android:padding="@dimen/_5sdp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_dashboard_polyclinic_row" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/_12sdp" android:textColor="@color/black" android:ellipsize="end" android:gravity="end" android:id="@id/tv_dashboard_polyclinic_name" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="All Clinics" android:maxLines="2" android:layout_weight="1.0" android:layout_marginEnd="@dimen/margin_8dp" />
+                                <ImageView android:id="@id/iv_dashboard_polyclinic_name" android:layout_width="@dimen/_10sdp" android:layout_height="@dimen/_10sdp" android:layout_marginLeft="@dimen/_2sdp" android:layout_marginTop="@dimen/_2sdp" fab:srcCompat="@drawable/down_arrow_black" fab:tint="@color/colorPrimaryGreen" />
+                            </LinearLayout>
+                            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <com.clinicia.custom_classes.TextViewBold android:textSize="@dimen/_12sdp" android:id="@id/tv_filter_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27 Mar 2019 - 29 Mar 2019" />
+                                <com.clinicia.custom_classes.TextViewRegular android:textSize="@dimen/_12sdp" android:textColor="@color/black" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/last_seven_days" />
+                                <ImageView android:id="@id/iv_filter_date" android:layout_width="@dimen/_10sdp" android:layout_height="@dimen/_10sdp" android:layout_marginLeft="@dimen/_2sdp" android:layout_marginTop="@dimen/_2sdp" fab:srcCompat="@drawable/down_arrow_black" fab:tint="@color/colorPrimaryGreen" />
+                                <LinearLayout android:gravity="end|center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/_12sdp" android:ellipsize="end" android:gravity="end" android:id="@id/tv_dashboard_clinic_name" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/all_clinics" android:maxLines="2" android:layout_weight="1.0" />
+                                    <ImageView android:id="@id/iv_dashboard_clinic_name" android:layout_width="@dimen/_10sdp" android:layout_height="@dimen/_10sdp" android:layout_marginLeft="@dimen/_2sdp" android:layout_marginTop="@dimen/_2sdp" fab:srcCompat="@drawable/down_arrow_black" fab:tint="@color/colorPrimaryGreen" />
+                                </LinearLayout>
+                            </LinearLayout>
+                            <androidx.recyclerview.widget.RecyclerView android:id="@id/rv_dashboard" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" />
+                            <Button android:textSize="11.0sp" android:textColor="#ffffffff" android:layout_gravity="end" android:id="@id/btnRefresh" android:background="@drawable/red_patch" android:visibility="gone" android:layout_width="60.0dip" android:layout_height="24.0dip" android:layout_marginTop="4.0dip" android:text="Refresh" android:textAllCaps="false" android:layout_marginEnd="4.0dip" />
+                        </LinearLayout>
+                        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/llMainTabs" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip">
+                            <Button android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btnHomePage" android:background="@drawable/red_patch_sharp" android:layout_width="0.0dip" android:layout_height="@dimen/margin_30dp" android:text="@string/menu" android:layout_weight="1.0" android:onClick="Add_Appointment" android:textAllCaps="false" />
+                            <Button android:textColor="@color/colorPrimaryGreen" android:layout_gravity="center" android:id="@id/btnWalkInData" android:background="@drawable/clinicborder_sharp" android:layout_width="0.0dip" android:layout_height="@dimen/margin_30dp" android:text="@string/schedule" android:layout_weight="1.0" android:textAllCaps="false" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="vertical" android:id="@id/llHomeMenus" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingRight="@dimen/_12sdp" android:paddingBottom="@dimen/_8sdp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_10sdp">
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_patients_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_patients2" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_patients" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/patients" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_quick_bill_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/quick_bill" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_settings_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_settings2" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/settings" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingRight="@dimen/_12sdp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_appointments_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_appointments2" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_appointment_title_dashboard" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/appointments" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_accounts_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_accounts2" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/accounts" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_smscampaign_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_title_campaign_dashboard" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/sms_campaign" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingTop="@dimen/_8sdp" android:paddingRight="@dimen/_12sdp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_reports_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_reports2" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/reports" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:id="@id/ll_prescription_dashboard" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/prescription" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:id="@id/ll_inventory_middle_position_dashboard" android:visibility="gone" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/inventory_icon" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/inventory" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:id="@id/ll_inventory_last_position_dashboard" android:visibility="visible" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/inventory_icon" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/inventory" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingTop="@dimen/_8sdp" android:paddingRight="@dimen/_12sdp" android:paddingBottom="@dimen/_12sdp" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                                <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_bills_dashboard" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_reports2" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/billing" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:id="@id/llDentalLabDashBoard" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/lab_work" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/lab_orders" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                                <LinearLayout android:orientation="vertical" android:visibility="invisible" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                    <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                            <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/inventory_icon" />
+                                            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/inventory" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="vertical" android:id="@id/llWalkInData" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/llTabs" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip">
+                                <Button android:textSize="12.0sp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btnApptCount" android:background="@drawable/red_patch" android:paddingLeft="@dimen/margin_5dp" android:paddingRight="@dimen/margin_5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/appointments_count" android:onClick="Add_Appointment" android:textAllCaps="false" />
+                                <Button android:textSize="12.0sp" android:textColor="#ff000080" android:layout_gravity="center" android:id="@id/btnCheckInCount" android:background="@drawable/clinicborder" android:paddingLeft="@dimen/margin_5dp" android:paddingRight="@dimen/margin_5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/check_in" android:textAllCaps="false" />
+                                <Button android:textSize="12.0sp" android:textColor="#ff000080" android:layout_gravity="center" android:id="@id/btnEngagedCount" android:background="@drawable/clinicborder" android:paddingLeft="@dimen/margin_5dp" android:paddingRight="@dimen/margin_5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/engaged" android:textAllCaps="false" />
+                                <Button android:textSize="12.0sp" android:textColor="#ff000080" android:layout_gravity="center" android:id="@id/btnCompletedCount" android:background="@drawable/clinicborder" android:paddingLeft="@dimen/margin_5dp" android:paddingRight="@dimen/margin_5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/completed" android:textAllCaps="false" />
+                            </LinearLayout>
+                            <androidx.recyclerview.widget.RecyclerView android:id="@id/rvWalkInList" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:nestedScrollingEnabled="false" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/ll_without_dashboard" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/ll_login_details">
+                <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingRight="@dimen/_12sdp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_patients" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_patients2" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_patient_without_dashboard" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/patients" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_quick_bill" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/quick_bill" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_settings" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:id="@id/iv_settings" android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_settings2" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_settings" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/settings" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingRight="@dimen/_12sdp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_35sdp" android:layout_marginBottom="@dimen/_35sdp">
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_appointments" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_appointments2" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_appointment_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/appointments" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_accounts" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_accounts2" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/accounts" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_smscampaign" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_title_campaign" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/sms_campaign" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingRight="@dimen/_12sdp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_reports" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_reports2" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/reports" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:id="@id/ll_prescription" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/prescription" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:id="@id/ll_inventory_middle_position" android:visibility="gone" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/prescription" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:id="@id/ll_inventory_last_position" android:visibility="visible" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/inventory_icon" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/inventory" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/_12sdp" android:paddingRight="@dimen/_12sdp" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_35sdp">
+                            <LinearLayout android:orientation="vertical" android:id="@id/ll_bills" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/icon_appointments2" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/tv_bills_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/billing" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:id="@id/llDentalLab" android:visibility="invisible" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/_12sdp" android:layout_marginRight="@dimen/_12sdp" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@drawable/lab_work" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/lab_orders" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                            <LinearLayout android:orientation="vertical" android:visibility="invisible" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                                <androidx.cardview.widget.CardView android:gravity="center" android:layout_gravity="center" android:layout_width="@dimen/_90sdp" android:layout_height="@dimen/_90sdp" fab:cardBackgroundColor="@android:color/white" fab:cardCornerRadius="@dimen/_5sdp" fab:cardElevation="@dimen/_2sdp" fab:cardUseCompatPadding="true">
+                                    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                                        <ImageView android:layout_width="@dimen/_35sdp" android:layout_height="@dimen/_35sdp" fab:srcCompat="@null" />
+                                        <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp" android:text="@string/sms_campaign" />
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_login_details" android:background="#fff2f2f2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+                <TextView android:textSize="12.0sp" android:textColor="#ffff0000" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/tv_assistant_login" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                <TextView android:textSize="12.0sp" android:textColor="#ff2f2f2f" android:gravity="center" android:id="@id/expirydate" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:onClick="Payment_date" />
+                <TextView android:textSize="12.0sp" android:textStyle="bold" android:textColor="#ff2f2f2f" android:gravity="center" android:id="@id/clickhere" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="3.0dip" android:text="@string/click_here_to_subscribe" android:onClick="Payment_date" />
+                <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/ll_account_name" android:paddingLeft="20.0dip" android:paddingRight="20.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip">
+                    <TextView android:textSize="12.0sp" android:textColor="@color/colorPrimary" android:id="@id/tv_account_doctor" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <ImageView android:id="@id/iv_accounts" android:visibility="gone" android:layout_width="15.0dip" android:layout_height="15.0dip" android:layout_marginLeft="5.0dip" fab:srcCompat="@drawable/switch_account" />
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView android:id="@id/iv_emcure" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_marginBottom="10.0dip" android:src="@drawable/emcure" android:layout_alignParentBottom="true" />
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true">
+                <com.github.clans.fab.FloatingActionMenu android:id="@id/material_design_android_floating_action_menu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_marginBottom="5.0dip" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" fab:layout_constraintBottom_toBottomOf="parent" fab:layout_constraintEnd_toEndOf="parent" fab:menu_animationDelayPerItem="55" fab:menu_backgroundColor="@android:color/transparent" fab:menu_buttonSpacing="0.0dip" fab:menu_colorNormal="#ffff4d4d" fab:menu_colorPressed="#ffff4d4d" fab:menu_colorRipple="#99d4d4d4" fab:menu_fab_size="mini" fab:menu_icon="@null" fab:menu_labels_colorNormal="#ff333333" fab:menu_labels_colorPressed="#ff444444" fab:menu_labels_colorRipple="#66efecec" fab:menu_labels_cornerRadius="3.0dip" fab:menu_labels_ellipsize="none" fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right" fab:menu_labels_margin="0.0dip" fab:menu_labels_maxLines="-1" fab:menu_labels_padding="8.0dip" fab:menu_labels_position="left" fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right" fab:menu_labels_showShadow="true" fab:menu_labels_singleLine="false" fab:menu_labels_textColor="#fff2f1f1" fab:menu_labels_textSize="15.0sp" fab:menu_openDirection="up" fab:menu_shadowColor="#66aff198" fab:menu_shadowRadius="4.0dip" fab:menu_shadowXOffset="1.0dip" fab:menu_shadowYOffset="4.0dip" fab:menu_showShadow="true">
+                    <com.github.clans.fab.FloatingActionButton android:id="@id/fab_add_patient" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/patient_white" fab:fab_label="Add Patient" fab:fab_size="mini" />
+                    <com.github.clans.fab.FloatingActionButton android:id="@id/fab_add_appt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/calendar_white" fab:fab_label="Add Appointment" fab:fab_size="mini" />
+                    <com.github.clans.fab.FloatingActionButton android:id="@id/fab_add_walk_in" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/calendar_white" fab:fab_label="Add Walk In" fab:fab_size="mini" />
+                    <com.github.clans.fab.FloatingActionButton android:id="@id/fab_add_payment" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/payment_white" fab:fab_label="Add Payment" fab:fab_size="mini" />
+                    <com.github.clans.fab.FloatingActionButton android:id="@id/fab_unverified_visits" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/schedule" fab:fab_label="Unverified Visits" fab:fab_size="mini" />
+                </com.github.clans.fab.FloatingActionMenu>
+                <ImageView android:id="@id/iv_whatsapp" android:visibility="visible" android:layout_width="@dimen/margin_50dp" android:layout_height="@dimen/margin_50dp" android:layout_marginBottom="@dimen/margin_16dp" android:src="@drawable/whatsapp" android:layout_alignParentBottom="true" android:layout_marginStart="@dimen/margin_10dp" fab:layout_constraintBottom_toBottomOf="@id/material_design_android_floating_action_menu" fab:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <fragment android:name="com.clinicia.view.FragmentDrawer" android:layout_gravity="start" android:id="@id/fragment_navigation_drawer1" android:layout_width="@dimen/nav_drawer_width" android:layout_height="fill_parent" fab:layout="@layout/fragment_navigation_drawer" />
+</androidx.drawerlayout.widget.DrawerLayout>

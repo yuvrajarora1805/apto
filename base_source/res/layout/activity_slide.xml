@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.viewpager.widget.ViewPager android:id="@id/viewpager" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.clinicia.view.CirclePageIndicator android:id="@id/cpi" android:padding="@dimen/margin_10dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_20dp" android:layout_marginRight="@dimen/margin_20dp" android:layout_above="@id/tv_skip" android:layout_centerHorizontal="true" app:fillColor="@color/colorPrimary" app:pageColor="@color/gray" />
+    <TextView android:textSize="@dimen/font_20sp" android:textColor="@color/link_color" android:id="@id/tv_skip" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/margin_5dp" android:text="@string/skip_tutorial" android:layout_alignParentBottom="true" android:layout_marginEnd="@dimen/margin_10dp" android:layout_alignParentEnd="true" />
+</RelativeLayout>

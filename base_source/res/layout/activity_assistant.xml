@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_assistant" layout="@layout/toolbar" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_assistant" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/assistb1">
+            <EditText android:id="@id/assistsearch" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="46.0dip" android:layout_marginTop="10.0dip" android:hint="Search Assistant" android:drawableLeft="@null" />
+            <TextView android:textSize="20.0dip" android:textColor="#ffffffff" android:gravity="center" android:background="@drawable/green" android:padding="5.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="All Assistant" />
+            <ListView android:id="@id/assistListuser" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Button android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@id/assistb1" android:background="@drawable/red_patch" android:padding="10.0sp" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginBottom="10.0dip" android:text="Add Assistant" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:onClick="addAssistant" android:textAllCaps="false" />
+    </RelativeLayout>
+</LinearLayout>

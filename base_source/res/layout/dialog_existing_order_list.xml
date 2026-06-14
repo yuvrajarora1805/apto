@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:orientation="vertical" android:paddingBottom="@dimen/margin_20dp" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:background="@drawable/green" android:padding="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/font_18sp" android:textColor="@color/white" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/existing_orders" android:layout_centerInParent="true" />
+            <TextView android:textSize="@dimen/font_18sp" android:textColor="@color/white" android:id="@id/tv_skip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/skip" android:layout_centerVertical="true" android:layout_marginEnd="@dimen/margin_10dp" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <com.clinicia.view.NonScrollListView android:id="@id/lv_existing_orders" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
+    </LinearLayout>
+</ScrollView>

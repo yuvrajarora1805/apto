@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="30.0dip" android:text="Enter time for slot 1" />
+    <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip" android:text="Select days :" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:weightSum="7.0">
+        <CheckBox android:id="@id/mmon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="M" android:layout_weight="1.0" style="@style/radio_button_style" />
+        <CheckBox android:id="@id/mtue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="T" android:layout_weight="1.0" style="@style/radio_button_style" />
+        <CheckBox android:id="@id/mwed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="W" android:layout_weight="1.0" style="@style/radio_button_style" />
+        <CheckBox android:id="@id/mthu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="T" android:layout_weight="1.0" style="@style/radio_button_style" />
+        <CheckBox android:id="@id/mfri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="F" android:layout_weight="1.0" style="@style/radio_button_style" />
+        <CheckBox android:id="@id/msat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:layout_weight="1.0" style="@style/radio_button_style" />
+        <CheckBox android:id="@id/msun" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:layout_weight="1.0" style="@style/radio_button_style" />
+    </LinearLayout>
+    <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip" android:text="Select time to add:" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="2.0dip">
+        <EditText android:textSize="16.0sp" android:textColor="#ff000000" android:textColorHint="#ff000000" android:id="@id/morningfromtime" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="From" android:layout_weight="1.0" style="@android:style/Widget.Holo.Spinner" />
+        <EditText android:textSize="16.0sp" android:textColor="#ff000000" android:textColorHint="#ff000000" android:id="@id/morningtotime" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="To" android:layout_weight="1.0" style="@android:style/Widget.Holo.Spinner" />
+    </LinearLayout>
+    <CheckBox android:id="@id/chkdelete" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:text="Delete time" style="@style/radio_button_style" />
+    <Button android:textSize="14.0sp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/morningaddbutton" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="30.0dip" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip" android:text="Add" android:textAllCaps="false" />
+</LinearLayout>

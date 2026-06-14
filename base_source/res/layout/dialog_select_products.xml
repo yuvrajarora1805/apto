@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingBottom="@dimen/margin_20dp" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/rv_title" android:background="@drawable/green" android:padding="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/font_18sp" android:textColor="@color/white" android:gravity="center" android:id="@id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Item Level Benefits" android:layout_centerInParent="true" />
+        <ImageView android:id="@id/iv_cancel" android:layout_width="@dimen/margin_25dp" android:layout_height="@dimen/margin_25dp" android:src="@drawable/close_white" android:layout_centerVertical="true" android:layout_marginEnd="@dimen/margin_10dp" android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/ll_clinic" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:layout_below="@id/rv_title">
+        <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center" android:id="@id/tv_clinic_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/clinic_colon">
+            <requestFocus />
+        </TextView>
+        <Spinner android:id="@id/sp_clinic" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_10dp" style="@style/spinner_style" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:layout_below="@id/rv_title">
+        <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/type_colon">
+            <requestFocus />
+        </TextView>
+        <Spinner android:id="@id/sp_type" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_20dp" style="@style/spinner_style" />
+    </LinearLayout>
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" android:layout_above="@id/ll_buttons" android:layout_below="@id/ll_clinic">
+        <com.clinicia.view.NonScrollListView android:id="@id/lv_products" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
+    </ScrollView>
+    <LinearLayout android:gravity="center" android:layout_gravity="bottom|center" android:orientation="horizontal" android:id="@id/ll_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <Button android:textSize="16.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/btn_ok" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="30.0dip" android:text="OK" android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>

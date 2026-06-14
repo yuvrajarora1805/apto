@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_addtreatment" layout="@layout/toolbar" />
+    <LinearLayout android:orientation="vertical" android:id="@id/addpatientgray" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_groups" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <EditText android:id="@id/et_groupname" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/group_name" android:inputType="textCapWords" />
+            <LinearLayout android:gravity="right" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                <Button android:textColor="#ffffffff" android:id="@id/btn_clear" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="@string/clear" android:layout_weight="0.0" android:textAllCaps="false" />
+                <Button android:textColor="#ffffffff" android:id="@id/btn_delete" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginRight="5.0dip" android:text="@string/delete" android:layout_weight="0.0" android:textAllCaps="false" />
+                <Button android:textColor="#ffffffff" android:id="@id/btn_add" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="@string/add" android:textAllCaps="false" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:background="@drawable/green" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_marginTop="10.0dip" android:weightSum="100.0">
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="left" android:id="@id/tv_groups_name_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/groups_name" android:layout_weight="30.0" />
+        </LinearLayout>
+        <ListView android:id="@id/lv_groups" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_payment" layout="@layout/toolbar" />
+    <ScrollView android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip">
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="10.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/plan_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/plan" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/planname" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/validity" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/validity" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/subscription_amount" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/amount" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/tv_additional_clinics" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/additional_clinics" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/tv_clinic_amount" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/taxes" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/taxes" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/discount" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/tv_discount" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/total_payable" android:layout_weight="21.0" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:gravity="center" android:id="@id/total" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="" android:layout_weight="25.5" />
+                    <View android:background="@android:color/black" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView android:layout_gravity="center" android:layout_width="150.0dip" android:layout_height="150.0dip" android:layout_marginTop="@dimen/margin_10dp" android:src="@drawable/axis_qr_code" />
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_16sp" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/bank_account_name" />
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_16sp" android:textStyle="bold" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/embrave_tech_solutions" android:layout_weight="21.0" />
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_16sp" android:textColor="#ff000000" android:gravity="center" android:id="@id/tvUPITitle" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/upi_id" android:layout_weight="21.0" />
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_16sp" android:textStyle="bold" android:textColor="#ff000000" android:gravity="center" android:id="@id/tvUPI" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/clinicia_upi" android:layout_weight="21.0" />
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/or" android:layout_weight="21.0" />
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="18.0sp" android:textColor="@color/hyperlink_blue" android:layout_gravity="center" android:id="@id/btnpayment" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/other_payment_options" android:onClick="payment" android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

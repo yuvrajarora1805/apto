@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/border_dark" android:padding="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_at_admission_details" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/margin_20dp">
+        <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_at_admission_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/at_admission" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_patient_category_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/patient_category" android:layout_weight="0.5" />
+            <TextView android:id="@id/tv_patient_category" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="-" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_patient_test_done_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/patient_test_done" android:layout_weight="0.5" />
+            <TextView android:id="@id/tv_patient_test_done" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="-" android:layout_weight="1.0" style="@style/spinner_style" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_patient_type_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/patient_type" android:layout_weight="0.5" />
+            <TextView android:id="@id/tv_patient_type" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="-" android:layout_weight="1.0" style="@style/spinner_style" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_admission_status_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/admission_status" android:layout_weight="0.5" />
+            <TextView android:id="@id/tv_admission_status" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="-" android:layout_weight="1.0" style="@style/spinner_style" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_at_discharge_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/at_discharge" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+        <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_patient_category_title2" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/patient_category" android:layout_weight="0.5" />
+        <Spinner android:id="@id/sp_patient_category" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:hint="Select Patient Category" android:layout_weight="1.0" style="@style/spinner_style" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+        <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_patient_test_done_title2" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/patient_test_done" android:layout_weight="0.5" />
+        <Spinner android:id="@id/sp_patient_test_done" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:hint="Test Done" android:layout_weight="1.0" style="@style/spinner_style" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+        <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_patient_type_title2" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/patient_type" android:layout_weight="0.5" />
+        <Spinner android:id="@id/sp_patient_type" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:hint="Select Patient Type" android:layout_weight="1.0" style="@style/spinner_style" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/ll_discharge_status" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp">
+        <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:gravity="left" android:layout_gravity="center" android:id="@id/tv_admission_status_title2" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/admission_status" android:layout_weight="0.5" />
+        <Spinner android:id="@id/sp_discharge_type" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:hint="Select Discharge Type" android:layout_weight="1.0" style="@style/spinner_style" />
+    </LinearLayout>
+    <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/tv_document_handover" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:text="Documents Handover" />
+    <EditText android:textSize="16.0sp" android:gravity="top" android:id="@id/et_document_handover" android:background="@drawable/rectengle" android:paddingLeft="3.0dip" android:paddingRight="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:minHeight="@dimen/margin_50dp" android:singleLine="false" android:inputType="textCapSentences|textMultiLine" />
+</LinearLayout>

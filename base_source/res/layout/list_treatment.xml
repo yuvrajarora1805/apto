@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/liniar_visit_list" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="100.0">
+        <TextView android:textSize="18.0sp" android:id="@id/treatlistname" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="40.0" />
+        <TextView android:textSize="18.0dip" android:gravity="center|right" android:id="@id/treatlistamount" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="60.0" />
+        <CheckBox android:id="@id/treatlistcheck" android:focusable="false" android:focusableInTouchMode="false" android:visibility="gone" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" style="@style/radio_button_style" />
+    </LinearLayout>
+</LinearLayout>

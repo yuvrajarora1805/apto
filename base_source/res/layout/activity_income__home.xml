@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:id="@id/toolbar_incomehome" layout="@layout/toolbar" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="horizontal" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="100.0">
+                <TextView android:textSize="20.0dip" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="Income Details" android:layout_weight="20.0" />
+                <ImageButton android:textColor="#ffffffff" android:gravity="center" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="80.0" android:onClick="sort" app:srcCompat="@null" />
+            </LinearLayout>
+            <ListView android:id="@id/inListuser" android:paddingBottom="100.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" android:layout_alignParentBottom="true">
+            <Button android:textColor="#ffffffff" android:id="@id/incomebutton" android:background="@drawable/red_patch" android:padding="10.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Add Income" android:onClick="Addincome" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

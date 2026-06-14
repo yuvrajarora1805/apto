@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_visit_invoice" layout="@layout/toolbar_patients" />
+    <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_visit_invoice_top" android:paddingTop="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="8.0dip" android:paddingEnd="8.0dip">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_polyclinic_visit_invoice" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff000000" android:id="@id/tv_polyclinic_visit_invoice_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Branch:" />
+                <Spinner android:id="@id/sp_polyclinic_visit_invoice" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="8.0dip" style="@style/spinner_style" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_department_visit_invoice" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff000000" android:id="@id/tv_department_visit_invoice_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Department:" />
+                <Spinner android:id="@id/sp_department_visit_invoice" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="8.0dip" style="@style/spinner_style" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_tabs_bills" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <ImageView android:id="@id/view_visit_bills_up" android:background="#ff444444" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <ImageView android:id="@id/view_bills_up" android:background="#ff444444" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="3.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_title_visits_bills" android:background="@drawable/green" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="Visits" android:layout_weight="1.0" />
+                    <View android:background="#ff444444" android:layout_width="3.0dip" android:layout_height="40.0dip" />
+                    <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="normal" android:textColor="#ffcccccc" android:gravity="center" android:id="@id/tv_title_bills" android:background="#ff1aa5a5" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="Bills" android:layout_weight="1.0" />
+                    <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="Visits" android:layout_weight="1.0" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <ImageView android:id="@id/view_visit_bills_down" android:background="#ff444444" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <ImageView android:id="@id/view_bills_down" android:background="#ff444444" android:layout_width="0.0dip" android:layout_height="3.0dip" android:layout_weight="1.0" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_list" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="80.0dip" android:layout_below="@id/ll_visit_invoice_top">
+            <ListView android:id="@id/visit_invoice_listView1" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:layout_alignParentBottom="true">
+            <Button android:textColor="#ffffffff" android:gravity="center" android:id="@id/visit_invoice_preview" android:background="@drawable/red_patch" android:layout_width="150.0dip" android:layout_height="wrap_content" android:text="Preview" android:onClick="PreviewInvoice" android:textAllCaps="false" />
+            <Button android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:id="@id/visit_invoice_generate" android:background="@drawable/red_patch" android:visibility="gone" android:layout_width="120.0dip" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:text="Generate Bill" android:onClick="PreviewInvoice" android:textAllCaps="false" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="36" android:compileSdkVersionCodename="16" android:name="android.support.multidex.MultiDexApplication" android:requiredSplitTypes="base__density" android:splitTypes="" package="com.clinicia" platformBuildVersionCode="36" platformBuildVersionName="16">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="true"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.TYPE_KEYGUARD_DIALOG"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <permission android:label="Jitsi Meet Event Broadcast" android:name="com.clinicia.permission.JITSI_BROADCAST" android:protectionLevel="normal"/>
+    <uses-permission android:name="com.clinicia.permission.JITSI_BROADCAST"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <queries>
+        <package android:name="com.whatsapp"/>
+        <package android:name="com.whatsapp.w4b"/>
+        <package android:name="com.whatsapp.business"/>
+        <package android:name="com.whatsapp.biz"/>
+        <package android:name="com.google.android.apps.maps"/>
+    </queries>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <permission android:name="com.clinicia.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.clinicia.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:hardwareAccelerated="false" android:icon="@drawable/app_logo" android:label="@string/app_name" android:largeHeap="true" android:name="com.pairip.application.Application" android:requestLegacyExternalStorage="true" android:roundIcon="@drawable/app_logo" android:theme="@style/MyMaterialTheme" android:usesCleartextTraffic="true">
+        <meta-data android:name="@string/sdkVersionKey" android:value="@string/user_experior_version_key"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAjaZWI74HmzWmASbW3FEz80bXmQjnmhNQ"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <provider android:authorities="com.clinicia.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:exported="true" android:label="@string/app_name" android:name="com.clinicia.activity.SplashActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.clinicia.activity.Slide_Activity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.clinicia.activity.ClinicList" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.clinicia.activity.Home" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_billings" android:name="com.clinicia.modules.billing.Billings" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_billings" android:name="com.clinicia.modules.billing.GenerateBill" android:screenOrientation="portrait" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:exported="false" android:label="@string/title_activity_billings" android:name="com.clinicia.modules.billing.BillPreview" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_login" android:name="com.clinicia.activity.LoginActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:label="@string/title_activity_docter_reg" android:name="com.clinicia.activity.RegistrationActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_docter_reg" android:name="com.clinicia.activity.RegistrationStep1Activity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_docter_reg" android:name="com.clinicia.activity.DoctorSearch" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_docter_reg" android:name="com.clinicia.activity.AddDoctor" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_myprofile" android:name="com.clinicia.activity.Profile" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_myprofile" android:name="com.clinicia.activity.ProfileSetting" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_mydevices" android:name="com.clinicia.activity.MyDevicesActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_docreg_next" android:name="com.clinicia.activity.Feedback" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_patient_details" android:name="com.clinicia.modules.patients.PatientList" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_add_patient" android:name="com.clinicia.modules.patients.AddPatient" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.EyeObservationPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_appoinment" android:name="com.clinicia.modules.appointments.AppointmentDetails" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_schedule" android:name="com.clinicia.modules.appointments.ScheduleDetails" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_income__expanse" android:name="com.clinicia.modules.accounts.Income_Expanse" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_export_data" android:name="com.clinicia.activity.ExportData" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_assistant" android:name="com.clinicia.activity.ReceiptionistListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_add_assistant" android:name="com.clinicia.activity.AddReceiptionist" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_income__home" android:name="com.clinicia.modules.accounts.Income_Home" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_expanse__home" android:name="com.clinicia.modules.accounts.ExpenseListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_add_income" android:name="com.clinicia.modules.accounts.AddIncome" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_add__expanse" android:name="com.clinicia.modules.accounts.Add_Expense" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:label="@string/title_master" android:name="com.clinicia.activity.MasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_group" android:name="com.clinicia.activity.AddGroup" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_group" android:name="com.clinicia.activity.UserSubRole" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_patient_group" android:name="com.clinicia.activity.GroupPatientsList" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_patient_group" android:name="com.clinicia.activity.AddPatientGroup" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_change_password" android:name="com.clinicia.activity.ChangePassword" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_individual_details" android:name="com.clinicia.modules.patients.PatientDashboard" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_individual_details" android:name="com.clinicia.modules.reports.UnVerifiedVisitReport" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_individual_details" android:name="com.clinicia.modules.reports.NewPatientReport" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_individual_details" android:name="com.clinicia.modules.reports.NewPatientClinicWiseReport" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/title_activity_prescriptions" android:name="com.clinicia.modules.prescription.PrescriptionListAll" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_prescriptions" android:name="com.clinicia.modules.patients.AddPrescription" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_prescriptions" android:name="com.clinicia.modules.patients.PrescriptionPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_doc_first" android:name="com.clinicia.modules.patients.SMSCommList" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_report_home" android:name="com.clinicia.modules.reports.ReportHome" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:label="@string/title_activity_patient_report" android:name="com.clinicia.modules.reports.PatientWiseFeesReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_treatment_wise_report" android:name="com.clinicia.modules.reports.TreatmentWiseReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_birthday_report" android:name="com.clinicia.modules.reports.BirthdayReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_follow_up_due_report" android:name="com.clinicia.modules.reports.FollowUpDueReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_cashflow_report" android:name="com.clinicia.modules.reports.CashflowReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_doctorwise_report" android:name="com.clinicia.modules.reports.DoctorWiseFeesReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_web_view" android:name="com.clinicia.activity.WebView" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_outstanding_report" android:name="com.clinicia.modules.reports.OutstandingIncomeReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_calender" android:name="com.clinicia.modules.appointments.NotifyCalendar" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_calender" android:name="com.clinicia.modules.appointments.CalenderView" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_payment__screen" android:name="com.clinicia.activity.Payment_Screen" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_clinic__detail" android:name="com.clinicia.activity.Clinic_List_Detail" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_clinic__detail" android:name="com.clinicia.activity.ClinicSearchActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_clinic__detail" android:name="com.clinicia.activity.ClinicDashboardActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_my_doctors" android:name="com.clinicia.activity.Doctors_List_Details" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_preference" android:name="com.clinicia.activity.Preference" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_sms_history" android:name="com.clinicia.modules.sms_campaign.SmsHistory" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_sms_main" android:name="com.clinicia.modules.sms_campaign.SmsMain" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_sms_main" android:name="com.clinicia.activity.PDFViewActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="@string/title_activity_sms_patient_list" android:name="com.clinicia.modules.sms_campaign.SmsPatientList" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ProductMasterList" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.Eye_examination" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.PatientWiseOutstandingReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.VisitInvoice" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.EmailPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.InvoicePreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.TreatmentPlanPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.PatientPaymentReport" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.PaymentSummaryReportPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.DoctorWiseFeesReportPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.NewPatientReportPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.PatientVisitsReportPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.PaymentReceiptPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.DoctorwisePaymentReportPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.ClinicWisePaymentReportPreview" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:label="Refer" android:name="com.clinicia.activity.ReferActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="false" android:label="My Rewards" android:name="com.clinicia.activity.MyRewardsActivity" android:screenOrientation="portrait"/>
+        <meta-data android:name="io.fabric.ApiKey" android:value="f584b043c7accca8f607ec57519c06d08f75d0fb"/>
+        <activity android:exported="false" android:label="@string/title_activity_casepaper" android:name="com.clinicia.modules.patients.VisitPreview" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.sms_campaign.SmsGroupList" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.PatientApptList" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.reports.PatientAppointmentReport" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ClinicDetailsTabsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.CasePaperView" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddTreatment" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddDepartment" android:screenOrientation="portrait"/>
+        <meta-data android:name="instamojo.orderauth.url" android:value="https://clinicia.com/app/web_api/access_token.php"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.Patient_Treatment_Plan" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.Visit_Details" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.CustomFormDetailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.AdmitDischargePatientActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ReleaseNote" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.PrescriptionRemarksActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.GenericAdviceRemarksActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.InvestigationMasterActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.appointments.MonthlyCalendarView" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.PrivacySettingActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ConsentFormMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddConsentFormActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ConsentPreview" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ConsentAgreementActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ObservationMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ComplaintMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.DiagnosisMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.TaxMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddTax" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.MedicineMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddMedicine" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddProduct" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddTreatmentService" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ProductClinicTaxList" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddComplaint" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddObservation" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddDiagnosis" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddInvestigation" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.PatientVitalStatsActivity" android:screenOrientation="portrait"/>
+        <service android:exported="false" android:name="com.clinicia.services.MyFirebaseMessagingService" android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.clinicia.services.DeleteTokenService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/logofinal1"/>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorPrimaryDark"/>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="789"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.InventoryTabsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.AddInventoryTransactionActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.AddInventoryOrderActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.AddInventoryVendorActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.InventoryFulfillmentHistoryActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.InventoryFulfillmentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddMembership" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.MembershipMasterActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.utility.PermissionsActivity"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.Physio_Examination" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.PhysioObservationPreview" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ConsentPrintPreview" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.PatientFeedbackActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.PatientImageGalleryActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.VideoCallActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.CategoryMasterActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.IssuedBooksListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.patients.BookHistoryActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.BookMasterListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.ProductItemMasterListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddBookActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddProductItemActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.LibraryInventoryListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.inventory.LibraryInventoryDetailsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="true" android:name="com.clinicia.activity.CertificateListActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.CertificateActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.CertificatePreview" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.AddMedicineTemplate" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.activity.MedicineTemplatesMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.dentallab.DentalLabMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.dentallab.AddDentalLabActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.dentallab.DentalLabOrdersActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.dentallab.AddDentalLabOrderActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.clinicia.modules.dentallab.DentalLabOrderPreviewActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="true" android:name="com.clinicia.activity.GenericAdviceMasterActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="true" android:name="com.clinicia.activity.AddGenericAdviceRemarksActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="true" android:name="com.clinicia.activity.DeleteAccountActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="true" android:name="com.clinicia.activity.BatchEntryActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="true" android:name="com.clinicia.photoediting.EditImageActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.yalantis.ucrop.UCropActivity" android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:exported="true" android:name="com.clinicia.activity.BlankTemplatePreview" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/places_autocomplete_label" android:name="com.google.android.libraries.places.widget.AutocompleteActivity" android:theme="@style/PlacesAutocompleteOverlay" android:windowSoftInputMode="adjustResize"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <provider android:authorities="com.clinicia.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <provider android:authorities="com.clinicia.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.work.WorkManagerInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <activity android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+        <activity android:exported="false" android:name="com.pairip.licensecheck.LicenseActivity"/>
+        <meta-data android:name="com.android.vending.splits.required" android:value="true"/>
+        <meta-data android:name="com.android.stamp.source" android:value="https://play.google.com/store"/>
+        <meta-data android:name="com.android.stamp.type" android:value="STAMP_TYPE_DISTRIBUTION_APK"/>
+        <meta-data android:name="com.android.vending.splits" android:resource="@xml/splits0"/>
+        <meta-data android:name="com.android.vending.derived.apk.id" android:value="3"/>
+    </application>
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE"/>
+</manifest>

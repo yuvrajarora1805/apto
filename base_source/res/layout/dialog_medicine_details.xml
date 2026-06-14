@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:orientation="vertical" android:background="@color/bg_color" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/dialog_title_view" />
+        <LinearLayout android:orientation="vertical" android:paddingTop="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/margin_20dp" android:paddingEnd="@dimen/margin_20dp">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dosage : " />
+                    <CheckBox android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/d_morning" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_5dp" android:layout_marginRight="2.0dip" android:text="Mo" style="@style/radio_button_style" />
+                    <CheckBox android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/d_after" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="2.0dip" android:text="Af" style="@style/radio_button_style" />
+                    <CheckBox android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/d_evening" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ev" style="@style/radio_button_style" />
+                    <View android:background="#ff333333" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="10.0dip" android:layout_marginRight="5.0dip" />
+                    <CheckBox android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/d_sos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SOS" style="@style/radio_button_style" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <EditText android:textSize="16.0sp" android:textColor="#ff000000" android:gravity="left" android:id="@id/et_duration" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:hint="No. of Days" android:maxLength="3" android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <EditText android:textSize="16.0sp" android:textColor="#ff000000" android:id="@id/Dosage_Qty" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Dosage Qty (tbs/ml/etc)" android:inputType="textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <AutoCompleteTextView android:textSize="14.0sp" android:textColor="#ff000000" android:id="@id/pre_Remark" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Instruction" android:inputType="textCapSentences" android:imeOptions="actionDone" android:imeActionLabel="Done" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_70dp" android:layout_height="wrap_content" android:text="@string/quantity" />
+                <EditText android:textSize="14.0dip" android:textColor="#ff000000" android:gravity="right" android:id="@id/et_quantity_medicine" android:layout_width="@dimen/margin_70dp" android:layout_height="wrap_content" android:inputType="number" android:paddingStart="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp" />
+                <Spinner android:id="@id/sp_unit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/margin_5dp" style="@style/spinner_style" />
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_11sp" android:textColor="@color/red" android:id="@id/tv_qty_error_medicine" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_70dp" android:layout_height="wrap_content" android:text="@string/rate_price_each" />
+                <EditText android:textSize="14.0dip" android:textColor="#ff000000" android:gravity="right" android:id="@id/et_rate_medicine" android:layout_width="@dimen/margin_70dp" android:layout_height="wrap_content" android:inputType="number" android:paddingStart="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textColor="@color/black" android:layout_width="@dimen/margin_70dp" android:layout_height="wrap_content" android:text="@string/total_colon" />
+                <EditText android:enabled="false" android:textSize="14.0dip" android:gravity="right" android:id="@id/et_total_medicine" android:padding="10.0dip" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="@dimen/margin_70dp" android:layout_height="wrap_content" android:singleLine="false" android:inputType="textPostalAddress|textCapSentences|textMultiLine" android:layout_marginStart="@dimen/margin_10dp" />
+            </LinearLayout>
+            <CheckBox android:id="@id/chkbx_save_for_future" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/save_details_for_future_use" style="@style/radio_button_style" />
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_20dp" android:layout_marginBottom="@dimen/margin_20dp">
+                <Button android:textSize="14.0dip" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="left" android:id="@id/btn_cancel" android:background="@drawable/red_patch" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/margin_40dp" android:layout_marginTop="2.0dip" android:layout_marginRight="100.0dip" android:layout_marginBottom="2.0dip" android:text="@string/cancel" android:textAllCaps="false" />
+                <Button android:textSize="14.0dip" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="left" android:id="@id/btn_submit" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="@dimen/margin_40dp" android:layout_marginTop="2.0dip" android:layout_marginBottom="2.0dip" android:text="@string/submit" android:textAllCaps="false" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@id/tv_title" android:background="@drawable/green" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="30.0dip" />
+    <LinearLayout android:layout_gravity="center" android:id="@id/card_doctor" android:background="#fff4f4f4" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingRight="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="16.0sp" android:textStyle="bold" android:id="@id/tv_doc_name" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <ImageView android:id="@id/iv_call" android:visibility="gone" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginTop="-5.0dip" card_view:srcCompat="@null" />
+                <LinearLayout android:gravity="right" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip">
+                    <Button android:textSize="9.0sp" android:textColor="#ff000080" android:gravity="center" android:id="@id/btn_doc_remove" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/remove" android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_doc_status" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="12.0sp" android:textStyle="italic" android:textColor="@color/accent" android:gravity="center_vertical" android:id="@id/tv_doc_approval" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <LinearLayout android:gravity="right" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <Button android:textSize="9.0sp" android:textColor="#ff000080" android:gravity="center" android:id="@id/btn_doc_accept" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:text="@string/accept" android:textAllCaps="false" />
+                    <Button android:textSize="9.0sp" android:textColor="#ff000080" android:gravity="center" android:id="@id/btn_doc_decline" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/decline" android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_gravity="center" android:id="@id/card_clinic" android:paddingLeft="10.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="14.0sp" android:ellipsize="end" android:id="@id/tv_clinic_name" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+                    <TextView android:textSize="12.0sp" android:id="@id/tv_clinic_location" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" />
+                </LinearLayout>
+                <Button android:textSize="9.0sp" android:textColor="#ff000080" android:gravity="center" android:id="@id/btn_clinic_remove" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginTop="3.0dip" android:text="@string/remove" android:textAllCaps="false" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_clinic_status" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="12.0sp" android:textStyle="italic" android:textColor="@color/accent" android:gravity="center_vertical" android:id="@id/tv_clinic_approval" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" />
+                <LinearLayout android:gravity="right" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <Button android:textSize="9.0sp" android:textColor="#ff000080" android:gravity="center" android:id="@id/btn_clinic_accept" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:text="@string/accept" android:textAllCaps="false" />
+                    <Button android:textSize="9.0sp" android:textColor="#ff000080" android:gravity="center" android:id="@id/btn_clinic_decline" android:background="@drawable/clinicborder" android:layout_width="50.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:text="@string/decline" android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

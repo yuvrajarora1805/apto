@@ -1,0 +1,24 @@
+node_modules/
+dist/
+.env
+
+# Flutter / Android
+clinicia_mobile/build/
+clinicia_mobile/.dart_tool/
+clinicia_mobile/.flutter-plugins
+clinicia_mobile/.flutter-plugins-dependencies
+clinicia_mobile/android/.gradle/
+clinicia_mobile/android/app/build/
+
+# Database
+mysql-data/
+db_data/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="10.0dip" android:paddingTop="20.0dip" android:layout_width="fill_parent" android:layout_height="150.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Observation saved successfully." />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/hyperlink_blue" android:id="@id/tv_add_tp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/add_treatment_plan" />
+        <TextView android:textColor="@color/hyperlink_blue" android:id="@id/tv_add_td" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:text="@string/add_treatment_done" />
+    </LinearLayout>
+    <Button android:textSize="16.0sp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btn_close" android:background="@drawable/red_patch" android:padding="5.0dip" android:layout_width="100.0dip" android:layout_height="30.0dip" android:layout_marginTop="10.0dip" android:text="Close" android:textAllCaps="false" />
+</LinearLayout>

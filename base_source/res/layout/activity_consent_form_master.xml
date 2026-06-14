@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_consent_form_master" layout="@layout/toolbar" />
+    <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+        <ListView android:id="@id/lv_consent_form" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="10.0dip" android:layout_above="@id/btn_add_new" />
+        <Button android:textColor="@color/white" android:id="@id/btn_add_new" android:background="@drawable/red_patch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/add_new" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:textAllCaps="false" />
+    </RelativeLayout>
+</LinearLayout>

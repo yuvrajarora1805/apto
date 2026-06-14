@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_prescription_preview_toolbar" layout="@layout/toolbar" />
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <WebView android:id="@id/prescription_preview_webView" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <Button android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/btn_edit_prescription" android:background="@drawable/red_patch" android:padding="5.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="Edit" android:textAllCaps="false" />
+    </FrameLayout>
+</LinearLayout>

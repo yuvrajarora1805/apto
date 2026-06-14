@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText android:id="@id/conferenceName" android:layout_width="fill_parent" android:layout_height="52.0dip" android:layout_margin="12.0dip" android:hint="Enter room name" />
+    <Button android:textColor="#ffffffff" android:id="@id/btnJoin" android:background="#ff000080" android:layout_width="fill_parent" android:layout_height="52.0dip" android:layout_margin="12.0dip" android:text="Join" />
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff61b3ff" android:gravity="left" android:id="@id/appproduct_name" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Question Desc" android:layout_weight="1.0" />
+        <TextView android:textSize="16.0dip" android:id="@id/applistdate" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:text="Date" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000080" android:id="@id/appmobno" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="\ 7777777777" />
+            <ImageView android:id="@id/appnoimg" android:layout_width="40.0dip" android:layout_height="40.0dip" app:srcCompat="@null" />
+        </LinearLayout>
+        <TextView android:textSize="16.0dip" android:gravity="left" android:id="@id/applisttime" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Time" android:layout_weight="2.0" />
+    </LinearLayout>
+</LinearLayout>

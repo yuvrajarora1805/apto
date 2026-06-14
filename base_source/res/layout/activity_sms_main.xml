@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_smsmain" layout="@layout/toolbar_patients" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:weightSum="1.0">
+            <TextView android:textColor="@color/colorPrimary" android:gravity="center" android:id="@id/smsmaintrialtext" android:background="@color/light_gray_bg" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_5dp" android:text="@string/sms_campaign_is_disabled_for_trial_user" />
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_camp_type" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_8dp">
+                    <TextView android:textSize="@dimen/font_14sp" android:textColor="@color/black" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/campaign_type" />
+                    <TextView android:textSize="@dimen/font_18sp" android:textColor="@color/link_color" android:id="@id/tv_important" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/important" android:layout_alignParentEnd="true" />
+                </RelativeLayout>
+                <RadioGroup android:orientation="horizontal" android:padding="@dimen/font_10sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_10dp">
+                    <RadioButton android:id="@id/rd_sms" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sms" style="@style/radio_button_style" />
+                    <RadioButton android:id="@id/rd_email" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/email" android:layout_marginStart="@dimen/margin_10dp" style="@style/radio_button_style" />
+                </RadioGroup>
+            </LinearLayout>
+            <TextView android:textSize="@dimen/font_14sp" android:textColor="@color/black" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_8dp" android:text="@string/send_sms_to" />
+            <RadioGroup android:orientation="vertical" android:padding="@dimen/font_10sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_10dp">
+                <RadioButton android:id="@id/rd_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/all_patients" style="@style/radio_button_style" />
+                <RadioButton android:id="@id/rd_patients" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/selected_patients" style="@style/radio_button_style" />
+                <RadioButton android:id="@id/rd_groups" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/selected_groups" style="@style/radio_button_style" />
+            </RadioGroup>
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_email" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/font_14sp" android:textColor="@color/black" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_8dp" android:text="@string/email_subject" />
+                <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:gravity="top" android:id="@id/et_email_subject" android:background="@drawable/backtext" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:singleLine="false" />
+                <TextView android:textSize="@dimen/font_14sp" android:textColor="@color/black" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:text="@string/email_header" />
+                <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:gravity="top" android:id="@id/et_email_header" android:background="@drawable/backtext" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:singleLine="false" />
+                <TextView android:textSize="@dimen/font_14sp" android:textColor="@color/black" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:text="@string/email_sub_header" />
+                <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:gravity="top" android:id="@id/et_email_subheader" android:background="@drawable/backtext" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:singleLine="false" />
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="@dimen/font_14sp" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:text="@string/image" />
+                    <ImageView android:id="@id/iv_image" android:layout_width="@dimen/margin_50dp" android:layout_height="@dimen/margin_50dp" android:src="@drawable/pictures" android:scaleType="fitCenter" android:layout_marginStart="@dimen/margin_20dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <CheckBox android:id="@id/chkbx_dear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:text="@string/include_quot_dear_patient_name_quot_in_the_message" android:layout_marginStart="-5.0dip" style="@style/radio_button_style" />
+            <EditText android:textColorHint="@android:color/secondary_text_light_nodisable" android:gravity="top" android:id="@id/et_message" android:background="@drawable/backtext" android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="200.0dip" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:hint="@string/message" android:singleLine="false" android:inputType="textCapSentences|textMultiLine" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/ll_sms_count" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:gravity="right" android:id="@id/smsmaincounttext" android:layout_width="@dimen/margin_0dp" android:layout_height="wrap_content" android:layout_weight="1.0" />
+                <TextView android:gravity="right" android:id="@id/smsmaincounttextmax" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView android:textColor="#ff000000" android:gravity="left" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/select_signature" />
+            <RadioGroup android:orientation="vertical" android:padding="10.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/margin_10dp" android:layout_marginStart="@dimen/margin_10dp">
+                <RadioButton android:id="@id/rd_doc_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/regards_n_doctor_name_clinic_phone_no" style="@style/radio_button_style" />
+                <RadioButton android:id="@id/rd_clinic_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_5dp" android:text="@string/regards_clinic_name_clinic_phone_no" style="@style/radio_button_style" />
+            </RadioGroup>
+            <Button android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btn_submit" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="@string/submit" android:textAllCaps="false" />
+            <TextView android:textSize="@dimen/font_18sp" android:textColor="@color/link_color" android:id="@id/tv_past" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/margin_10dp" android:layout_marginBottom="@dimen/margin_10dp" android:text="@string/previous_campaigns" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

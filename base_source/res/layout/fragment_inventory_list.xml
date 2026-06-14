@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:id="@id/rl_title_main" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@id/rl_title" android:background="@drawable/green" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="40.0dip" android:paddingStart="@dimen/margin_10dp" android:paddingEnd="@dimen/margin_10dp">
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/product_name" android:layout_centerVertical="true" android:layout_alignParentStart="true" />
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/tv_fees" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/available_qty" android:layout_centerVertical="true" android:layout_alignParentEnd="true" />
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="right" android:id="@id/addtreatchat_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="@string/chart" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <TextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_transaction_title" android:background="@drawable/green" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/margin_40dp" android:text="@string/inward_outward" />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView android:id="@id/lv_inventory" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/rl_title_main" android:nestedScrollingEnabled="false" />
+    <ImageView android:layout_gravity="end|bottom|center" android:id="@id/iv_add" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_margin="15.0dip" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" app:srcCompat="@drawable/plus_filled" />
+</RelativeLayout>

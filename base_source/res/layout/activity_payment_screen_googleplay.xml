@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/toolbar_payment" layout="@layout/toolbar" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="20.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/billed_monthly" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                <TextView android:textSize="26.0sp" android:textStyle="bold" android:textColor="#ff000000" android:id="@id/tv_month_price" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:textSize="16.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/for_first_3_months" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ff000000" android:id="@id/tv_price_month" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/month" />
+                <TextView android:textSize="14.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_4th_month_onwards" />
+            </LinearLayout>
+            <Button android:textSize="16.0sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@id/btn_month" android:background="@drawable/red_patch" android:layout_width="120.0dip" android:layout_height="35.0dip" android:layout_marginTop="20.0dip" android:text="@string/subscribe" android:textAllCaps="false" />
+            <TextView android:textSize="20.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:background="@drawable/green" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:text="@string/billed_yearly" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                <TextView android:textSize="26.0sp" android:textStyle="bold" android:textColor="#ff000000" android:id="@id/tv_year_price" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:textSize="16.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/for_first_year" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+                <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ff000000" android:id="@id/tv_price_year" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" />
+                <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/year" />
+                <TextView android:textSize="14.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/from_2nd_year_onwards" />
+            </LinearLayout>
+            <Button android:textSize="16.0sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@id/btn_year" android:background="@drawable/red_patch" android:layout_width="120.0dip" android:layout_height="35.0dip" android:layout_marginTop="20.0dip" android:text="@string/subscribe" android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
