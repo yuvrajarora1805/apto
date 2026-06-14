@@ -286,16 +286,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            if (app['mobile_no'] != null && app['mobile_no'].toString().isNotEmpty)
+                            if (app['mobile_no'] != null && app['mobile_no'].toString().isNotEmpty) ...[
                               IconButton(
                                 icon: const Icon(Icons.call, color: Colors.green),
                                 onPressed: () async {
                                   final url = Uri.parse("tel:${app['mobile_no']}");
-                                  if (await canLaunchUrl(url)) {
-                                    await launchUrl(url);
-                                  }
+                                  if (await canLaunchUrl(url)) await launchUrl(url);
                                 },
                               ),
+                              IconButton(
+                                icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
+                                onPressed: () async {
+                                  final dial = app['dial_code']?.replaceAll('+', '') ?? '91';
+                                  final url = Uri.parse("https://wa.me/$dial${app['mobile_no']}");
+                                  if (await canLaunchUrl(url)) await launchUrl(url, mode: LaunchMode.externalApplication);
+                                },
+                              ),
+                            ],
                             PopupMenuButton<String>(
                               icon: const Icon(Icons.more_vert),
                               onSelected: (String status) async {

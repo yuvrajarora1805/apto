@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
 import 'patient_detail_screen.dart';
@@ -144,7 +145,29 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       title: Text(p['patient_name'] ?? 'Unknown', style: const TextStyle(fontWeight: FontWeight.bold)),
                       subtitle: Text("Phone: ${p['mobile_no'] ?? 'N/A'}\nAge: ${p['age'] ?? '-'} | Gender: ${p['gender'] ?? '-'}"),
                       isThreeLine: true,
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (p['mobile_no'] != null && p['mobile_no'].toString().isNotEmpty) ...[
+                            IconButton(
+                              icon: const Icon(Icons.call, color: Colors.green),
+                              onPressed: () async {
+                                final url = Uri.parse("tel:${p['mobile_no']}");
+                                if (await canLaunchUrl(url)) await launchUrl(url);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
+                              onPressed: () async {
+                                final dial = p['dial_code']?.replaceAll('+', '') ?? '91';
+                                final url = Uri.parse("https://wa.me/$dial${p['mobile_no']}");
+                                if (await canLaunchUrl(url)) await launchUrl(url, mode: LaunchMode.externalApplication);
+                              },
+                            ),
+                          ],
+                          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+                        ]
+                      ),
                       onTap: () {
                         Navigator.push(
                           context,
