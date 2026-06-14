@@ -244,8 +244,29 @@ class ApiService {
   }
 
   static Future<Map<String, dynamic>> fetchDoctors(int adminId) async {
-    final response = await http.get(Uri.parse('$baseUrl/doctors?admin_id=$adminId'));
-    return jsonDecode(response.body);
+    bool online = await isConnected();
+    if (online) {
+      try {
+        final response = await http.get(Uri.parse('$baseUrl/doctors?admin_id=$adminId'));
+        final data = jsonDecode(response.body);
+
+        List<dynamic> docs = [];
+        if (data is List) {
+          docs = data;
+        } else if (data['data'] is List) {
+          docs = data['data'];
+        } else if (data['doctors'] is List) {
+          docs = data['doctors'];
+        }
+
+        await DatabaseHelper.instance.cacheDoctors(docs);
+      } catch (e) {
+        print("Offline fallback fetching doctors: $e");
+      }
+    }
+
+    final localData = await DatabaseHelper.instance.getDoctors();
+    return {'success': true, 'data': localData};
   }
 
   static Future<Map<String, dynamic>> addDoctor(Map<String, dynamic> data) async {

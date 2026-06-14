@@ -54,6 +54,19 @@ class DatabaseHelper {
         sync_status INTEGER DEFAULT 1 -- 1 = Synced, 0 = Pending Sync
       )
     ''');
+
+    // Doctors Table
+    await db.execute('''
+      CREATE TABLE doctors (
+        id INTEGER PRIMARY KEY,
+        first_name TEXT,
+        last_name TEXT,
+        email TEXT,
+        phone TEXT,
+        specialization TEXT,
+        sync_status INTEGER DEFAULT 1
+      )
+    ''');
   }
 
   // --- Patients ---
@@ -175,14 +188,38 @@ class DatabaseHelper {
 
   Future<void> updateAppointmentStatusOffline(int id, String status) async {
     final db = await instance.database;
-    // For simplicity, if we update a synced appointment offline, we mark it unsynced so we push the status update later.
-    // However, the api payload requires just the status update. We'll mark the whole record as unsynced so it gets pushed.
     await db.update('appointments', {'status': status, 'sync_status': 0}, where: 'id = ?', whereArgs: [id]);
+  }
+
+  // --- Doctors ---
+
+  Future<void> cacheDoctors(List<dynamic> doctors) async {
+    final db = await instance.database;
+    await db.transaction((txn) async {
+      await txn.delete('doctors', where: 'sync_status = 1');
+      for (var d in doctors) {
+        await txn.insert('doctors', {
+          'id': d['id'],
+          'first_name': d['first_name'],
+          'last_name': d['last_name'],
+          'email': d['email'],
+          'phone': d['phone'],
+          'specialization': d['specialization'],
+          'sync_status': 1
+        }, conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getDoctors() async {
+    final db = await instance.database;
+    return await db.query('doctors', orderBy: 'first_name ASC');
   }
 
   Future<void> clearAll() async {
     final db = await instance.database;
     await db.delete('patients');
     await db.delete('appointments');
+    await db.delete('doctors');
   }
 }
