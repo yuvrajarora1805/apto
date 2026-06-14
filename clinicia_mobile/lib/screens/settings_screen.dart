@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
+import '../services/database_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -79,6 +80,60 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const Text(
+              "Sync Status",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            FutureBuilder(
+              future: Future.wait([
+                DatabaseHelper.instance.getUnsyncedPatients(),
+                DatabaseHelper.instance.getUnsyncedAppointments(),
+              ]),
+              builder: (context, AsyncSnapshot<List<List<Map<String, dynamic>>>> snapshot) {
+                if (!snapshot.hasData) return const CircularProgressIndicator();
+                int pendingPats = snapshot.data![0].length;
+                int pendingAppts = snapshot.data![1].length;
+                int total = pendingPats + pendingAppts;
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: total > 0 ? const Color(0xFFfffbeb) : const Color(0xFFf0fdf4),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: total > 0 ? const Color(0xFFfde68a) : const Color(0xFFbbf7d0)),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        total > 0 ? Icons.cloud_upload_outlined : Icons.cloud_done_outlined,
+                        color: total > 0 ? const Color(0xFFd97706) : const Color(0xFF16a34a),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          total > 0 ? "\$total items pending sync to cloud (\$pendingPats patients, \$pendingAppts appointments)" : "All data is completely synced with the cloud.",
+                          style: TextStyle(
+                            color: total > 0 ? const Color(0xFFb45309) : const Color(0xFF15803d),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      if (total > 0)
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white),
+                          onPressed: () async {
+                            await ApiService.syncOfflineData();
+                            setState(() {});
+                            if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Sync complete!")));
+                          },
+                          child: const Text("Sync Now"),
+                        )
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 32),
             const Text(
               "Update Clinic Name",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

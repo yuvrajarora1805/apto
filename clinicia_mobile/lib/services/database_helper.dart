@@ -19,9 +19,26 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _createDB,
+      onUpgrade: _upgradeDB,
     );
+  }
+
+  Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS doctors (
+          id INTEGER PRIMARY KEY,
+          first_name TEXT,
+          last_name TEXT,
+          email TEXT,
+          phone TEXT,
+          specialization TEXT,
+          sync_status INTEGER DEFAULT 1
+        )
+      ''');
+    }
   }
 
   Future _createDB(Database db, int version) async {
