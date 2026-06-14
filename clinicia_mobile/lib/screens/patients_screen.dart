@@ -159,8 +159,10 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             IconButton(
                               icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
                               onPressed: () async {
-                                final dial = p['dial_code']?.replaceAll('+', '') ?? '91';
-                                final url = Uri.parse("https://wa.me/$dial${p['mobile_no']}");
+                                String phone = p['mobile_no'].toString();
+                                if (!phone.startsWith('+')) phone = "${p['dial_code'] ?? '91'}$phone";
+                                phone = phone.replaceAll('+', '').replaceAll(' ', '');
+                                final url = Uri.parse("https://wa.me/$phone");
                                 if (await canLaunchUrl(url)) await launchUrl(url, mode: LaunchMode.externalApplication);
                               },
                             ),

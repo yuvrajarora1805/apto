@@ -200,7 +200,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         _fetchAppointments();
                         
                         if (whatsappChk && res['whatsapp_message'] != null) {
-                          final url = Uri.parse("https://api.whatsapp.com/send?phone=${res['dial_code']}${res['mobile_no']}&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                          String phone = res['mobile_no'].toString();
+                          if (!phone.startsWith('+')) phone = "${res['dial_code'] ?? '91'}$phone";
+                          phone = phone.replaceAll('+', '').replaceAll(' ', '');
+                          final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(res['whatsapp_message'])}");
                           if (await canLaunchUrl(url)) {
                             await launchUrl(url, mode: LaunchMode.externalApplication);
                           }
@@ -297,8 +300,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               IconButton(
                                 icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
                                 onPressed: () async {
-                                  final dial = app['dial_code']?.replaceAll('+', '') ?? '91';
-                                  final url = Uri.parse("https://wa.me/$dial${app['mobile_no']}");
+                                  String phone = app['mobile_no'].toString();
+                                  if (!phone.startsWith('+')) phone = "${app['dial_code'] ?? '91'}$phone";
+                                  phone = phone.replaceAll('+', '').replaceAll(' ', '');
+                                  final url = Uri.parse("https://wa.me/$phone");
                                   if (await canLaunchUrl(url)) await launchUrl(url, mode: LaunchMode.externalApplication);
                                 },
                               ),
@@ -318,7 +323,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 _fetchAppointments();
                                 
                                 if (res['whatsapp_message'] != null && res['whatsapp_message'].isNotEmpty) {
-                                  final url = Uri.parse("https://api.whatsapp.com/send?phone=${res['dial_code']}${res['mobile_no']}&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                                  String phone = res['mobile_no'].toString();
+                                  if (!phone.startsWith('+')) phone = "${res['dial_code'] ?? '91'}$phone";
+                                  phone = phone.replaceAll('+', '').replaceAll(' ', '');
+                                  final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(res['whatsapp_message'])}");
                                   if (await canLaunchUrl(url)) {
                                     await launchUrl(url, mode: LaunchMode.externalApplication);
                                   }
