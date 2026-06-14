@@ -190,7 +190,9 @@ app.post('/api/appointments', async (req, res) => {
       hr = hr % 12 || 12;
       const formattedTime = `${hr}:${minStr}${ampm}`;
 
-      message = `Dear ${patient_name},\n\nYour appointment with Dr. ${doctor.first_name} ${doctor.last_name} has been scheduled on ${formattedDate}, ${formattedTime}\n\nRegards,\n${doctor.clinic_name} ,\nPh no: 07837880037`;
+      const clinicName = doctor.clinic_name || 'Clinicia';
+
+      message = `Dear ${patient_name},\n\nYour appointment with Dr. ${doctor.first_name} ${doctor.last_name} has been scheduled on ${formattedDate}, ${formattedTime}\n\nRegards,\n${clinicName},\nPh no: 07837880037`;
     }
 
     res.json({ 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../services/api_service.dart';
+import '../services/auth_service.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -13,12 +15,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   List<dynamic> _appointments = [];
+  List<dynamic> _patients = [];
 
   @override
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
     _fetchAppointments();
+    _fetchPatients();
+  }
+
+  Future<void> _fetchPatients() async {
+    try {
+      final res = await ApiService.fetchPatients();
+      if (res['success'] == true && mounted) {
+        setState(() => _patients = res['data']);
+      }
+    } catch (e) {
+      debugPrint("Error fetching patients: $e");
+    }
   }
 
   Future<void> _fetchAppointments() async {
@@ -32,6 +47,138 @@ class _DashboardScreenState extends State<DashboardScreen> {
     } catch (e) {
       debugPrint("Offline mode or error fetching appointments: $e");
     }
+  }
+
+  void _showBookAppointmentDialog() {
+    int? selectedPatientId;
+    DateTime selectedDate = _selectedDay ?? _focusedDay;
+    TimeOfDay startTime = const TimeOfDay(hour: 9, minute: 0);
+    TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 30);
+    final purposeCtrl = TextEditingController();
+    bool whatsappChk = true;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 24, right: 24, top: 24),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text("Book Appointment", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<int>(
+                      decoration: const InputDecoration(labelText: 'Select Patient *', border: OutlineInputBorder()),
+                      value: selectedPatientId,
+                      items: _patients.map((p) => DropdownMenuItem<int>(
+                        value: p['id'],
+                        child: Text("${p['patient_name']} (${p['mobile_no']})"),
+                      )).toList(),
+                      onChanged: (val) => setModalState(() => selectedPatientId = val),
+                    ),
+                    const SizedBox(height: 12),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text('Date'),
+                      subtitle: Text("${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}"),
+                      trailing: const Icon(Icons.calendar_today),
+                      onTap: () async {
+                        final date = await showDatePicker(context: context, initialDate: selectedDate, firstDate: DateTime(2020), lastDate: DateTime(2030));
+                        if (date != null) setModalState(() => selectedDate = date);
+                      },
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Start Time'),
+                            subtitle: Text(startTime.format(context)),
+                            onTap: () async {
+                              final time = await showTimePicker(context: context, initialTime: startTime);
+                              if (time != null) setModalState(() => startTime = time);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('End Time'),
+                            subtitle: Text(endTime.format(context)),
+                            onTap: () async {
+                              final time = await showTimePicker(context: context, initialTime: endTime);
+                              if (time != null) setModalState(() => endTime = time);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(controller: purposeCtrl, decoration: const InputDecoration(labelText: 'Purpose', border: OutlineInputBorder())),
+                    const SizedBox(height: 12),
+                    CheckboxListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text("Send WhatsApp Confirmation"),
+                      value: whatsappChk,
+                      onChanged: (val) => setModalState(() => whatsappChk = val ?? false),
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
+                      child: const Text('Schedule', style: TextStyle(fontSize: 16)),
+                      onPressed: () async {
+                        if (selectedPatientId == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please select a patient")));
+                          return;
+                        }
+                        Navigator.pop(context);
+                        
+                        final patient = _patients.firstWhere((p) => p['id'] == selectedPatientId);
+                        final dateStr = "${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}";
+                        final startStr = "${startTime.hour.toString().padLeft(2, '0')}:${startTime.minute.toString().padLeft(2, '0')}";
+                        final endStr = "${endTime.hour.toString().padLeft(2, '0')}:${endTime.minute.toString().padLeft(2, '0')}";
+
+                        final session = await AuthService.getSession();
+                        final doctorId = session != null ? session['id'] : 1;
+
+                        final res = await ApiService.scheduleAppointment({
+                          'patient_id': selectedPatientId,
+                          'patient_name': patient['patient_name'],
+                          'mobile_no': patient['mobile_no'],
+                          'appointment_date': dateStr,
+                          'start_time': startStr,
+                          'end_time': endStr,
+                          'doctor_id': doctorId,
+                          'purpose': purposeCtrl.text,
+                          'whatsapp_chk': whatsappChk,
+                        });
+                        _fetchAppointments();
+                        
+                        if (whatsappChk && res['whatsapp_message'] != null) {
+                          final url = Uri.parse("https://api.whatsapp.com/send?phone=${res['dial_code']}${res['mobile_no']}&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url, mode: LaunchMode.externalApplication);
+                          }
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 24),
+                  ],
+                ),
+              ),
+            );
+          }
+        );
+      },
+    );
   }
 
   List<dynamic> _getEventsForDay(DateTime day) {
@@ -88,7 +235,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         leading: CircleAvatar(backgroundColor: const Color(0xFFe0f2fe), child: Text(app['patient_name'][0].toUpperCase(), style: const TextStyle(color: Color(0xFF0ea5e9)))),
                         title: Text("${app['patient_name']} - ${app['start_time']}"),
                         subtitle: Text("Status: ${app['status']}"),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                        trailing: PopupMenuButton<String>(
+                          icon: const Icon(Icons.more_vert),
+                          onSelected: (String status) async {
+                            final res = await ApiService.updateAppointmentStatus(app['id'], status);
+                            _fetchAppointments();
+                            
+                            if (res['whatsapp_message'] != null && res['whatsapp_message'].isNotEmpty) {
+                              final url = Uri.parse("https://api.whatsapp.com/send?phone=${res['dial_code']}${res['mobile_no']}&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url, mode: LaunchMode.externalApplication);
+                              }
+                            }
+                          },
+                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                            const PopupMenuItem<String>(value: 'Scheduled', child: Text('Scheduled')),
+                            const PopupMenuItem<String>(value: 'Arrived', child: Text('Arrived')),
+                            const PopupMenuItem<String>(value: 'Completed', child: Text('Completed')),
+                            const PopupMenuItem<String>(value: 'Missed', child: Text('Missed')),
+                          ],
+                        ),
                       );
                     },
                   ),
@@ -98,10 +264,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,
-        onPressed: () {
-          // Open Schedule Appointment Form (To be implemented)
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Scheduling offline form opens here")));
-        },
+        onPressed: _showBookAppointmentDialog,
         child: const Icon(Icons.add),
       ),
     );

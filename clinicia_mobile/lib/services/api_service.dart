@@ -41,4 +41,22 @@ class ApiService {
     );
     return jsonDecode(response.body);
   }
+
+  static Future<Map<String, dynamic>> addPatient(Map<String, dynamic> data) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/patients'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+    return jsonDecode(response.body);
+  }
+
+  static Future<Map<String, dynamic>> updateAppointmentStatus(int id, String status) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/appointments/$id/status'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'status': status, 'whatsapp_chk': true}),
+    );
+    return jsonDecode(response.body);
+  }
 }

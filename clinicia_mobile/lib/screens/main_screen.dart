@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
+import 'patients_screen.dart';
 import '../services/auth_service.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   // Placeholder for the tabs
   final List<Widget> _screens = [
     const DashboardScreen(),
-    const Center(child: Text("Patients Screen", style: TextStyle(fontSize: 24))),
+    const PatientsScreen(),
     const Center(child: Text("Profile Settings", style: TextStyle(fontSize: 24))),
   ];
 
