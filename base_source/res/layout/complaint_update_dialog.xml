@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="left" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="Observation:" />
-        <EditText android:textColor="#ff000000" android:id="@id/et_value" android:background="@drawable/rectengle" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:minLines="2" android:inputType="textCapWords|textMultiLine" />
-        <Button android:textSize="16.0sp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/btn_update" android:background="@drawable/red_patch" android:paddingLeft="@dimen/activity_horizontal_margin" android:paddingRight="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="30.0dip" android:layout_marginTop="5.0dip" android:text="Update" android:textAllCaps="false" />
-    </LinearLayout>
-</LinearLayout>

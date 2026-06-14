@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include android:id="@id/toolbar_membership" layout="@layout/toolbar" />
-    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <ListView android:id="@id/lv_membership" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/iv_add" />
-        <ImageView android:layout_gravity="end|bottom|center" android:id="@id/iv_add" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginBottom="30.0dip" android:layout_alignParentBottom="true" android:layout_marginEnd="@dimen/margin_15dp" android:layout_alignParentEnd="true" app:srcCompat="@drawable/plus_filled" />
-    </RelativeLayout>
-</LinearLayout>

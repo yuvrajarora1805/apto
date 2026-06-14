@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textStyle="bold" android:gravity="center" android:id="@id/rowIndex" android:layout_width="32.0dip" android:layout_height="wrap_content" android:text="1" android:layout_marginEnd="4.0dip" />
-    <EditText android:id="@id/batchNumber" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="Batch #" android:layout_weight="2.0" android:inputType="text" />
-    <EditText android:id="@id/manufactureDate" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="Mfg Date" android:layout_weight="2.0" android:inputType="date" />
-    <EditText android:id="@id/expiryDate" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="Exp Date" android:layout_weight="2.0" android:inputType="date" />
-    <EditText android:id="@id/manufacturerName" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="Mfg Name" android:layout_weight="2.0" android:inputType="text" />
-</LinearLayout>

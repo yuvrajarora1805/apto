@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textSize="18.0dip" android:textStyle="bold" android:id="@id/patient_name" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Question Desc" android:layout_weight="1.0" />
-    <CheckBox android:id="@id/chkbx_patientlist" android:paddingRight="5.0dip" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/radio_button_style" />
-</LinearLayout>

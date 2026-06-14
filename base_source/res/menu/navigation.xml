@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:icon="@drawable/ic_dashboard_black_24dp" android:id="@id/navigation_group_channels" android:title="Conversation" />
-    <item android:icon="@drawable/icon_user" android:id="@id/navigation_user_list" android:title="Users" />
-</menu>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@id/check_in" android:title="Check In" />
-    <item android:id="@id/in_procedure" android:title="In Procedure" />
-    <item android:id="@id/check_out" android:title="Check Out" />
-    <item android:id="@id/missed" android:title="Missed" />
-    <item android:id="@id/cancelled" android:title="Cancelled" />
-</menu>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include android:id="@id/toolbar_list" layout="@layout/toolbar" />
-    <FrameLayout android:id="@id/container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/navigation" android:layout_below="@id/toolbar_list" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@id/floating_button_create" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="8.0dip" android:layout_marginBottom="8.0dip" android:layout_above="@id/navigation" android:layout_alignParentRight="true" android:layout_marginEnd="8.0dip" android:layout_alignParentEnd="true" app:srcCompat="@android:drawable/ic_menu_add" />
-    <com.google.android.material.bottomnavigation.BottomNavigationView android:id="@id/navigation" android:background="?android:windowBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" app:menu="@menu/navigation" />
-</RelativeLayout>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:id="@id/main_view" android:layout_width="fill_parent" android:layout_height="wrap_content" card_view:cardBackgroundColor="#fff5f5f5" card_view:cardElevation="@dimen/margin_4dp"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:card_view="http://schemas.android.com/apk/res-auto">
-    <LinearLayout android:orientation="horizontal" android:padding="@dimen/margin_8dp" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_16sp" android:textColor="@color/black" android:id="@id/tvName" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Missed" android:layout_weight="1.0" />
-        <com.clinicia.custom_classes.TextViewBold android:textSize="@dimen/font_18sp" android:textColor="@color/black" android:id="@id/tvCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1234" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>

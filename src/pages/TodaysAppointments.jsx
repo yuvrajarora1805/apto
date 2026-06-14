@@ -108,7 +108,16 @@ const TodaysAppointments = ({ user }) => {
                 </td>
                 <td style={{ padding: '1rem', textAlign: 'right' }}>
                   {app.status !== 'Completed' && (
-                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                      <a href={`tel:${app.mobile_no}`} className="btn" style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem', background: '#e2e8f0', color: '#0f172a', textDecoration: 'none' }}>Call</a>
+                      <a 
+                        href={`https://api.whatsapp.com/send?phone=${app.mobile_no?.toString().startsWith('+') ? app.mobile_no.toString().replace(/\s+/g, '') : '+91' + app.mobile_no?.toString().replace(/\s+/g, '')}`} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="btn" 
+                        style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem', background: '#25D366', color: 'white', textDecoration: 'none' }}>
+                        WhatsApp
+                      </a>
                       {app.status !== 'Arrived' && (
                         <button className="btn btn-primary" style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }} onClick={() => updateStatus(app.id, 'Arrived')}>Mark Arrived</button>
                       )}

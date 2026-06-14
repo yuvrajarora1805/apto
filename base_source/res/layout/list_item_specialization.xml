@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBox android:textSize="16.0sp" android:id="@id/ds_title" android:paddingLeft="10.0dip" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="Specialization" style="@style/radio_button_style" />
-</LinearLayout>

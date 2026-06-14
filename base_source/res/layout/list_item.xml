@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView android:textSize="18.0sp" android:textStyle="bold" android:id="@id/product_name" android:padding="6.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:lineSpacingExtra="6.0dip" />
-    <LinearLayout android:gravity="center|right" android:layout_gravity="center" android:id="@id/ll_patient_menu" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.15">
-        <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_patient_menu" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginRight="10.0dip" app:srcCompat="@drawable/option_menu" />
-    </LinearLayout>
-</LinearLayout>

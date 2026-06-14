@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout android:gravity="right" android:orientation="horizontal" android:background="@drawable/green" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip">
-        <TextView android:textSize="18.0dip" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/tv_header_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginTop="5.0dip" android:text="Patient Names" android:layout_weight="1.0" />
-        <TextView android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="All " />
-        <CheckBox android:textColor="#ffffffff" android:id="@id/chkAll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" style="@style/radio_button_style" />
-    </LinearLayout>
-</LinearLayout>

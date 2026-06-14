@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <CheckBox android:id="@id/chkbx_image" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" style="@style/radio_button_style" />
-    <androidx.appcompat.widget.AppCompatImageView android:id="@id/thumb_image" android:layout_width="@dimen/margin_40dp" android:layout_height="@dimen/margin_40dp" app:layout_constraintStart_toEndOf="@id/chkbx_image" app:layout_constraintTop_toTopOf="parent" app:srcCompat="@drawable/attachment" />
-    <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_14sp" android:textColor="@color/textColor" android:id="@id/tvName" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_8dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/thumb_image" app:layout_constraintTop_toTopOf="parent" />
-    <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_12sp" android:id="@id/tvDate" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginStart="@dimen/margin_8dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/thumb_image" app:layout_constraintTop_toBottomOf="@id/tvName" />
-</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <include android:id="@id/toolbar_export_data" layout="@layout/toolbar" />
-    <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/data_will_be_sent_to_registered_email_id" />
-    <Button android:textStyle="bold" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/appointmentsubmit" android:background="@drawable/red_patch" android:layout_width="100.0dip" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/export" android:onClick="export_data" android:textAllCaps="false" />
-</LinearLayout>

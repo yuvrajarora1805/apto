@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="fill_parent" android:layout_height="80.0dip" android:layout_margin="@dimen/margin_10dp"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout android:background="@drawable/img_bg" android:layout_width="fill_parent" android:layout_height="70.0dip" android:layout_margin="7.0dip">
-        <ImageView android:id="@id/iv_image" android:layout_width="fill_parent" android:layout_height="70.0dip" android:scaleType="centerCrop" android:layout_centerInParent="true" />
-    </LinearLayout>
-    <ImageView android:id="@id/iv_remove" android:layout_width="25.0dip" android:layout_height="25.0dip" android:scaleType="fitXY" android:layout_alignParentRight="true" app:srcCompat="@mipmap/close_background" />
-</RelativeLayout>

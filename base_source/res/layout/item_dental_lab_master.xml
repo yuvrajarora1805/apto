@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:padding="@dimen/margin_10dp" android:layout_width="fill_parent" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_16sp" android:textStyle="bold" android:textColor="@color/black" android:ellipsize="end" android:id="@id/tvName" android:layout_width="0.0dip" android:layout_height="wrap_content" android:singleLine="true" app:layout_constraintEnd_toStartOf="@id/iv_call" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-    <androidx.appcompat.widget.AppCompatTextView android:textSize="@dimen/font_14sp" android:id="@id/tvContact" android:layout_width="0.0dip" android:layout_height="wrap_content" app:layout_constraintEnd_toStartOf="@id/iv_call" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tvName" />
-    <androidx.appcompat.widget.AppCompatImageView android:id="@id/iv_call" android:layout_width="@dimen/margin_45dp" android:layout_height="@dimen/margin_45dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" app:srcCompat="@null" />
-</androidx.constraintlayout.widget.ConstraintLayout>

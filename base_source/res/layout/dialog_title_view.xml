@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView android:textSize="@dimen/_16sdp" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/tv_title_dialog" android:background="@color/colorPrimary" android:layout_width="fill_parent" android:layout_height="@dimen/margin_50dp" android:text="@string/business_category" android:paddingStart="@dimen/margin_20dp" />
-    <ImageView android:id="@id/iv_cancel_dialog" android:layout_width="@dimen/margin_25dp" android:layout_height="@dimen/margin_25dp" android:layout_centerVertical="true" android:layout_marginEnd="@dimen/margin_20dp" android:layout_alignParentEnd="true" app:srcCompat="@drawable/close_white" />
-</RelativeLayout>

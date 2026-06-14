@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:icon="@drawable/send" android:id="@id/sending" android:title="Send" app:showAsAction="always" />
-    <item android:icon="@drawable/send_sms" android:id="@id/sms" android:title="SMS" app:showAsAction="always" />
-    <item android:icon="@drawable/print" android:id="@id/print" android:title="Print" app:showAsAction="always" />
-    <item android:icon="@drawable/whatsapp_menu" android:id="@id/whatsapp" android:visible="true" android:title="Whatsapp" app:showAsAction="always" />
-</menu>
