@@ -42,6 +42,8 @@ class ApiService {
         List<dynamic> appts = [];
         if (data is List) {
           appts = data;
+        } else if (data['data'] is List) {
+          appts = data['data'];
         } else if (data['appointments'] is List) {
           appts = data['appointments'];
         }
@@ -96,6 +98,8 @@ class ApiService {
         List<dynamic> pats = [];
         if (data is List) {
           pats = data;
+        } else if (data['data'] is List) {
+          pats = data['data'];
         } else if (data['patients'] is List) {
           pats = data['patients'];
         }
