@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
             });
           },
           backgroundColor: Colors.white,
-          selectedItemColor: const Color(0xFF0284C7),
+          selectedItemColor: const Color(0xFF0ea5e9),
           unselectedItemColor: const Color(0xFF94A3B8),
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,

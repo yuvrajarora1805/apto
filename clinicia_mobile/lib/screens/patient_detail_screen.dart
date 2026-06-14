@@ -65,7 +65,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
         title: Text(widget.patient['patient_name'] ?? 'Patient Details'),
-        backgroundColor: const Color(0xFF0284C7),
+        backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,
       ),
       body: _isLoading 
@@ -83,7 +83,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                       backgroundColor: const Color(0xFFE0F2FE),
                       child: Text(
                         widget.patient['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
-                        style: const TextStyle(fontSize: 32, color: Color(0xFF0284C7), fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 32, color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -152,7 +152,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("Visit Date: $dateStr", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0284C7))),
+                                    Text("Visit Date: $dateStr", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0ea5e9))),
                                     if (payment != null)
                                       Text("Paid: ₹${payment['paid_amount']}", style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
                                   ],

@@ -43,7 +43,7 @@ class _PendingDuesScreenState extends State<PendingDuesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pending Dues'),
-        backgroundColor: const Color(0xFFEF4444), // Red for alerts
+        backgroundColor: const Color(0xFF0ea5e9), // Apto Blue
         foregroundColor: Colors.white,
       ),
       backgroundColor: Colors.grey.shade50,

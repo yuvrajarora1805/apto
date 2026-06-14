@@ -140,7 +140,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               _buildBreakdownRow("Total All-Time", rev['total']),
               const SizedBox(height: 24),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6366F1), foregroundColor: Colors.white),
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white),
                 onPressed: () => Navigator.pop(context), 
                 child: const Text("Close")
               ),
@@ -169,7 +169,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Analytics Dashboard'),
-        backgroundColor: const Color(0xFF6366F1), // Indigo color for analytics
+        backgroundColor: const Color(0xFF0ea5e9), // Indigo color for analytics
         foregroundColor: Colors.white,
         actions: [
           IconButton(icon: const Icon(Icons.refresh), onPressed: _fetchAnalytics),
@@ -183,7 +183,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             child: ListView(
               padding: const EdgeInsets.all(16.0),
               children: [
-                const Text("Today's Performance", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF6366F1))),
+                const Text("Today's Performance", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0ea5e9))),
                 const SizedBox(height: 16),
                 GridView.count(
                   crossAxisCount: 2,
@@ -199,7 +199,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 ),
                 
                 const SizedBox(height: 32),
-                const Text("Financial Overview", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF6366F1))),
+                const Text("Financial Overview", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0ea5e9))),
                 const SizedBox(height: 16),
                 GridView.count(
                   crossAxisCount: 2,
@@ -223,7 +223,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 ),
 
                 const SizedBox(height: 32),
-                const Text("Historical Data", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF6366F1))),
+                const Text("Historical Data", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0ea5e9))),
                 const SizedBox(height: 16),
                 GridView.count(
                   crossAxisCount: 2,

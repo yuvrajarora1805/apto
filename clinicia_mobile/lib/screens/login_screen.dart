@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Icon(Icons.local_hospital, size: 80, color: Color(0xFF0284C7)),
+                const Icon(Icons.local_hospital, size: 80, color: Color(0xFF0ea5e9)),
                 const SizedBox(height: 16),
                 const Text(
                   'Clinicia App',
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _login,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF0284C7),
+                            backgroundColor: const Color(0xFF0ea5e9),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                             elevation: 0,

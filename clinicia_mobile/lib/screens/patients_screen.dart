@@ -84,7 +84,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                 TextField(controller: addressCtrl, decoration: const InputDecoration(labelText: 'Address', border: OutlineInputBorder())),
                 const SizedBox(height: 24),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0284C7), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
                   child: const Text('Save Patient', style: TextStyle(fontSize: 16)),
                   onPressed: () async {
                     if (nameCtrl.text.isEmpty || phoneCtrl.text.isEmpty) {
@@ -121,7 +121,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Patient Directory'),
-        backgroundColor: const Color(0xFF0284C7),
+        backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,
       ),
       body: _isLoading
@@ -139,7 +139,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         backgroundColor: const Color(0xFFE0F2FE),
                         child: Text(
                           p['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
-                          style: const TextStyle(color: Color(0xFF0284C7), fontWeight: FontWeight.bold),
+                          style: const TextStyle(color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold),
                         ),
                       ),
                       title: Text(p['patient_name'] ?? 'Unknown', style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -182,7 +182,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   },
                 ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF0284C7),
+        backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,
         onPressed: _showAddPatientDialog,
         child: const Icon(Icons.person_add),
