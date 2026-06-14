@@ -49,6 +49,17 @@ async function initDB() {
     `);
 
     await connection.query(`
+      CREATE TABLE IF NOT EXISTS clinic_doctors (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        first_name VARCHAR(100),
+        last_name VARCHAR(100),
+        mobile_no VARCHAR(20),
+        clinic_name VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    await connection.query(`
       CREATE TABLE IF NOT EXISTS diagnoses (
         id INT AUTO_INCREMENT PRIMARY KEY,
         diagnosis_details VARCHAR(255),

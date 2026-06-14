@@ -13,6 +13,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final _firstNameCtrl = TextEditingController();
   final _lastNameCtrl = TextEditingController();
   final _mobileCtrl = TextEditingController();
+  final _clinicCtrl = TextEditingController();
   bool _isLoading = false;
 
   Future<void> _submit() async {
@@ -24,6 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         'first_name': _firstNameCtrl.text,
         'last_name': _lastNameCtrl.text,
         'mobile_no': _mobileCtrl.text,
+        'clinic_name': _clinicCtrl.text,
       });
 
       if (res['success'] == true) {
@@ -32,6 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _firstNameCtrl.clear();
         _lastNameCtrl.clear();
         _mobileCtrl.clear();
+        _clinicCtrl.clear();
       } else {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res['message'] ?? 'Failed to add doctor')));
@@ -87,6 +90,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     controller: _mobileCtrl,
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(labelText: 'Mobile Number', border: OutlineInputBorder()),
+                    validator: (val) => val == null || val.isEmpty ? 'Required' : null,
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _clinicCtrl,
+                    decoration: const InputDecoration(labelText: 'Clinic Name', border: OutlineInputBorder()),
                     validator: (val) => val == null || val.isEmpty ? 'Required' : null,
                   ),
                   const SizedBox(height: 24),
