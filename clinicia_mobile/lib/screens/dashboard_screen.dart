@@ -64,7 +64,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
-  void _showBookAppointmentDialog() {
+  void _showBookAppointmentDialog() async {
+    await _fetchDoctors();
+    await _fetchPatients();
+
+    if (!mounted) return;
+
     int? selectedPatientId;
     int? selectedDoctorId;
     DateTime selectedDate = _selectedDay ?? _focusedDay;
