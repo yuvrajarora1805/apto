@@ -87,11 +87,21 @@ class DatabaseHelper {
     return await db.query('patients', where: 'sync_status = 0');
   }
 
-  Future<int> insertOfflinePatient(Map<String, dynamic> patient) async {
+  Future<int> insertOfflinePatient(Map<String, dynamic> patientData) async {
     final db = await instance.database;
     int tempId = -(DateTime.now().millisecondsSinceEpoch % 1000000000);
-    patient['id'] = tempId;
-    patient['sync_status'] = 0;
+    
+    // Create a new map to avoid modifying the original and to filter columns
+    Map<String, dynamic> patient = {
+      'id': tempId,
+      'patient_name': patientData['patient_name'],
+      'mobile_no': patientData['mobile_no'],
+      'age': patientData['age'],
+      'gender': patientData['gender'],
+      'address': patientData['address'],
+      'sync_status': 0
+    };
+    
     await db.insert('patients', patient);
     return tempId;
   }
