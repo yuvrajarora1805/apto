@@ -236,7 +236,7 @@ app.post('/api/doctors', async (req, res) => {
 
 app.get('/api/doctors', async (req, res) => {
   try {
-    const [rows] = await dbPool.query('SELECT id, first_name, last_name, clinic_name, role FROM doctors WHERE status = "Approved"');
+    const [rows] = await dbPool.query('SELECT id, first_name, last_name, clinic_name, role FROM doctors WHERE status = "Approved" AND role = "doctor"');
     res.json({ success: true, data: rows });
   } catch (err) {
     console.error(err);
@@ -255,6 +255,9 @@ app.put('/api/appointments/:id/status', async (req, res) => {
     const [rows] = await dbPool.query('SELECT * FROM appointments WHERE id = ?', [id]);
     const appt = rows[0];
 
+    const [docRows] = await dbPool.query('SELECT clinic_name FROM doctors WHERE id = ?', [appt.doctor_id]);
+    const clinicName = (docRows.length > 0 && docRows[0].clinic_name) ? docRows[0].clinic_name : 'Our Clinic';
+
     let message = '';
     let dial_code = '91';
 
@@ -262,7 +265,7 @@ app.put('/api/appointments/:id/status', async (req, res) => {
       if (status === 'Missed') {
         message = `Dear *${appt.patient_name}*,\n\nSorry we missed you for your appointment today.\n\nPlease reply to this message to reschedule your visit.`;
       } else if (status === 'Completed') {
-        message = `Dear *${appt.patient_name}*,\n\nThank you for visiting Clinicia today! We hope you had a great experience.\n\nRegards,\nClinicia Team`;
+        message = `Dear *${appt.patient_name}*,\n\nThank you for visiting ${clinicName} today! We hope you had a great experience.\n\nRegards,\n${clinicName} Team`;
       }
     }
 
