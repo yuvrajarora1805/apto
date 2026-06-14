@@ -12,13 +12,30 @@ class PatientsScreen extends StatefulWidget {
 }
 
 class _PatientsScreenState extends State<PatientsScreen> {
-  List<dynamic> _patients = [];
   bool _isLoading = true;
+  List<dynamic> _patients = [];
+  List<dynamic> _filteredPatients = [];
+  List<dynamic> _doctors = [];
+  String _searchQuery = "";
 
   @override
   void initState() {
     super.initState();
     _fetchPatients();
+    _fetchDoctors();
+  }
+
+  Future<void> _fetchDoctors() async {
+    try {
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchDoctors(adminId);
+      if (res['success'] == true && mounted) {
+        setState(() => _doctors = res['data']);
+      }
+    } catch (e) {
+      debugPrint("Error fetching doctors: $e");
+    }
   }
 
   Future<void> _fetchPatients() async {
@@ -160,10 +177,17 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
                               onPressed: () async {
                                 String phone = p['mobile_no'].toString();
-                                if (!phone.startsWith('+')) phone = "${p['dial_code'] ?? '91'}$phone";
-                                phone = phone.replaceAll('+', '').replaceAll(' ', '');
-                                final url = Uri.parse("https://wa.me/$phone");
-                                if (await canLaunchUrl(url)) await launchUrl(url, mode: LaunchMode.externalApplication);
+                                if (!phone.startsWith('+')) phone = "+91$phone";
+                                final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone");
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                                }
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.calendar_month, color: Color(0xFF0ea5e9)),
+                              onPressed: () {
+                                _showBookAppointmentDialog(p);
                               },
                             ),
                           ],
@@ -187,6 +211,128 @@ class _PatientsScreenState extends State<PatientsScreen> {
         onPressed: _showAddPatientDialog,
         child: const Icon(Icons.person_add),
       ),
+    );
+  }
+
+  void _showBookAppointmentDialog(Map<String, dynamic> patient) {
+    DateTime selectedDate = DateTime.now();
+    TimeOfDay startTime = const TimeOfDay(hour: 9, minute: 0);
+    TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 30);
+    int? selectedDoctorId;
+    final purposeCtrl = TextEditingController();
+    bool whatsappChk = true;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 24, right: 24, top: 24),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text("Book Appointment for ${patient['patient_name']}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<int>(
+                      decoration: const InputDecoration(labelText: 'Select Doctor (Optional)', border: OutlineInputBorder()),
+                      value: selectedDoctorId,
+                      items: _doctors.map((d) => DropdownMenuItem<int>(
+                        value: d['id'],
+                        child: Text("Dr. ${d['first_name']} ${d['last_name']}"),
+                      )).toList(),
+                      onChanged: (val) => setModalState(() => selectedDoctorId = val),
+                    ),
+                    const SizedBox(height: 12),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text('Date'),
+                      subtitle: Text("${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}"),
+                      trailing: const Icon(Icons.calendar_today),
+                      onTap: () async {
+                        final date = await showDatePicker(context: context, initialDate: selectedDate, firstDate: DateTime(2020), lastDate: DateTime(2030));
+                        if (date != null) setModalState(() => selectedDate = date);
+                      },
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Start Time'),
+                            subtitle: Text(startTime.format(context)),
+                            onTap: () async {
+                              final time = await showTimePicker(context: context, initialTime: startTime);
+                              if (time != null) setModalState(() => startTime = time);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('End Time'),
+                            subtitle: Text(endTime.format(context)),
+                            onTap: () async {
+                              final time = await showTimePicker(context: context, initialTime: endTime);
+                              if (time != null) setModalState(() => endTime = time);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(controller: purposeCtrl, decoration: const InputDecoration(labelText: 'Purpose', border: OutlineInputBorder())),
+                    const SizedBox(height: 12),
+                    CheckboxListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text("Send WhatsApp Confirmation"),
+                      value: whatsappChk,
+                      onChanged: (val) => setModalState(() => whatsappChk = val ?? false),
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
+                      child: const Text('Schedule', style: TextStyle(fontSize: 16)),
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        
+                        final dateStr = "${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}";
+                        final startStr = "${startTime.hour.toString().padLeft(2, '0')}:${startTime.minute.toString().padLeft(2, '0')}";
+                        final endStr = "${endTime.hour.toString().padLeft(2, '0')}:${endTime.minute.toString().padLeft(2, '0')}";
+
+                        final session = await AuthService.getSession();
+                        final doctorId = selectedDoctorId ?? (session != null ? session['id'] : 1);
+
+                        final res = await ApiService.scheduleAppointment({
+                          'admin_id': session != null ? session['id'] : 1,
+                          'patient_id': patient['id'],
+                          'patient_name': patient['patient_name'],
+                          'mobile_no': patient['mobile_no'],
+                          'appointment_date': dateStr,
+                          'start_time': startStr,
+                          'end_time': endStr,
+                          'doctor_id': doctorId,
+                          'purpose': purposeCtrl.text,
+                          'whatsapp_chk': whatsappChk,
+                        });
+                        
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res['message'] ?? 'Appointment Booked!')));
+                      },
+                    ),
+                    const SizedBox(height: 24),
+                  ],
+                ),
+              ),
+            );
+          }
+        );
+      },
     );
   }
 }
