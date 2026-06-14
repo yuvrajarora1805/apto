@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
 import 'patients_screen.dart';
 import 'settings_screen.dart';
+import 'completed_appointments_screen.dart';
 import '../services/auth_service.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const DashboardScreen(),
     const PatientsScreen(),
+    const CompletedAppointmentsScreen(),
     const SettingsScreen(),
   ];
 
@@ -69,6 +71,11 @@ class _MainScreenState extends State<MainScreen> {
               label: 'Patients',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.history_outlined),
+              activeIcon: Icon(Icons.history),
+              label: 'History',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.person_outline),
               activeIcon: Icon(Icons.person),
               label: 'Profile',
@@ -76,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      appBar: _currentIndex == 2 ? AppBar(
+      appBar: _currentIndex == 3 ? AppBar(
         title: const Text('Settings'),
         backgroundColor: Colors.white,
         elevation: 0,

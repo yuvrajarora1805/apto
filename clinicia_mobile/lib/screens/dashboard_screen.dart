@@ -218,12 +218,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   List<dynamic> _getEventsForDay(DateTime day) {
-    return _appointments.where((app) {
+    var events = _appointments.where((app) {
       if (app['appointment_date'] == null) return false;
       final appDateStr = app['appointment_date'].toString().split('T')[0];
       final dayStr = "${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}";
       return appDateStr == dayStr;
     }).toList();
+
+    events.sort((a, b) {
+      if (a['status'] == 'Completed' && b['status'] != 'Completed') return 1;
+      if (a['status'] != 'Completed' && b['status'] == 'Completed') return -1;
+      
+      final timeA = a['start_time']?.toString() ?? '00:00';
+      final timeB = b['start_time']?.toString() ?? '00:00';
+      return timeA.compareTo(timeB);
+    });
+
+    return events;
   }
 
   @override

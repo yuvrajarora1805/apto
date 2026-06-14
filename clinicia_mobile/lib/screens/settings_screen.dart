@@ -14,6 +14,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final _firstNameCtrl = TextEditingController();
   final _lastNameCtrl = TextEditingController();
   final _mobileCtrl = TextEditingController();
+  final _clinicNameCtrl = TextEditingController();
   bool _isLoading = false;
   List<dynamic> _doctors = [];
 
@@ -83,6 +84,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const Text(
+              "Update Clinic Name",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _clinicNameCtrl,
+                    decoration: const InputDecoration(labelText: 'Clinic Name', border: OutlineInputBorder()),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                SizedBox(
+                  height: 55,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white),
+                    onPressed: () async {
+                      if (_clinicNameCtrl.text.isEmpty) return;
+                      final session = await AuthService.getSession();
+                      final adminId = session != null ? session['id'] : 1;
+                      final res = await ApiService.updateClinicName({
+                        'admin_id': adminId,
+                        'clinic_name': _clinicNameCtrl.text,
+                      });
+                      if (res['success'] == true && mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Clinic Name updated successfully!')));
+                      }
+                    },
+                    child: const Text('Update'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
             const Text(
               "Add New Doctor",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

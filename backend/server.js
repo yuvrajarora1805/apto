@@ -183,8 +183,8 @@ app.post('/api/appointments', async (req, res) => {
     let dial_code = '91';
 
     if (whatsapp_chk) {
-      const [docRows] = await dbPool.query('SELECT * FROM doctors WHERE id = ?', [doctor_id]);
-      const doctor = docRows.length > 0 ? docRows[0] : { first_name: 'Paras', last_name: 'Arora', clinic_name: 'Arora Dental Implant Clinic' };
+      const [docRows] = await dbPool.query('SELECT * FROM clinic_doctors WHERE id = ? AND admin_id = ?', [doctor_id, admin_id]);
+      const doctor = docRows.length > 0 ? docRows[0] : { first_name: 'Paras', last_name: 'Arora', clinic_name: 'Arora Dental Implant Clinic', mobile_no: '07837880037' };
 
       // Format date from "2026-06-14" to "Jun 14"
       const dateParts = appointment_date.split('-');
@@ -199,8 +199,9 @@ app.post('/api/appointments', async (req, res) => {
       const formattedTime = `${hr}:${minStr}${ampm}`;
 
       const clinicName = doctor.clinic_name || 'Clinicia';
+      const docPhone = doctor.mobile_no || '07837880037';
 
-      message = `Dear ${patient_name},\n\nYour appointment with Dr. ${doctor.first_name} ${doctor.last_name} has been scheduled on ${formattedDate}, ${formattedTime}\n\nRegards,\n${clinicName},\nPh no: 07837880037`;
+      message = `Dear ${patient_name},\n\nYour appointment with Dr. ${doctor.first_name} ${doctor.last_name} has been scheduled on ${formattedDate}, ${formattedTime}\n\nRegards,\n${clinicName},\nPh no: ${docPhone}`;
     }
 
     res.json({ 
@@ -306,6 +307,21 @@ app.put('/api/appointments/:id/status', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: 'Failed to update status' });
+  }
+});
+
+app.put('/api/update-clinic-name', async (req, res) => {
+  try {
+    const { admin_id, clinic_name } = req.body;
+    if (!admin_id || !clinic_name) return res.status(400).json({ success: false, message: 'Missing data' });
+    
+    await dbPool.query('UPDATE users SET clinic_name = ? WHERE id = ?', [clinic_name, admin_id]);
+    await dbPool.query('UPDATE clinic_doctors SET clinic_name = ? WHERE admin_id = ?', [clinic_name, admin_id]);
+
+    res.json({ success: true, message: 'Clinic name updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to update clinic name' });
   }
 });
 

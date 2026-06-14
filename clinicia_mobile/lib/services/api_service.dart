@@ -28,6 +28,15 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
+  static Future<Map<String, dynamic>> updateClinicName(Map<String, dynamic> data) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/update-clinic-name'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+    return jsonDecode(response.body);
+  }
+
   static Future<Map<String, dynamic>> fetchPatients(int adminId) async {
     final response = await http.get(Uri.parse('$baseUrl/patients?admin_id=$adminId'));
     return jsonDecode(response.body);
