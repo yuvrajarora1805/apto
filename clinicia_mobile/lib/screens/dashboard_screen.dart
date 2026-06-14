@@ -29,7 +29,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<void> _fetchDoctors() async {
     try {
-      final res = await ApiService.fetchDoctors();
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchDoctors(adminId);
       if (res['success'] == true && mounted) {
         setState(() => _doctors = res['data']);
       }

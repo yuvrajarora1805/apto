@@ -51,6 +51,7 @@ async function initDB() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS clinic_doctors (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT,
         first_name VARCHAR(100),
         last_name VARCHAR(100),
         mobile_no VARCHAR(20),
@@ -58,6 +59,10 @@ async function initDB() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+
+    try {
+      await connection.query('ALTER TABLE clinic_doctors ADD COLUMN admin_id INT');
+    } catch (err) {}
 
     await connection.query(`
       CREATE TABLE IF NOT EXISTS diagnoses (

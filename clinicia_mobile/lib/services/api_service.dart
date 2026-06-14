@@ -33,8 +33,8 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
-  static Future<Map<String, dynamic>> fetchDoctors() async {
-    final response = await http.get(Uri.parse('$baseUrl/doctors'));
+  static Future<Map<String, dynamic>> fetchDoctors(int adminId) async {
+    final response = await http.get(Uri.parse('$baseUrl/doctors?admin_id=$adminId'));
     return jsonDecode(response.body);
   }
 

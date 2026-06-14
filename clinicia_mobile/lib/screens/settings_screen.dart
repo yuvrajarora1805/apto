@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
+import '../services/auth_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -13,19 +14,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final _firstNameCtrl = TextEditingController();
   final _lastNameCtrl = TextEditingController();
   final _mobileCtrl = TextEditingController();
-  final _clinicCtrl = TextEditingController();
   bool _isLoading = false;
+  List<dynamic> _doctors = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDoctors();
+  }
+
+  Future<void> _fetchDoctors() async {
+    try {
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchDoctors(adminId);
+      if (res['success'] == true && mounted) {
+        setState(() => _doctors = res['data']);
+      }
+    } catch (e) {
+      debugPrint("Error fetching doctors: $e");
+    }
+  }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
     try {
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+
       final res = await ApiService.addDoctor({
+        'admin_id': adminId,
         'first_name': _firstNameCtrl.text,
         'last_name': _lastNameCtrl.text,
         'mobile_no': _mobileCtrl.text,
-        'clinic_name': _clinicCtrl.text,
       });
 
       if (res['success'] == true) {
@@ -34,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _firstNameCtrl.clear();
         _lastNameCtrl.clear();
         _mobileCtrl.clear();
-        _clinicCtrl.clear();
+        _fetchDoctors();
       } else {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res['message'] ?? 'Failed to add doctor')));
@@ -92,12 +115,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     decoration: const InputDecoration(labelText: 'Mobile Number', border: OutlineInputBorder()),
                     validator: (val) => val == null || val.isEmpty ? 'Required' : null,
                   ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _clinicCtrl,
-                    decoration: const InputDecoration(labelText: 'Clinic Name', border: OutlineInputBorder()),
-                    validator: (val) => val == null || val.isEmpty ? 'Required' : null,
-                  ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
@@ -115,6 +132,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(height: 32),
+            const Text(
+              "Manage Doctors",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _doctors.length,
+              itemBuilder: (context, index) {
+                final doc = _doctors[index];
+                return Card(
+                  elevation: 0,
+                  color: const Color(0xFFF8FAFC),
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: const Color(0xFFE0F2FE),
+                      child: Text(
+                        doc['first_name'][0].toUpperCase(),
+                        style: const TextStyle(color: Color(0xFF0284C7)),
+                      ),
+                    ),
+                    title: Text("Dr. ${doc['first_name']} ${doc['last_name']}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(doc['mobile_no'] ?? ''),
+                  ),
+                );
+              },
             ),
           ],
         ),

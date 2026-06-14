@@ -221,10 +221,15 @@ app.get('/api/appointments', async (req, res) => {
 
 app.post('/api/doctors', async (req, res) => {
   try {
-    const { first_name, last_name, mobile_no, clinic_name } = req.body;
+    const { first_name, last_name, mobile_no, admin_id } = req.body;
+    
+    // Fetch clinic_name from admin
+    const [adminRows] = await dbPool.query('SELECT clinic_name FROM doctors WHERE id = ?', [admin_id]);
+    const clinic_name = (adminRows.length > 0 && adminRows[0].clinic_name) ? adminRows[0].clinic_name : 'Our Clinic';
+
     const [result] = await dbPool.query(
-      'INSERT INTO clinic_doctors (first_name, last_name, mobile_no, clinic_name) VALUES (?, ?, ?, ?)',
-      [first_name, last_name, mobile_no, clinic_name]
+      'INSERT INTO clinic_doctors (admin_id, first_name, last_name, mobile_no, clinic_name) VALUES (?, ?, ?, ?, ?)',
+      [admin_id, first_name, last_name, mobile_no, clinic_name]
     );
     res.json({ success: true, message: 'Doctor added successfully', insertId: result.insertId });
   } catch (err) {
@@ -235,7 +240,14 @@ app.post('/api/doctors', async (req, res) => {
 
 app.get('/api/doctors', async (req, res) => {
   try {
-    const [rows] = await dbPool.query('SELECT id, first_name, last_name, clinic_name FROM clinic_doctors');
+    const admin_id = req.query.admin_id;
+    let query = 'SELECT id, first_name, last_name, clinic_name, mobile_no FROM clinic_doctors';
+    let params = [];
+    if (admin_id) {
+      query += ' WHERE admin_id = ?';
+      params.push(admin_id);
+    }
+    const [rows] = await dbPool.query(query, params);
     res.json({ success: true, data: rows });
   } catch (err) {
     console.error(err);
