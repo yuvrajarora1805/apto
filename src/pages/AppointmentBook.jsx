@@ -159,17 +159,21 @@ const AppointmentBook = ({ user }) => {
     <div style={{ height: 'calc(100vh - 100px)', padding: '1rem', background: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
       <h2 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Appointments Calendar</h2>
       
-      <Calendar
-        localizer={localizer}
-        events={appointments}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: '85%' }}
-        selectable
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleSelectEvent}
-        defaultView="week"
-      />
+      <div style={{ height: '85%', overflowX: 'auto' }}>
+        <div style={{ minWidth: '700px', height: '100%' }}>
+          <Calendar
+            localizer={localizer}
+            events={appointments}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: '100%' }}
+            selectable
+            onSelectSlot={handleSelectSlot}
+            onSelectEvent={handleSelectEvent}
+            defaultView="week"
+          />
+        </div>
+      </div>
 
       {/* Edit Appointment Modal */}
       {showEditModal && selectedEvent && (

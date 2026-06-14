@@ -47,9 +47,9 @@ const FinancialDashboard = () => {
         </div>
       </div>
 
-      <div className="card">
+      <div className="card" style={{ overflowX: 'auto' }}>
         <h3 style={{ marginBottom: '1rem' }}>Recent Invoices</h3>
-        <table className="data-table">
+        <table className="data-table" style={{ minWidth: '600px' }}>
           <thead>
             <tr>
               <th>Invoice ID</th>

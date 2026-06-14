@@ -41,8 +41,8 @@ const AdminDashboard = ({ setAuth }) => {
         <button className="btn" style={{ background: '#e2e8f0' }} onClick={() => setAuth(null)}>Logout</button>
       </div>
 
-      <div className="card">
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="card" style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
           <thead>
             <tr style={{ borderBottom: '2px solid #eee' }}>
               <th style={{ padding: '1rem' }}>Name</th>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(const CliniciaApp());
@@ -21,7 +22,7 @@ class CliniciaApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (context) => const LoginScreen(),
-        '/dashboard': (context) => const DashboardScreen(),
+        '/dashboard': (context) => const MainScreen(),
       },
     );
   }

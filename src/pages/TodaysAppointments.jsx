@@ -71,8 +71,8 @@ const TodaysAppointments = () => {
         </label>
       </div>
 
-      <div className="card">
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="card" style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
           <thead>
             <tr style={{ borderBottom: '2px solid #eee' }}>
               <th style={{ padding: '1rem' }}>Time</th>
