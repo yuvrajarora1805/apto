@@ -9,7 +9,7 @@ const AdminDashboard = ({ setAuth }) => {
 
   const fetchDoctors = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/admin/doctors');
+      const res = await fetch('/api/admin/doctors');
       const json = await res.json();
       if(json.success) setDoctors(json.data);
     } catch(err) {
@@ -19,7 +19,7 @@ const AdminDashboard = ({ setAuth }) => {
 
   const handleApprove = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/admin/doctors/${id}/approve`, {
+      const res = await fetch(`/api/admin/doctors/${id}/approve`, {
         method: 'PUT'
       });
       const json = await res.json();

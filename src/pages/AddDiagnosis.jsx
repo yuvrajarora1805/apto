@@ -14,7 +14,7 @@ const AddDiagnosis = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/diagnoses', {
+      const response = await fetch('/api/diagnoses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

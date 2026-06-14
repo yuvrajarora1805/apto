@@ -11,7 +11,7 @@ const TodaysAppointments = () => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/appointments');
+      const res = await fetch('/api/appointments');
       const json = await res.json();
       if(json.success) {
         // Filter for ONLY today's appointments
@@ -29,7 +29,7 @@ const TodaysAppointments = () => {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/appointments/${id}/status`, {
+      const res = await fetch(`/api/appointments/${id}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

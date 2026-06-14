@@ -30,7 +30,7 @@ const AppointmentBook = ({ user }) => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/appointments');
+      const res = await fetch('/api/appointments');
       const json = await res.json();
       if(json.success) {
         // Convert to react-big-calendar event format
@@ -55,7 +55,7 @@ const AppointmentBook = ({ user }) => {
 
   const fetchPatients = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/patients');
+      const res = await fetch('/api/patients');
       const json = await res.json();
       if(json.success) setPatients(json.data);
     } catch(err) {
@@ -92,7 +92,7 @@ const AppointmentBook = ({ user }) => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3001/api/appointments/${selectedEvent.id}/status`, {
+      const response = await fetch(`/api/appointments/${selectedEvent.id}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -132,7 +132,7 @@ const AppointmentBook = ({ user }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/api/appointments', {
+      const response = await fetch('/api/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
