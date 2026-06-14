@@ -252,6 +252,9 @@ app.put('/api/appointments/:id/status', async (req, res) => {
 app.get('/api/ping', (req, res) => res.send('pong'));
 
 // Catch-all route to serve React app for non-API requests
-app.get('*', (req, res) => {
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
