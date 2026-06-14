@@ -47,15 +47,22 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 40, color: color),
-              const SizedBox(height: 12),
-              Text(value, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              Icon(icon, size: 32, color: color),
+              const SizedBox(height: 8),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(value, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              ),
               const SizedBox(height: 4),
-              Text(title, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(title, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+              ),
             ],
           ),
         ),
@@ -74,15 +81,16 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         onTap: () => _showRevenueBreakdown(revenueData),
         borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.account_balance_wallet, size: 30, color: Color(0xFF10B981)),
-                  const SizedBox(width: 8),
+                  const Icon(Icons.account_balance_wallet, size: 28, color: Color(0xFF10B981)),
+                  const SizedBox(width: 4),
                   IconButton(
                     icon: Icon(_hideRevenue ? Icons.visibility_off : Icons.visibility, color: Colors.grey, size: 20),
                     onPressed: () => setState(() => _hideRevenue = !_hideRevenue),
@@ -92,9 +100,15 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 ],
               ),
               const SizedBox(height: 8),
-              Text(_hideRevenue ? "₹****" : "₹$todayRev", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(_hideRevenue ? "₹****" : "₹$todayRev", style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              ),
               const SizedBox(height: 4),
-              Text("Today's Revenue", textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text("Today's Revenue", textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+              ),
             ],
           ),
         ),
@@ -175,6 +189,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
+                  childAspectRatio: 1.15,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
@@ -190,6 +205,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
+                  childAspectRatio: 1.15,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
@@ -213,6 +229,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
+                  childAspectRatio: 1.15,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
