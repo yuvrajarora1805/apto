@@ -109,7 +109,8 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getPatients() async {
     final db = await instance.database;
-    return await db.query('patients', orderBy: 'id DESC');
+    // Order by sync_status ASC so offline patients (0) appear at the top, then id DESC
+    return await db.query('patients', orderBy: 'sync_status ASC, id DESC');
   }
 
   Future<List<Map<String, dynamic>>> getUnsyncedPatients() async {
