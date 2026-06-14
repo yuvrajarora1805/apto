@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://apto.voeva.in',
+        target: 'https://apto.voreva.in',
         changeOrigin: true
       }
     }
