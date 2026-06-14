@@ -42,7 +42,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<void> _fetchPatients() async {
     try {
-      final res = await ApiService.fetchPatients();
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchPatients(adminId);
       if (res['success'] == true && mounted) {
         setState(() => _patients = res['data']);
       }
@@ -53,7 +55,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<void> _fetchAppointments() async {
     try {
-      final res = await ApiService.fetchAppointments();
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchAppointments(adminId);
       if (res['success'] == true) {
         setState(() {
           _appointments = res['data'];
@@ -181,6 +185,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         final doctorId = selectedDoctorId ?? (session != null ? session['id'] : 1);
 
                         final res = await ApiService.scheduleAppointment({
+                          'admin_id': session != null ? session['id'] : 1,
                           'patient_id': selectedPatientId,
                           'patient_name': patient['patient_name'],
                           'mobile_no': patient['mobile_no'],

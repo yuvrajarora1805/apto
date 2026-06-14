@@ -21,7 +21,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
 
   Future<void> _fetchPatients() async {
     try {
-      final res = await ApiService.fetchPatients();
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchPatients(adminId);
       if (res['success'] == true) {
         setState(() {
           _patients = res['data'];
@@ -87,9 +89,12 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Name and Mobile are required")));
                       return;
                     }
+                    final session = await AuthService.getSession();
+                    final adminId = session != null ? session['id'] : 1;
                     Navigator.pop(context);
                     setState(() => _isLoading = true);
                     await ApiService.addPatient({
+                      'admin_id': adminId,
                       'patient_name': nameCtrl.text,
                       'mobile_no': phoneCtrl.text,
                       'email': emailCtrl.text,

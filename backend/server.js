@@ -140,10 +140,10 @@ app.post('/api/appointments/config', async (req, res) => {
 
 app.post('/api/patients', async (req, res) => {
   try {
-    const { patient_name, mobile_no, email, age, gender, address } = req.body;
+    const { admin_id, patient_name, mobile_no, email, age, gender, address } = req.body;
     const [result] = await dbPool.query(
-      'INSERT INTO patients (patient_name, mobile_no, email, age, gender, address) VALUES (?, ?, ?, ?, ?, ?)',
-      [patient_name, mobile_no, email, age, gender, address]
+      'INSERT INTO patients (admin_id, patient_name, mobile_no, email, age, gender, address) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [admin_id, patient_name, mobile_no, email, age, gender, address]
     );
     res.json({ success: true, message: 'Patient added successfully!', insertId: result.insertId });
   } catch (err) {
@@ -154,7 +154,15 @@ app.post('/api/patients', async (req, res) => {
 
 app.get('/api/patients', async (req, res) => {
   try {
-    const [rows] = await dbPool.query('SELECT * FROM patients ORDER BY created_at DESC');
+    const admin_id = req.query.admin_id;
+    let query = 'SELECT * FROM patients';
+    let params = [];
+    if (admin_id) {
+      query += ' WHERE admin_id = ?';
+      params.push(admin_id);
+    }
+    query += ' ORDER BY created_at DESC';
+    const [rows] = await dbPool.query(query, params);
     res.json({ success: true, data: rows });
   } catch (err) {
     console.error(err);
@@ -164,11 +172,11 @@ app.get('/api/patients', async (req, res) => {
 
 app.post('/api/appointments', async (req, res) => {
   try {
-    const { patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose, whatsapp_chk } = req.body;
+    const { admin_id, patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose, whatsapp_chk } = req.body;
     
     const [result] = await dbPool.query(
-      'INSERT INTO appointments (patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose]
+      'INSERT INTO appointments (admin_id, patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [admin_id, patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose]
     );
 
     let message = '';
@@ -211,7 +219,15 @@ app.post('/api/appointments', async (req, res) => {
 
 app.get('/api/appointments', async (req, res) => {
   try {
-    const [rows] = await dbPool.query('SELECT * FROM appointments ORDER BY appointment_date, start_time');
+    const admin_id = req.query.admin_id;
+    let query = 'SELECT * FROM appointments';
+    let params = [];
+    if (admin_id) {
+      query += ' WHERE admin_id = ?';
+      params.push(admin_id);
+    }
+    query += ' ORDER BY appointment_date, start_time';
+    const [rows] = await dbPool.query(query, params);
     res.json({ success: true, data: rows });
   } catch (err) {
     console.error(err);

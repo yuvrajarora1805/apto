@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddPatient = () => {
+const AddPatient = ({ user }) => {
   const [formData, setFormData] = useState({
     patient_name: '',
     mobile_no: '',
@@ -20,7 +20,7 @@ const AddPatient = () => {
       const response = await fetch('/api/patients', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, admin_id: user.id })
       });
       const data = await response.json();
       if(data.success) {

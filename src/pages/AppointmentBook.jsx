@@ -30,7 +30,7 @@ const AppointmentBook = ({ user }) => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await fetch('/api/appointments');
+      const res = await fetch(`/api/appointments?admin_id=${user.id}`);
       const json = await res.json();
       if(json.success) {
         // Convert to react-big-calendar event format
@@ -55,7 +55,7 @@ const AppointmentBook = ({ user }) => {
 
   const fetchPatients = async () => {
     try {
-      const res = await fetch('/api/patients');
+      const res = await fetch(`/api/patients?admin_id=${user.id}`);
       const json = await res.json();
       if(json.success) setPatients(json.data);
     } catch(err) {
@@ -97,7 +97,8 @@ const AppointmentBook = ({ user }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           status: selectedEvent.status, 
-          whatsapp_chk: selectedEvent.whatsapp_chk !== false 
+          whatsapp_chk: selectedEvent.whatsapp_chk !== false,
+          admin_id: user.id
         })
       });
       const data = await response.json();
@@ -127,6 +128,7 @@ const AppointmentBook = ({ user }) => {
 
     const payload = {
       ...formData,
+      admin_id: user.id,
       patient_name: selectedPatient.patient_name,
       mobile_no: selectedPatient.mobile_no
     };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
-const TodaysAppointments = () => {
+const TodaysAppointments = ({ user }) => {
   const [appointments, setAppointments] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
 
@@ -11,7 +11,7 @@ const TodaysAppointments = () => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await fetch('/api/appointments');
+      const res = await fetch(`/api/appointments?admin_id=${user.id}`);
       const json = await res.json();
       if(json.success) {
         // Filter for ONLY today's appointments

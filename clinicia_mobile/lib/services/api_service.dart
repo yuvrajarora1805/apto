@@ -23,13 +23,13 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
-  static Future<Map<String, dynamic>> fetchAppointments() async {
-    final response = await http.get(Uri.parse('$baseUrl/appointments'));
+  static Future<Map<String, dynamic>> fetchAppointments(int adminId) async {
+    final response = await http.get(Uri.parse('$baseUrl/appointments?admin_id=$adminId'));
     return jsonDecode(response.body);
   }
 
-  static Future<Map<String, dynamic>> fetchPatients() async {
-    final response = await http.get(Uri.parse('$baseUrl/patients'));
+  static Future<Map<String, dynamic>> fetchPatients(int adminId) async {
+    final response = await http.get(Uri.parse('$baseUrl/patients?admin_id=$adminId'));
     return jsonDecode(response.body);
   }
 

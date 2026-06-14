@@ -70,8 +70,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/appointments" replace />} />
             <Route path="/appointments" element={<AppointmentBook user={auth} />} />
-            <Route path="/todays-appointments" element={<TodaysAppointments />} />
-            <Route path="/add-patient" element={<AddPatient />} />
+            <Route path="/todays-appointments" element={<TodaysAppointments user={auth} />} />
+            <Route path="/add-patient" element={<AddPatient user={auth} />} />
             <Route path="/add-diagnosis" element={<AddDiagnosis />} />
             <Route path="/add-medicine" element={<AddMedicine />} />
             <Route path="/add-expense" element={<AddExpense />} />

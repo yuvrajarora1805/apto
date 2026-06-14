@@ -117,6 +117,7 @@ async function initDB() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS patients (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT,
         patient_name VARCHAR(150),
         mobile_no VARCHAR(20),
         email VARCHAR(100),
@@ -130,6 +131,7 @@ async function initDB() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS appointments (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT,
         patient_id INT,
         patient_name VARCHAR(150),
         mobile_no VARCHAR(20),
@@ -142,6 +144,9 @@ async function initDB() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+
+    try { await connection.query('ALTER TABLE patients ADD COLUMN admin_id INT'); } catch (e) {}
+    try { await connection.query('ALTER TABLE appointments ADD COLUMN admin_id INT'); } catch (e) {}
 
     console.log("All tables initialized successfully.");
     return mysql.createPool({ ...dbConfig, database: 'clinicia_db' });
