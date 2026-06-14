@@ -16,6 +16,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   DateTime? _selectedDay;
   List<dynamic> _appointments = [];
   List<dynamic> _patients = [];
+  List<dynamic> _doctors = [];
 
   @override
   void initState() {
@@ -23,6 +24,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _selectedDay = _focusedDay;
     _fetchAppointments();
     _fetchPatients();
+    _fetchDoctors();
+  }
+
+  Future<void> _fetchDoctors() async {
+    try {
+      final res = await ApiService.fetchDoctors();
+      if (res['success'] == true && mounted) {
+        setState(() => _doctors = res['data']);
+      }
+    } catch (e) {
+      debugPrint("Error fetching doctors: $e");
+    }
   }
 
   Future<void> _fetchPatients() async {
@@ -51,6 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _showBookAppointmentDialog() {
     int? selectedPatientId;
+    int? selectedDoctorId;
     DateTime selectedDate = _selectedDay ?? _focusedDay;
     TimeOfDay startTime = const TimeOfDay(hour: 9, minute: 0);
     TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 30);
@@ -82,6 +96,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Text("${p['patient_name']} (${p['mobile_no']})"),
                       )).toList(),
                       onChanged: (val) => setModalState(() => selectedPatientId = val),
+                    ),
+                    const SizedBox(height: 12),
+                    DropdownButtonFormField<int>(
+                      decoration: const InputDecoration(labelText: 'Select Doctor (Optional)', border: OutlineInputBorder()),
+                      value: selectedDoctorId,
+                      items: _doctors.map((d) => DropdownMenuItem<int>(
+                        value: d['id'],
+                        child: Text("Dr. ${d['first_name']} ${d['last_name']}"),
+                      )).toList(),
+                      onChanged: (val) => setModalState(() => selectedDoctorId = val),
                     ),
                     const SizedBox(height: 12),
                     ListTile(
@@ -147,7 +171,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         final endStr = "${endTime.hour.toString().padLeft(2, '0')}:${endTime.minute.toString().padLeft(2, '0')}";
 
                         final session = await AuthService.getSession();
-                        final doctorId = session != null ? session['id'] : 1;
+                        final doctorId = selectedDoctorId ?? (session != null ? session['id'] : 1);
 
                         final res = await ApiService.scheduleAppointment({
                           'patient_id': selectedPatientId,
@@ -235,24 +259,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         leading: CircleAvatar(backgroundColor: const Color(0xFFe0f2fe), child: Text(app['patient_name'][0].toUpperCase(), style: const TextStyle(color: Color(0xFF0ea5e9)))),
                         title: Text("${app['patient_name']} - ${app['start_time']}"),
                         subtitle: Text("Status: ${app['status']}"),
-                        trailing: PopupMenuButton<String>(
-                          icon: const Icon(Icons.more_vert),
-                          onSelected: (String status) async {
-                            final res = await ApiService.updateAppointmentStatus(app['id'], status);
-                            _fetchAppointments();
-                            
-                            if (res['whatsapp_message'] != null && res['whatsapp_message'].isNotEmpty) {
-                              final url = Uri.parse("https://api.whatsapp.com/send?phone=${res['dial_code']}${res['mobile_no']}&text=${Uri.encodeComponent(res['whatsapp_message'])}");
-                              if (await canLaunchUrl(url)) {
-                                await launchUrl(url, mode: LaunchMode.externalApplication);
-                              }
-                            }
-                          },
-                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                            const PopupMenuItem<String>(value: 'Scheduled', child: Text('Scheduled')),
-                            const PopupMenuItem<String>(value: 'Arrived', child: Text('Arrived')),
-                            const PopupMenuItem<String>(value: 'Completed', child: Text('Completed')),
-                            const PopupMenuItem<String>(value: 'Missed', child: Text('Missed')),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (app['mobile_no'] != null && app['mobile_no'].toString().isNotEmpty)
+                              IconButton(
+                                icon: const Icon(Icons.call, color: Colors.green),
+                                onPressed: () async {
+                                  final url = Uri.parse("tel:${app['mobile_no']}");
+                                  if (await canLaunchUrl(url)) {
+                                    await launchUrl(url);
+                                  }
+                                },
+                              ),
+                            PopupMenuButton<String>(
+                              icon: const Icon(Icons.more_vert),
+                              onSelected: (String status) async {
+                                final res = await ApiService.updateAppointmentStatus(app['id'], status);
+                                _fetchAppointments();
+                                
+                                if (res['whatsapp_message'] != null && res['whatsapp_message'].isNotEmpty) {
+                                  final url = Uri.parse("https://api.whatsapp.com/send?phone=${res['dial_code']}${res['mobile_no']}&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                                  if (await canLaunchUrl(url)) {
+                                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                                  }
+                                }
+                              },
+                              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                                const PopupMenuItem<String>(value: 'Scheduled', child: Text('Scheduled')),
+                                const PopupMenuItem<String>(value: 'Arrived', child: Text('Arrived')),
+                                const PopupMenuItem<String>(value: 'Completed', child: Text('Completed')),
+                                const PopupMenuItem<String>(value: 'Missed', child: Text('Missed')),
+                              ],
+                            ),
                           ],
                         ),
                       );

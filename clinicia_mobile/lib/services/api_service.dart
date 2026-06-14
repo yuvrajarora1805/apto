@@ -33,6 +33,11 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
+  static Future<Map<String, dynamic>> fetchDoctors() async {
+    final response = await http.get(Uri.parse('$baseUrl/doctors'));
+    return jsonDecode(response.body);
+  }
+
   static Future<Map<String, dynamic>> scheduleAppointment(Map<String, dynamic> data) async {
     final response = await http.post(
       Uri.parse('$baseUrl/appointments'),

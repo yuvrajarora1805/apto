@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/main_screen.dart';
+import 'services/auth_service.dart';
 
-void main() {
-  runApp(const CliniciaApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final session = await AuthService.getSession();
+  final initialRoute = session != null ? '/dashboard' : '/login';
+
+  runApp(CliniciaApp(initialRoute: initialRoute));
 }
 
 class CliniciaApp extends StatelessWidget {
-  const CliniciaApp({super.key});
+  final String initialRoute;
+  const CliniciaApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class CliniciaApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0ea5e9)), // Matching the React primary color
         useMaterial3: true,
       ),
-      initialRoute: '/login',
+      initialRoute: initialRoute,
       routes: {
         '/login': (context) => const LoginScreen(),
         '/dashboard': (context) => const MainScreen(),

@@ -219,6 +219,16 @@ app.get('/api/appointments', async (req, res) => {
   }
 });
 
+app.get('/api/doctors', async (req, res) => {
+  try {
+    const [rows] = await dbPool.query('SELECT id, first_name, last_name, clinic_name, role FROM doctors WHERE status = "Approved"');
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to fetch doctors' });
+  }
+});
+
 app.put('/api/appointments/:id/status', async (req, res) => {
   try {
     const { id } = req.params;
@@ -233,8 +243,12 @@ app.put('/api/appointments/:id/status', async (req, res) => {
     let message = '';
     let dial_code = '91';
 
-    if (whatsapp_chk && status === 'Missed') {
-      message = `Dear *${appt.patient_name}*,\n\nSorry we missed you for your appointment today.\n\nPlease reply to this message to reschedule your visit.`;
+    if (whatsapp_chk) {
+      if (status === 'Missed') {
+        message = `Dear *${appt.patient_name}*,\n\nSorry we missed you for your appointment today.\n\nPlease reply to this message to reschedule your visit.`;
+      } else if (status === 'Completed') {
+        message = `Dear *${appt.patient_name}*,\n\nThank you for visiting Clinicia today! We hope you had a great experience.\n\nRegards,\nClinicia Team`;
+      }
     }
 
     res.json({ 
