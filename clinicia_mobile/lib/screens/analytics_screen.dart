@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
+import 'pending_dues_screen.dart';
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});
@@ -12,6 +13,7 @@ class AnalyticsScreen extends StatefulWidget {
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Map<String, dynamic> _data = {};
   bool _isLoading = true;
+  bool _hideRevenue = true;
 
   @override
   void initState() {
@@ -37,22 +39,113 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     }
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(String title, String value, IconData icon, Color color, {VoidCallback? onTap}) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: color),
-            const SizedBox(height: 12),
-            Text(value, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Text(title, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
-          ],
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: color),
+              const SizedBox(height: 12),
+              Text(value, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 4),
+              Text(title, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildRevenueCard() {
+    final revenueData = _data['revenue'] ?? {};
+    final todayRev = revenueData['today'] ?? 0;
+    
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: InkWell(
+        onTap: () => _showRevenueBreakdown(revenueData),
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.account_balance_wallet, size: 30, color: Color(0xFF10B981)),
+                  const SizedBox(width: 8),
+                  IconButton(
+                    icon: Icon(_hideRevenue ? Icons.visibility_off : Icons.visibility, color: Colors.grey, size: 20),
+                    onPressed: () => setState(() => _hideRevenue = !_hideRevenue),
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(_hideRevenue ? "₹****" : "₹$todayRev", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 4),
+              Text("Today's Revenue", textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showRevenueBreakdown(Map<String, dynamic> rev) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text("Revenue Breakdown", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+              const SizedBox(height: 24),
+              _buildBreakdownRow("Today", rev['today']),
+              const Divider(),
+              _buildBreakdownRow("This Week", rev['week']),
+              const Divider(),
+              _buildBreakdownRow("This Month", rev['month']),
+              const Divider(),
+              _buildBreakdownRow("This Year", rev['year']),
+              const Divider(),
+              _buildBreakdownRow("Total All-Time", rev['total']),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6366F1), foregroundColor: Colors.white),
+                onPressed: () => Navigator.pop(context), 
+                child: const Text("Close")
+              ),
+            ],
+          ),
+        );
+      }
+    );
+  }
+
+  Widget _buildBreakdownRow(String label, dynamic value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: const TextStyle(fontSize: 16)),
+          Text(_hideRevenue ? "₹****" : "₹${value ?? 0}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF10B981))),
+        ],
       ),
     );
   }
@@ -100,8 +193,16 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    _buildStatCard("Total Revenue", "₹${_data['total_revenue'] ?? 0}", Icons.account_balance_wallet, const Color(0xFF10B981)),
-                    _buildStatCard("Outstanding Dues", "₹${_data['total_outstanding'] ?? 0}", Icons.money_off, const Color(0xFFEF4444)),
+                    _buildRevenueCard(),
+                    _buildStatCard(
+                      "Outstanding Dues", 
+                      "₹${_data['total_outstanding'] ?? 0}", 
+                      Icons.money_off, 
+                      const Color(0xFFEF4444),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => const PendingDuesScreen()));
+                      }
+                    ),
                   ],
                 ),
 

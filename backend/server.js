@@ -383,7 +383,13 @@ app.get('/api/analytics', async (req, res) => {
     const [totalPatients] = await dbPool.query('SELECT COUNT(*) as count FROM patients WHERE admin_id = ?', [admin_id]);
     const [totalAppts] = await dbPool.query('SELECT COUNT(*) as count FROM appointments WHERE admin_id = ?', [admin_id]);
     
-    const [revenue] = await dbPool.query('SELECT SUM(paid_amount) as total_paid, SUM(balance_due) as total_due FROM payments WHERE admin_id = ?', [admin_id]);
+    const [dues] = await dbPool.query('SELECT SUM(balance_due) as total_due FROM payments WHERE admin_id = ?', [admin_id]);
+
+    const [revToday] = await dbPool.query('SELECT SUM(paid_amount) as r FROM payments WHERE admin_id = ? AND DATE(created_at) = CURDATE()', [admin_id]);
+    const [revWeek] = await dbPool.query('SELECT SUM(paid_amount) as r FROM payments WHERE admin_id = ? AND YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1)', [admin_id]);
+    const [revMonth] = await dbPool.query('SELECT SUM(paid_amount) as r FROM payments WHERE admin_id = ? AND MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())', [admin_id]);
+    const [revYear] = await dbPool.query('SELECT SUM(paid_amount) as r FROM payments WHERE admin_id = ? AND YEAR(created_at) = YEAR(CURDATE())', [admin_id]);
+    const [revTotal] = await dbPool.query('SELECT SUM(paid_amount) as r FROM payments WHERE admin_id = ?', [admin_id]);
 
     res.json({
       success: true,
@@ -392,13 +398,39 @@ app.get('/api/analytics', async (req, res) => {
         today_completed: todayCompleted[0].count,
         total_patients: totalPatients[0].count,
         total_appointments: totalAppts[0].count,
-        total_revenue: revenue[0].total_paid || 0,
-        total_outstanding: revenue[0].total_due || 0
+        total_outstanding: dues[0].total_due || 0,
+        revenue: {
+          today: revToday[0].r || 0,
+          week: revWeek[0].r || 0,
+          month: revMonth[0].r || 0,
+          year: revYear[0].r || 0,
+          total: revTotal[0].r || 0
+        }
       }
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: 'Failed to fetch analytics' });
+  }
+});
+
+app.get('/api/pending-dues', async (req, res) => {
+  try {
+    const admin_id = req.query.admin_id;
+    const query = `
+      SELECT p.id, p.patient_name, p.mobile_no, p.email, SUM(pay.balance_due) as total_due 
+      FROM patients p 
+      JOIN payments pay ON p.id = pay.patient_id 
+      WHERE p.admin_id = ? 
+      GROUP BY p.id 
+      HAVING total_due > 0
+      ORDER BY total_due DESC
+    `;
+    const [rows] = await dbPool.query(query, [admin_id]);
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to fetch pending dues' });
   }
 });
 

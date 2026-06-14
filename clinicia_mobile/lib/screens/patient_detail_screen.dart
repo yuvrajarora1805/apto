@@ -114,11 +114,12 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: _totalDue > 0 ? Colors.red.shade200 : Colors.green.shade200)),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text("Total Outstanding Dues:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                        Text("₹$_totalDue", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: _totalDue > 0 ? Colors.red : Colors.green)),
+                        const SizedBox(height: 8),
+                        Text("₹$_totalDue", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _totalDue > 0 ? Colors.red : Colors.green)),
                       ],
                     ),
                   ),

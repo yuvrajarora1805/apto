@@ -61,6 +61,11 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
+  static Future<Map<String, dynamic>> fetchPendingDues(int adminId) async {
+    final response = await http.get(Uri.parse('$baseUrl/pending-dues?admin_id=$adminId'));
+    return jsonDecode(response.body);
+  }
+
   static Future<Map<String, dynamic>> fetchDoctors(int adminId) async {
     final response = await http.get(Uri.parse('$baseUrl/doctors?admin_id=$adminId'));
     return jsonDecode(response.body);

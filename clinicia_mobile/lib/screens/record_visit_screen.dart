@@ -23,6 +23,30 @@ class _RecordVisitScreenState extends State<RecordVisitScreen> {
   String _paymentMethod = 'Cash';
 
   bool _isLoading = false;
+  double _outstandingBalance = 0.0;
+  bool _isLoadingBalance = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchBalance();
+  }
+
+  Future<void> _fetchBalance() async {
+    try {
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchPatientHistory(widget.appointment['patient_id'], adminId);
+      if (res['success'] == true && mounted) {
+        setState(() {
+          _outstandingBalance = double.tryParse(res['total_due'].toString()) ?? 0.0;
+          _isLoadingBalance = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) setState(() => _isLoadingBalance = false);
+    }
+  }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
@@ -77,6 +101,19 @@ class _RecordVisitScreenState extends State<RecordVisitScreen> {
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
+            if (!_isLoadingBalance && _outstandingBalance > 0)
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(color: Colors.red.shade50, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.red.shade200)),
+                child: Row(
+                  children: [
+                    const Icon(Icons.warning_amber_rounded, color: Colors.red),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text("Previous Outstanding Balance: ₹$_outstandingBalance", style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16))),
+                  ],
+                ),
+              ),
             const Text("Clinical Notes", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0ea5e9))),
             const SizedBox(height: 12),
             TextFormField(
