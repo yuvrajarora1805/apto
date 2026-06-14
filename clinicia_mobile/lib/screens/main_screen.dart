@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
 import 'patients_screen.dart';
+import 'settings_screen.dart';
 import '../services/auth_service.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const DashboardScreen(),
     const PatientsScreen(),
-    const Center(child: Text("Profile Settings", style: TextStyle(fontSize: 24))),
+    const SettingsScreen(),
   ];
 
   void _logout() async {
@@ -76,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       appBar: _currentIndex == 2 ? AppBar(
-        title: const Text('Profile'),
+        title: const Text('Settings'),
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [

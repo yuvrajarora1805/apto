@@ -26,6 +26,7 @@ async function initDB() {
         id INT AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(100),
         last_name VARCHAR(100),
+        mobile_no VARCHAR(20),
         email VARCHAR(100) UNIQUE,
         password VARCHAR(255),
         clinic_name VARCHAR(255),
@@ -34,6 +35,12 @@ async function initDB() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+
+    try {
+      await connection.query('ALTER TABLE doctors ADD COLUMN mobile_no VARCHAR(20)');
+    } catch (err) {
+      // Ignore if column already exists
+    }
 
     // Insert Default Admin
     await connection.query(`

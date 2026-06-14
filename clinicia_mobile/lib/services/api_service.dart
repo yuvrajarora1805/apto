@@ -38,6 +38,15 @@ class ApiService {
     return jsonDecode(response.body);
   }
 
+  static Future<Map<String, dynamic>> addDoctor(Map<String, dynamic> data) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/doctors'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+    return jsonDecode(response.body);
+  }
+
   static Future<Map<String, dynamic>> scheduleAppointment(Map<String, dynamic> data) async {
     final response = await http.post(
       Uri.parse('$baseUrl/appointments'),
