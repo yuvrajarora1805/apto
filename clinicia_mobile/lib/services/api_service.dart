@@ -183,8 +183,8 @@ class ApiService {
           body: jsonEncode(data),
         );
         final resData = jsonDecode(response.body);
-        if (resData['id'] != null) {
-          int realId = resData['id'];
+        int? realId = resData['insertId'] ?? resData['id'];
+        if (realId != null) {
           patientIdMap[tempId] = realId;
           await DatabaseHelper.instance.markPatientSynced(tempId, realId);
         }
@@ -214,8 +214,9 @@ class ApiService {
             body: jsonEncode(data),
           );
           final resData = jsonDecode(response.body);
-          if (resData['id'] != null) {
-            await DatabaseHelper.instance.markAppointmentSynced(tempId, resData['id']);
+          int? realId = resData['insertId'] ?? resData['id'];
+          if (realId != null) {
+            await DatabaseHelper.instance.markAppointmentSynced(tempId, realId);
           }
         } else {
           // It's a positive ID, so it was an existing appointment whose status was updated offline.
