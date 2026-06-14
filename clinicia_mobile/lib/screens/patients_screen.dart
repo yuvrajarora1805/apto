@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
+import '../services/auth_service.dart';
 import 'patient_detail_screen.dart';
 
 class PatientsScreen extends StatefulWidget {

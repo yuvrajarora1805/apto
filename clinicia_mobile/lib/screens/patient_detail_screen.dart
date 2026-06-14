@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
+import '../services/auth_service.dart';
 
 class PatientDetailScreen extends StatefulWidget {
   final Map<String, dynamic> patient;
@@ -22,8 +23,10 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   Future<void> _fetchPatientAppointments() async {
     try {
-      final res = await ApiService.fetchAppointments();
-      if (res['success'] == true) {
+      final session = await AuthService.getSession();
+      final adminId = session != null ? session['id'] : 1;
+      final res = await ApiService.fetchAppointments(adminId);
+      if (res['success'] == true && mounted) {
         final allAppointments = res['data'] as List<dynamic>;
         setState(() {
           _patientAppointments = allAppointments.where((app) => app['patient_id'] == widget.patient['id']).toList();
