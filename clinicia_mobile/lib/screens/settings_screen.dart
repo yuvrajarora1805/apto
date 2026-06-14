@@ -111,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          total > 0 ? "\$total items pending sync to cloud (\$pendingPats patients, \$pendingAppts appointments)" : "All data is completely synced with the cloud.",
+                          total > 0 ? "$total items pending sync to cloud ($pendingPats patients, $pendingAppts appointments)" : "All data is completely synced with the cloud.",
                           style: TextStyle(
                             color: total > 0 ? const Color(0xFFb45309) : const Color(0xFF15803d),
                             fontWeight: FontWeight.w500,
