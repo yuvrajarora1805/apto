@@ -17,10 +17,12 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   List<dynamic> _historyPayments = [];
   double _totalDue = 0.0;
   bool _isLoading = true;
+  late Map<String, dynamic> _currentPatient;
 
   @override
   void initState() {
     super.initState();
+    _currentPatient = Map<String, dynamic>.from(widget.patient);
     _fetchData();
   }
 
@@ -30,13 +32,13 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       final adminId = session != null ? session['id'] : 1;
       
       final resAppt = await ApiService.fetchAppointments(adminId);
-      final resHist = await ApiService.fetchPatientHistory(widget.patient['id'], adminId);
+      final resHist = await ApiService.fetchPatientHistory(_currentPatient['id'], adminId);
 
       if (mounted) {
         setState(() {
           if (resAppt['success'] == true) {
             final allAppointments = resAppt['data'] as List<dynamic>;
-            _patientAppointments = allAppointments.where((app) => app['patient_id'] == widget.patient['id']).toList();
+            _patientAppointments = allAppointments.where((app) => app['patient_id'] == _currentPatient['id']).toList();
             _patientAppointments.sort((a, b) {
               final dateA = DateTime.tryParse(a['appointment_date'].toString()) ?? DateTime(2000);
               final dateB = DateTime.tryParse(b['appointment_date'].toString()) ?? DateTime(2000);
@@ -59,14 +61,110 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
     }
   }
 
+  void _showEditPatientDialog() {
+    final nameCtrl = TextEditingController(text: _currentPatient['patient_name']?.toString() ?? '');
+    final phoneCtrl = TextEditingController(text: _currentPatient['mobile_no']?.toString() ?? '');
+    final emailCtrl = TextEditingController(text: _currentPatient['email']?.toString() ?? '');
+    final ageCtrl = TextEditingController(text: _currentPatient['age']?.toString() ?? '');
+    final addressCtrl = TextEditingController(text: _currentPatient['address']?.toString() ?? '');
+    String gender = ['Male', 'Female', 'Other'].contains(_currentPatient['gender']) ? _currentPatient['gender'] : 'Male';
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 24, right: 24, top: 24),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text("Edit Patient", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 16),
+                TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Patient Name *', border: OutlineInputBorder())),
+                const SizedBox(height: 12),
+                TextField(controller: phoneCtrl, keyboardType: TextInputType.phone, decoration: const InputDecoration(labelText: 'Mobile Number *', border: OutlineInputBorder())),
+                const SizedBox(height: 12),
+                TextField(controller: emailCtrl, keyboardType: TextInputType.emailAddress, decoration: const InputDecoration(labelText: 'Email', border: OutlineInputBorder())),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(child: TextField(controller: ageCtrl, keyboardType: TextInputType.number, decoration: const InputDecoration(labelText: 'Age', border: OutlineInputBorder()))),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: DropdownButtonFormField<String>(
+                        value: gender,
+                        decoration: const InputDecoration(labelText: 'Gender', border: OutlineInputBorder()),
+                        items: ['Male', 'Female', 'Other'].map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
+                        onChanged: (val) => gender = val!,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                TextField(controller: addressCtrl, decoration: const InputDecoration(labelText: 'Address', border: OutlineInputBorder())),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
+                  child: const Text('Save Changes', style: TextStyle(fontSize: 16)),
+                  onPressed: () async {
+                    if (nameCtrl.text.isEmpty || phoneCtrl.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Name and Mobile are required")));
+                      return;
+                    }
+                    Navigator.pop(context);
+                    setState(() => _isLoading = true);
+                    final res = await ApiService.updatePatient(_currentPatient['id'], {
+                      'patient_name': nameCtrl.text,
+                      'mobile_no': phoneCtrl.text,
+                      'email': emailCtrl.text,
+                      'age': ageCtrl.text.isNotEmpty ? int.parse(ageCtrl.text) : null,
+                      'gender': gender,
+                      'address': addressCtrl.text,
+                    });
+                    if (res['success'] == true) {
+                      setState(() {
+                        _currentPatient['patient_name'] = nameCtrl.text;
+                        _currentPatient['mobile_no'] = phoneCtrl.text;
+                        _currentPatient['email'] = emailCtrl.text;
+                        _currentPatient['age'] = ageCtrl.text.isNotEmpty ? int.parse(ageCtrl.text) : null;
+                        _currentPatient['gender'] = gender;
+                        _currentPatient['address'] = addressCtrl.text;
+                        _isLoading = false;
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Patient updated successfully")));
+                    } else {
+                      setState(() => _isLoading = false);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res['message'] ?? "Failed to update patient")));
+                    }
+                  },
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
-        title: Text(widget.patient['patient_name'] ?? 'Patient Details'),
+        title: Text(_currentPatient['patient_name'] ?? 'Patient Details'),
         backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: _showEditPatientDialog,
+          )
+        ],
       ),
       body: _isLoading 
         ? const Center(child: CircularProgressIndicator())
@@ -82,21 +180,21 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                       radius: 40,
                       backgroundColor: const Color(0xFFE0F2FE),
                       child: Text(
-                        widget.patient['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
+                        _currentPatient['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
                         style: const TextStyle(fontSize: 32, color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Text(widget.patient['patient_name'] ?? 'Unknown', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text(_currentPatient['patient_name'] ?? 'Unknown', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
-                    Text("Phone: ${widget.patient['mobile_no'] ?? 'N/A'}", style: const TextStyle(fontSize: 16, color: Colors.grey)),
-                    Text("Email: ${widget.patient['email'] ?? 'N/A'}", style: const TextStyle(fontSize: 16, color: Colors.grey)),
+                    Text("Phone: ${_currentPatient['mobile_no'] ?? 'N/A'}", style: const TextStyle(fontSize: 16, color: Colors.grey)),
+                    Text("Email: ${_currentPatient['email'] ?? 'N/A'}", style: const TextStyle(fontSize: 16, color: Colors.grey)),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildStatCard("Age", widget.patient['age']?.toString() ?? '-'),
-                        _buildStatCard("Gender", widget.patient['gender']?.toString() ?? '-'),
+                        _buildStatCard("Age", _currentPatient['age']?.toString() ?? '-'),
+                        _buildStatCard("Gender", _currentPatient['gender']?.toString() ?? '-'),
                       ],
                     ),
                   ],

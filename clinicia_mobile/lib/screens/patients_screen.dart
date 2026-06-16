@@ -46,6 +46,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
       if (res['success'] == true) {
         setState(() {
           _patients = res['data'];
+          _filteredPatients = _patients;
           _isLoading = false;
         });
       }
@@ -133,78 +134,130 @@ class _PatientsScreenState extends State<PatientsScreen> {
     );
   }
 
+  void _onSearchChanged(String query) {
+    setState(() {
+      _searchQuery = query;
+      if (query.isEmpty) {
+        _filteredPatients = _patients;
+      } else {
+        _filteredPatients = _patients.where((p) {
+          final name = (p['patient_name'] ?? '').toString().toLowerCase();
+          final phone = (p['mobile_no'] ?? '').toString().toLowerCase();
+          final searchLower = query.toLowerCase();
+          return name.contains(searchLower) || phone.contains(searchLower);
+        }).toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
         title: const Text('Patient Directory'),
         backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,
+        elevation: 0,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _patients.isEmpty
-              ? const Center(child: Text('No patients found.'))
-              : ListView.separated(
-                  itemCount: _patients.length,
-                  separatorBuilder: (context, index) => const Divider(height: 1),
-                  itemBuilder: (context, index) {
-                    final p = _patients[index];
-                    return ListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      leading: CircleAvatar(
-                        backgroundColor: const Color(0xFFE0F2FE),
-                        child: Text(
-                          p['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
-                          style: const TextStyle(color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold),
-                        ),
+          : Column(
+              children: [
+                Container(
+                  color: const Color(0xFF0ea5e9),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: TextField(
+                    onChanged: _onSearchChanged,
+                    decoration: InputDecoration(
+                      hintText: 'Search by name or phone...',
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
                       ),
-                      title: Text(p['patient_name'] ?? 'Unknown', style: const TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text("Phone: ${p['mobile_no'] ?? 'N/A'}\nAge: ${p['age'] ?? '-'} | Gender: ${p['gender'] ?? '-'}"),
-                      isThreeLine: true,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (p['mobile_no'] != null && p['mobile_no'].toString().isNotEmpty) ...[
-                            IconButton(
-                              icon: const Icon(Icons.call, color: Colors.green),
-                              onPressed: () async {
-                                final url = Uri.parse("tel:${p['mobile_no']}");
-                                if (await canLaunchUrl(url)) await launchUrl(url);
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
-                              onPressed: () async {
-                                String phone = p['mobile_no'].toString();
-                                if (!phone.startsWith('+')) phone = "+91$phone";
-                                final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone");
-                                if (await canLaunchUrl(url)) {
-                                  await launchUrl(url, mode: LaunchMode.externalApplication);
-                                }
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.calendar_month, color: Color(0xFF0ea5e9)),
-                              onPressed: () {
-                                _showBookAppointmentDialog(p);
-                              },
-                            ),
-                          ],
-                          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-                        ]
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PatientDetailScreen(patient: p),
-                          ),
-                        );
-                      },
-                    );
-                  },
+                    ),
+                  ),
                 ),
+                Expanded(
+                  child: _filteredPatients.isEmpty
+                      ? const Center(child: Text('No patients found.'))
+                      : ListView.builder(
+                          padding: const EdgeInsets.only(top: 8, bottom: 80),
+                          itemCount: _filteredPatients.length,
+                          itemBuilder: (context, index) {
+                            final p = _filteredPatients[index];
+                            return Card(
+                              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFFE2E8F0))),
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                leading: CircleAvatar(
+                                  radius: 24,
+                                  backgroundColor: const Color(0xFFE0F2FE),
+                                  child: Text(
+                                    p['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
+                                    style: const TextStyle(color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold, fontSize: 20),
+                                  ),
+                                ),
+                                title: Text(p['patient_name'] ?? 'Unknown', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text("Phone: ${p['mobile_no'] ?? 'N/A'}\nAge: ${p['age'] ?? '-'} | Gender: ${p['gender'] ?? '-'}"),
+                                ),
+                                isThreeLine: true,
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (p['mobile_no'] != null && p['mobile_no'].toString().isNotEmpty) ...[
+                                      IconButton(
+                                        icon: const Icon(Icons.call, color: Colors.green),
+                                        onPressed: () async {
+                                          final url = Uri.parse("tel:${p['mobile_no']}");
+                                          if (await canLaunchUrl(url)) await launchUrl(url);
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
+                                        onPressed: () async {
+                                          String phone = p['mobile_no'].toString();
+                                          if (!phone.startsWith('+')) phone = "+91$phone";
+                                          final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone");
+                                          if (await canLaunchUrl(url)) {
+                                            await launchUrl(url, mode: LaunchMode.externalApplication);
+                                          }
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.calendar_month, color: Color(0xFF0ea5e9)),
+                                        onPressed: () {
+                                          _showBookAppointmentDialog(p);
+                                        },
+                                      ),
+                                    ],
+                                    const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+                                  ]
+                                ),
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PatientDetailScreen(patient: p),
+                                    ),
+                                  );
+                                  _fetchPatients(); // Refresh if updated
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF0ea5e9),
         foregroundColor: Colors.white,

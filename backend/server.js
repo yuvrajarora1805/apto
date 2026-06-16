@@ -170,6 +170,21 @@ app.get('/api/patients', async (req, res) => {
   }
 });
 
+app.put('/api/patients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { patient_name, mobile_no, email, age, gender, address } = req.body;
+    await dbPool.query(
+      'UPDATE patients SET patient_name = ?, mobile_no = ?, email = ?, age = ?, gender = ?, address = ? WHERE id = ?',
+      [patient_name, mobile_no, email, age, gender, address, id]
+    );
+    res.json({ success: true, message: 'Patient updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to update patient' });
+  }
+});
+
 app.post('/api/appointments', async (req, res) => {
   try {
     const { admin_id, patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose, whatsapp_chk } = req.body;

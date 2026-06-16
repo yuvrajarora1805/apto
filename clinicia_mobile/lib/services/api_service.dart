@@ -142,6 +142,26 @@ class ApiService {
     };
   }
 
+  static Future<Map<String, dynamic>> updatePatient(int id, Map<String, dynamic> data) async {
+    bool online = await isConnected();
+    if (online) {
+      try {
+        final response = await http.put(
+          Uri.parse('$baseUrl/patients/$id'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(data),
+        );
+        final res = jsonDecode(response.body);
+        return res;
+      } catch (e) {
+        print("Update patient failed: $e");
+        return {'success': false, 'message': 'Failed to update online'};
+      }
+    }
+    // Simple offline stub (we won't add full offline update sync logic for brevity, just failing if offline)
+    return {'success': false, 'message': 'You are offline, cannot update patient.'};
+  }
+
   static Future<Map<String, dynamic>> updateAppointmentStatus(int id, String status) async {
     bool online = await isConnected();
     if (id < 0 || !online) {
