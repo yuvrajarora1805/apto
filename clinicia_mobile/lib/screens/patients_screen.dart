@@ -194,54 +194,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                               elevation: 0,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFFE2E8F0))),
-                              child: ListTile(
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                leading: CircleAvatar(
-                                  radius: 24,
-                                  backgroundColor: const Color(0xFFE0F2FE),
-                                  child: Text(
-                                    p['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
-                                    style: const TextStyle(color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold, fontSize: 20),
-                                  ),
-                                ),
-                                title: Text(p['patient_name'] ?? 'Unknown', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                                subtitle: Padding(
-                                  padding: const EdgeInsets.only(top: 4.0),
-                                  child: Text("Phone: ${p['mobile_no'] ?? 'N/A'}\nAge: ${p['age'] ?? '-'} | Gender: ${p['gender'] ?? '-'}"),
-                                ),
-                                isThreeLine: true,
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (p['mobile_no'] != null && p['mobile_no'].toString().isNotEmpty) ...[
-                                      IconButton(
-                                        icon: const Icon(Icons.call, color: Colors.green),
-                                        onPressed: () async {
-                                          final url = Uri.parse("tel:${p['mobile_no']}");
-                                          if (await canLaunchUrl(url)) await launchUrl(url);
-                                        },
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
-                                        onPressed: () async {
-                                          String phone = p['mobile_no'].toString();
-                                          if (!phone.startsWith('+')) phone = "+91$phone";
-                                          final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone");
-                                          if (await canLaunchUrl(url)) {
-                                            await launchUrl(url, mode: LaunchMode.externalApplication);
-                                          }
-                                        },
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.calendar_month, color: Color(0xFF0ea5e9)),
-                                        onPressed: () {
-                                          _showBookAppointmentDialog(p);
-                                        },
-                                      ),
-                                    ],
-                                    const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
-                                  ]
-                                ),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(12),
                                 onTap: () async {
                                   await Navigator.push(
                                     context,
@@ -251,6 +205,82 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                   );
                                   _fetchPatients(); // Refresh if updated
                                 },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 24,
+                                        backgroundColor: const Color(0xFFE0F2FE),
+                                        child: Text(
+                                          p['patient_name']?.substring(0, 1).toUpperCase() ?? '?',
+                                          style: const TextStyle(color: Color(0xFF0ea5e9), fontWeight: FontWeight.bold, fontSize: 20),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    p['patient_name'] ?? 'Unknown',
+                                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 12),
+                                            if (p['mobile_no'] != null && p['mobile_no'].toString().isNotEmpty)
+                                              Row(
+                                                children: [
+                                                  IconButton(
+                                                    padding: EdgeInsets.zero,
+                                                    constraints: const BoxConstraints(),
+                                                    icon: const Icon(Icons.call, color: Colors.green),
+                                                    onPressed: () async {
+                                                      final url = Uri.parse("tel:${p['mobile_no']}");
+                                                      if (await canLaunchUrl(url)) await launchUrl(url);
+                                                    },
+                                                  ),
+                                                  const SizedBox(width: 24),
+                                                  IconButton(
+                                                    padding: EdgeInsets.zero,
+                                                    constraints: const BoxConstraints(),
+                                                    icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
+                                                    onPressed: () async {
+                                                      String phone = p['mobile_no'].toString();
+                                                      if (!phone.startsWith('+')) phone = "+91$phone";
+                                                      final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone");
+                                                      if (await canLaunchUrl(url)) {
+                                                        await launchUrl(url, mode: LaunchMode.externalApplication);
+                                                      }
+                                                    },
+                                                  ),
+                                                  const SizedBox(width: 24),
+                                                  IconButton(
+                                                    padding: EdgeInsets.zero,
+                                                    constraints: const BoxConstraints(),
+                                                    icon: const Icon(Icons.calendar_month, color: Color(0xFF0ea5e9)),
+                                                    onPressed: () {
+                                                      _showBookAppointmentDialog(p);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             );
                           },
@@ -353,6 +383,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0ea5e9), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
                       child: const Text('Schedule', style: TextStyle(fontSize: 16)),
                       onPressed: () async {
+                        final scaffoldMessenger = ScaffoldMessenger.of(context);
                         Navigator.pop(context);
                         
                         final dateStr = "${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}";
@@ -375,7 +406,17 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           'whatsapp_chk': whatsappChk,
                         });
                         
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res['message'] ?? 'Appointment Booked!')));
+                        scaffoldMessenger.showSnackBar(SnackBar(content: Text(res['message'] ?? 'Appointment Booked!')));
+
+                        if (whatsappChk && res['whatsapp_message'] != null) {
+                          String phone = res['mobile_no']?.toString() ?? patient['mobile_no'].toString();
+                          if (!phone.startsWith('+')) phone = "${res['dial_code'] ?? '91'}$phone";
+                          phone = phone.replaceAll('+', '').replaceAll(' ', '');
+                          final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url, mode: LaunchMode.externalApplication);
+                          }
+                        }
                       },
                     ),
                     const SizedBox(height: 24),

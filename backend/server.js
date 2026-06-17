@@ -161,7 +161,7 @@ app.get('/api/patients', async (req, res) => {
       query += ' WHERE admin_id = ?';
       params.push(admin_id);
     }
-    query += ' ORDER BY created_at DESC';
+    query += ' ORDER BY patient_name ASC';
     const [rows] = await dbPool.query(query, params);
     res.json({ success: true, data: rows });
   } catch (err) {

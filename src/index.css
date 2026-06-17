@@ -157,51 +157,247 @@ body {
   }
   
   .sidebar {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    overflow-x: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .sidebar > div:first-child { /* Hide header on mobile */
-    display: none; 
-  }
-  
-  .sidebar > div:nth-child(2) {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0 !important;
-  }
-  
-  .nav-item {
-    padding: 0.75rem 1rem;
-    white-space: nowrap;
-    border-left: none;
-    border-bottom: 3px solid transparent;
-  }
-  
-  .nav-item.active {
-    border-left-color: transparent;
-    border-bottom-color: var(--primary);
-  }
-  
-  .sidebar > div:last-child {
-    display: none; /* Hide bottom logout on mobile nav, or move it */
+    display: none !important; /* Hide sidebar completely on mobile */
   }
   
   .page-content {
     padding: 1rem;
+    padding-top: 70px; /* Space for Mobile AppBar */
+    padding-bottom: 80px; /* Space for Bottom Nav */
+    height: 100vh;
+    overflow-y: auto;
   }
   
+  .page-header {
+    display: none; /* Hide desktop header on mobile */
+  }
+
   .card {
     padding: 1rem;
     margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 100%;
   }
   
   .form-row {
     flex-direction: column;
     gap: 0;
+  }
+}
+
+/* Mobile App Bar */
+.mobile-app-bar {
+  display: none;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-app-bar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: var(--surface);
+    border-top: 1px solid var(--border-color);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    gap: 4px;
+    flex: 1;
+    height: 100%;
+  }
+
+  .bottom-nav-item.active {
+    color: var(--primary);
+  }
+
+  /* React Big Calendar Mobile Fixes */
+  .rbc-toolbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center !important;
+  }
+  
+  .rbc-toolbar-label {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  
+  .rbc-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ListTile Layouts (Mimicking Mobile App) */
+  .list-tile {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .list-tile-leading {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .list-tile-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0; /* allows truncation */
+  }
+
+  .list-tile-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.2rem;
+  }
+
+  .list-tile-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .list-tile-trailing {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* Floating Action Button (FAB) */
+  .fab {
+    position: fixed;
+    bottom: 80px; /* Above BottomNav */
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+  }
+
+  /* Responsive Table to Cards */
+  .responsive-table table, 
+  .responsive-table thead, 
+  .responsive-table tbody, 
+  .responsive-table th, 
+  .responsive-table td, 
+  .responsive-table tr {
+    display: block;
+  }
+  
+  .responsive-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .responsive-table tr {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .responsive-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50% !important;
+    text-align: right !important;
+  }
+  
+  .responsive-table td:before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-muted);
+    content: attr(data-label);
+  }
+
+  .responsive-table td:last-child {
+    border-bottom: 0;
+  }
+
+  /* Make header and action containers wrap */
+  .page-header-actions {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
   }
 }

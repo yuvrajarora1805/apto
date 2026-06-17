@@ -158,8 +158,9 @@ class ApiService {
         return {'success': false, 'message': 'Failed to update online'};
       }
     }
-    // Simple offline stub (we won't add full offline update sync logic for brevity, just failing if offline)
-    return {'success': false, 'message': 'You are offline, cannot update patient.'};
+    // Offline fallback
+    await DatabaseHelper.instance.updateOfflinePatient(id, data);
+    return {'success': true, 'message': 'Saved offline. Will sync when connected.'};
   }
 
   static Future<Map<String, dynamic>> updateAppointmentStatus(int id, String status) async {
@@ -201,16 +202,30 @@ class ApiService {
         data.remove('sync_status');
         data['admin_id'] = currentAdminId;
 
-        final response = await http.post(
-          Uri.parse('$baseUrl/patients'),
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode(data),
-        );
-        final resData = jsonDecode(response.body);
-        int? realId = resData['insertId'] ?? resData['id'];
-        if (realId != null) {
-          patientIdMap[tempId] = realId;
-          await DatabaseHelper.instance.markPatientSynced(tempId, realId);
+        if (tempId < 0) {
+          // POST (Create)
+          final response = await http.post(
+            Uri.parse('$baseUrl/patients'),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode(data),
+          );
+          final resData = jsonDecode(response.body);
+          int? realId = resData['insertId'] ?? resData['id'];
+          if (realId != null) {
+            patientIdMap[tempId] = realId;
+            await DatabaseHelper.instance.markPatientSynced(tempId, realId);
+          }
+        } else {
+          // PUT (Update)
+          final response = await http.put(
+            Uri.parse('$baseUrl/patients/$tempId'),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode(data),
+          );
+          final resData = jsonDecode(response.body);
+          if (resData['success'] == true) {
+            await DatabaseHelper.instance.markPatientSynced(tempId, tempId);
+          }
         }
       } catch (e) {
         print("Failed to sync patient: $e");

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import MobileScheduleView from '../components/MobileScheduleView';
 
 const localizer = momentLocalizer(moment);
 
@@ -12,6 +13,8 @@ const AppointmentBook = ({ user }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [patientSearchQuery, setPatientSearchQuery] = useState('');
 
   const [formData, setFormData] = useState({
     patient_id: '',
@@ -26,6 +29,10 @@ const AppointmentBook = ({ user }) => {
   useEffect(() => {
     fetchAppointments();
     fetchPatients();
+    
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const fetchAppointments = async () => {
@@ -158,29 +165,38 @@ const AppointmentBook = ({ user }) => {
   };
 
   return (
-    <div style={{ height: 'calc(100vh - 100px)', padding: '1rem', background: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-      <h2 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Appointments Calendar</h2>
+    <div style={{ height: 'calc(100vh - 100px)', padding: isMobile ? 0 : '1rem', background: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+      {!isMobile && <h2 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Appointments Calendar</h2>}
       
-      <div style={{ height: '85%', overflowX: 'auto' }}>
-        <div style={{ minWidth: '700px', height: '100%' }}>
-          <Calendar
-            localizer={localizer}
-            events={appointments}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: '100%' }}
-            selectable
-            onSelectSlot={handleSelectSlot}
-            onSelectEvent={handleSelectEvent}
-            defaultView="week"
+      <div style={{ height: '85%' }}>
+        {isMobile ? (
+          <MobileScheduleView 
+            appointments={appointments}
+            onAddClick={() => setShowModal(true)}
+            onEventClick={handleSelectEvent}
           />
-        </div>
+        ) : (
+          <div style={{ height: '100%' }}>
+            <Calendar
+              localizer={localizer}
+              events={appointments}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: '100%' }}
+              selectable
+              onSelectSlot={handleSelectSlot}
+              onSelectEvent={handleSelectEvent}
+              defaultView="week"
+              views={['month', 'week', 'day', 'agenda']}
+            />
+          </div>
+        )}
       </div>
 
       {/* Edit Appointment Modal */}
       {showEditModal && selectedEvent && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div className="card" style={{ width: '400px', margin: 0 }}>
+          <div className="card" style={{ width: '100%', maxWidth: '400px', margin: 0 }}>
             <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>Edit Appointment</h3>
             
             <form onSubmit={handleEditSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -221,19 +237,56 @@ const AppointmentBook = ({ user }) => {
       {/* Schedule Appointment Modal */}
       {showModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div className="card" style={{ width: '500px', margin: 0 }}>
+          <div className="card" style={{ width: '100%', maxWidth: '500px', margin: 0 }}>
             <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>Schedule Appointment</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               
               <div className="form-group">
-                <label>Patient *</label>
-                <select className="form-control" name="patient_id" value={formData.patient_id} onChange={handleChange} required>
-                  <option value="">-- Select Patient --</option>
-                  {patients.map(p => (
-                    <option key={p.id} value={p.id}>{p.patient_name} ({p.mobile_no})</option>
-                  ))}
-                </select>
+                <label>Search Patient *</label>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search by name or phone..."
+                    value={patientSearchQuery}
+                    onChange={(e) => setPatientSearchQuery(e.target.value)}
+                  />
+                  {formData.patient_id && (
+                    <div style={{ marginTop: '0.5rem', color: '#16a34a', fontWeight: 'bold' }}>
+                      Selected: {patients.find(p => p.id === parseInt(formData.patient_id))?.patient_name}
+                    </div>
+                  )}
+                  <div style={{ maxHeight: '150px', overflowY: 'auto', border: '1px solid #e2e8f0', borderRadius: '4px', marginTop: '0.5rem' }}>
+                    {patients
+                      .filter(p => {
+                        const q = patientSearchQuery.toLowerCase();
+                        if (!q) return true;
+                        const name = (p.patient_name || '').toLowerCase();
+                        const phone = (p.mobile_no || '').toLowerCase();
+                        return name.includes(q) || phone.includes(q);
+                      })
+                      .slice(0, 50)
+                      .map(p => (
+                        <div
+                          key={p.id}
+                          onClick={() => setFormData({ ...formData, patient_id: p.id })}
+                          style={{
+                            padding: '0.5rem',
+                            borderBottom: '1px solid #f1f5f9',
+                            cursor: 'pointer',
+                            background: parseInt(formData.patient_id) === p.id ? '#f0fdf4' : 'white',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                          }}
+                        >
+                          <span>{p.patient_name} ({p.mobile_no})</span>
+                          {parseInt(formData.patient_id) === p.id && <span style={{ color: '#16a34a' }}>✓</span>}
+                        </div>
+                      ))}
+                  </div>
+                </div>
               </div>
 
               <div style={{ display: 'flex', gap: '1rem' }}>

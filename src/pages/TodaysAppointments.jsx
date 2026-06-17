@@ -1,134 +1,151 @@
 import React, { useState, useEffect } from 'react';
+import { Search, CheckCircle } from 'lucide-react';
 import moment from 'moment';
 
-const TodaysAppointments = ({ user }) => {
+const TodaysAppointments = () => {
   const [appointments, setAppointments] = useState([]);
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchAppointments();
+    fetchHistory();
   }, []);
 
-  const fetchAppointments = async () => {
+  const fetchHistory = async () => {
     try {
-      const res = await fetch(`/api/appointments?admin_id=${user.id}`);
+      const res = await fetch('/api/appointments?admin_id=1');
       const json = await res.json();
       if(json.success) {
-        // Filter for ONLY today's appointments
-        const todayStr = moment().format('YYYY-MM-DD');
-        const todaysList = json.data.filter(app => {
-          const appDate = moment(app.appointment_date).format('YYYY-MM-DD');
-          return appDate === todayStr;
-        });
-        setAppointments(todaysList);
+        // Only show completed for History
+        const completed = json.data.filter(app => app.status === 'Completed');
+        setAppointments(completed);
       }
     } catch(err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const updateStatus = async (id, newStatus) => {
-    try {
-      const res = await fetch(`/api/appointments/${id}/status`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          status: newStatus, 
-          whatsapp_chk: false // Assuming no automated message from quick actions to keep it fast
-        })
-      });
-      const data = await res.json();
-      if(data.success) {
-        fetchAppointments(); // Refresh the list
-      } else {
-        alert("Error updating status");
-      }
-    } catch (err) {
-      alert("Failed to connect to backend server.");
+  const filteredApps = appointments.filter(app => {
+    const matchText = app.patient_name?.toLowerCase().includes(searchQuery.toLowerCase());
+    let matchDate = true;
+    if (selectedDate && app.appointment_date) {
+      const appDateStr = app.appointment_date.split('T')[0];
+      matchDate = appDateStr === selectedDate;
     }
-  };
-
-  // Apply "Show Completed" filter
-  const displayedAppointments = showCompleted 
-    ? appointments 
-    : appointments.filter(app => app.status !== 'Completed');
+    return matchText && matchDate;
+  });
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <div>
-          <h2 style={{ color: 'var(--primary)', margin: 0 }}>Today's Appointments</h2>
-          <div style={{ color: 'var(--text-muted)', marginTop: '0.2rem' }}>{moment().format('dddd, MMMM Do YYYY')}</div>
+    <div style={{ padding: '0', background: '#f8fafc', minHeight: 'calc(100vh - 100px)' }}>
+      
+      <div style={{ padding: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '12px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            padding: '0.5rem 1rem',
+            border: '1px solid #e2e8f0',
+            flex: 1
+          }}>
+            <Search size={20} color="var(--text-muted)" style={{ marginRight: '0.5rem' }} />
+            <input 
+              type="text" 
+              placeholder="Search patient name..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ border: 'none', outline: 'none', width: '100%', fontSize: '1rem' }}
+            />
+          </div>
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '12px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            padding: '0.5rem',
+            border: '1px solid #e2e8f0'
+          }}>
+            <input 
+              type="date" 
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '1rem', color: 'var(--text-main)' }}
+            />
+          </div>
         </div>
         
-        <label className="checkbox-label" style={{ fontWeight: 600, background: 'white', padding: '0.5rem 1rem', borderRadius: '4px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
-          <input 
-            type="checkbox" 
-            checked={showCompleted} 
-            onChange={(e) => setShowCompleted(e.target.checked)} 
-          /> 
-          Show Completed
-        </label>
+        {selectedDate && (
+          <div style={{ marginBottom: '1rem', fontWeight: 'bold', color: '#10B981' }}>
+            Showing results for: {selectedDate}
+            <button 
+              onClick={() => setSelectedDate('')}
+              style={{ marginLeft: '1rem', padding: '0.2rem 0.5rem', fontSize: '0.8rem', background: '#e2e8f0', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+              Clear
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="card" style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid #eee' }}>
-              <th style={{ padding: '1rem' }}>Time</th>
-              <th style={{ padding: '1rem' }}>Patient Name</th>
-              <th style={{ padding: '1rem' }}>Purpose</th>
-              <th style={{ padding: '1rem' }}>Status</th>
-              <th style={{ padding: '1rem', textAlign: 'right' }}>Quick Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayedAppointments.length === 0 && (
-              <tr><td colSpan="5" style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>No appointments to show for today.</td></tr>
-            )}
-            {displayedAppointments.map(app => (
-              <tr key={app.id} style={{ borderBottom: '1px solid #eee', background: app.status === 'Completed' ? '#f8fafc' : 'white' }}>
-                <td style={{ padding: '1rem', fontWeight: 600 }}>{app.start_time} - {app.end_time}</td>
-                <td style={{ padding: '1rem' }}>{app.patient_name} <br/><span style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>{app.mobile_no}</span></td>
-                <td style={{ padding: '1rem' }}>{app.purpose || '-'}</td>
-                <td style={{ padding: '1rem' }}>
-                  <span style={{ 
-                    padding: '0.25rem 0.75rem', 
-                    borderRadius: '999px', 
-                    fontSize: '0.85rem',
-                    background: app.status === 'Completed' ? '#dcfce7' : 
-                                app.status === 'Arrived' ? '#dbeafe' : 
-                                app.status === 'Missed' ? '#fee2e2' : '#fef3c7',
-                    color: app.status === 'Completed' ? '#16a34a' : 
-                           app.status === 'Arrived' ? '#2563eb' : 
-                           app.status === 'Missed' ? '#dc2626' : '#d97706'
+      <div style={{ padding: '0 1rem', paddingBottom: '80px' }}>
+        {isLoading ? (
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading history...</div>
+        ) : filteredApps.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No completed appointments found.</div>
+        ) : (
+          <div>
+            {filteredApps.map(app => {
+              const dateStr = moment(app.appointment_date).format('YYYY-MM-DD');
+              const timeStr = app.start_time; // Using start_time string from backend
+
+              return (
+                <div 
+                  key={app.id} 
+                  style={{ 
+                    background: 'white', 
+                    borderRadius: '12px', 
+                    marginBottom: '12px', 
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                    display: 'flex',
+                    padding: '1rem',
+                    alignItems: 'center'
+                  }}
+                >
+                  <div style={{ 
+                    width: '45px', 
+                    height: '45px', 
+                    borderRadius: '50%', 
+                    background: '#d1fae5', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    marginRight: '1rem',
+                    flexShrink: 0
                   }}>
-                    {app.status}
-                  </span>
-                </td>
-                <td style={{ padding: '1rem', textAlign: 'right' }}>
-                  {app.status !== 'Completed' && (
-                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-                      <a href={`tel:${app.mobile_no}`} className="btn" style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem', background: '#e2e8f0', color: '#0f172a', textDecoration: 'none' }}>Call</a>
-                      <a 
-                        href={`https://api.whatsapp.com/send?phone=${app.mobile_no?.toString().startsWith('+') ? app.mobile_no.toString().replace(/\s+/g, '') : '+91' + app.mobile_no?.toString().replace(/\s+/g, '')}`} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="btn" 
-                        style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem', background: '#25D366', color: 'white', textDecoration: 'none' }}>
-                        WhatsApp
-                      </a>
-                      {app.status !== 'Arrived' && (
-                        <button className="btn btn-primary" style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }} onClick={() => updateStatus(app.id, 'Arrived')}>Mark Arrived</button>
-                      )}
-                      <button className="btn" style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem', background: '#16a34a', color: 'white' }} onClick={() => updateStatus(app.id, 'Completed')}>Complete</button>
+                    <CheckCircle size={24} color="#10B981" />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontWeight: 'bold', color: 'var(--text-main)', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {app.patient_name || 'Unknown'}
                     </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+                      Date: {dateStr} at {timeStr}
+                    </div>
+                    {app.purpose && (
+                      <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                        Purpose: {app.purpose}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

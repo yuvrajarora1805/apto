@@ -109,8 +109,8 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getPatients() async {
     final db = await instance.database;
-    // Order by sync_status ASC so offline patients (0) appear at the top, then id DESC
-    return await db.query('patients', orderBy: 'sync_status ASC, id DESC');
+    // Order by sync_status ASC so offline patients (0) appear at the top, then name ASC
+    return await db.query('patients', orderBy: 'sync_status ASC, patient_name ASC');
   }
 
   Future<List<Map<String, dynamic>>> getUnsyncedPatients() async {
@@ -135,6 +135,24 @@ class DatabaseHelper {
     
     await db.insert('patients', patient);
     return tempId;
+  }
+
+  Future<void> updateOfflinePatient(int id, Map<String, dynamic> data) async {
+    final db = await instance.database;
+    // Set sync_status to 0 so the sync loop will pick it up
+    await db.update(
+      'patients',
+      {
+        'patient_name': data['patient_name'],
+        'mobile_no': data['mobile_no'],
+        'age': data['age'],
+        'gender': data['gender'],
+        'address': data['address'],
+        'sync_status': 0,
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
   Future<void> markPatientSynced(int tempId, int realId) async {

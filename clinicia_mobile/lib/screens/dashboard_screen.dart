@@ -82,6 +82,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 30);
     final purposeCtrl = TextEditingController();
     bool whatsappChk = true;
+    String patientSearchQuery = '';
 
     showModalBottomSheet(
       context: context,
@@ -100,14 +101,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     const Text("Book Appointment", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
-                    DropdownButtonFormField<int>(
-                      decoration: const InputDecoration(labelText: 'Select Patient *', border: OutlineInputBorder()),
-                      value: selectedPatientId,
-                      items: _patients.map((p) => DropdownMenuItem<int>(
-                        value: p['id'],
-                        child: Text("${p['patient_name']} (${p['mobile_no']})"),
-                      )).toList(),
-                      onChanged: (val) => setModalState(() => selectedPatientId = val),
+                    TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'Search Patient by Name or Phone',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.search),
+                        isDense: true,
+                      ),
+                      onChanged: (val) => setModalState(() => patientSearchQuery = val),
+                    ),
+                    if (selectedPatientId != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                        child: Text(
+                          "Selected: ${_patients.firstWhere((p) => p['id'] == selectedPatientId, orElse: () => {'patient_name': 'Unknown'})['patient_name']}",
+                          style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
+                    const SizedBox(height: 4),
+                    Container(
+                      height: 160,
+                      decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade400), borderRadius: BorderRadius.circular(4)),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: _patients.where((p) {
+                          final q = patientSearchQuery.toLowerCase();
+                          if (q.isEmpty) return true;
+                          final n = (p['patient_name'] ?? '').toLowerCase();
+                          final ph = (p['mobile_no'] ?? '').toString();
+                          return n.contains(q) || ph.contains(q);
+                        }).take(50).map((p) => ListTile(
+                          dense: true,
+                          title: Text("${p['patient_name']} (${p['mobile_no']})"),
+                          trailing: selectedPatientId == p['id'] ? const Icon(Icons.check_circle, color: Colors.green) : null,
+                          onTap: () => setModalState(() {
+                            selectedPatientId = p['id'];
+                            FocusScope.of(context).unfocus();
+                          }),
+                        )).toList(),
+                      ),
                     ),
                     const SizedBox(height: 12),
                     DropdownButtonFormField<int>(
