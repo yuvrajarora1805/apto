@@ -5,7 +5,7 @@ import 'database_helper.dart';
 import 'auth_service.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://apto.voreva.in/api';
+  static const String baseUrl = 'http://localhost:3001/api';
 
   static Future<bool> isConnected() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
