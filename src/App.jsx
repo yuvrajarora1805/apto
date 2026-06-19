@@ -92,7 +92,7 @@ function AppContent({ auth, setAuth }) {
           <Route path="/appointments" element={<AppointmentBook user={auth} />} />
           <Route path="/todays-appointments" element={<TodaysAppointments user={auth} />} />
           <Route path="/history" element={<TodaysAppointments user={auth} />} />
-          <Route path="/patients" element={<PatientDashboard />} />
+          <Route path="/patients" element={<PatientDashboard user={auth} />} />
           <Route path="/analytics" element={<FinancialDashboard />} />
           <Route path="/profile" element={<Profile user={auth} />} />
           

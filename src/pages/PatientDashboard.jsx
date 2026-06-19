@@ -1,10 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus } from 'lucide-react';
+import { Plus, Search, Phone, MessageCircle, Calendar, User } from 'lucide-react';
+
+const avatarColors = [
+  { bg: '#e0f2fe', text: '#0284c7' }, // Blue
+  { bg: '#d1fae5', text: '#059669' }, // Emerald
+  { bg: '#ede9fe', text: '#7c3aed' }, // Violet
+  { bg: '#fef3c7', text: '#d97706' }, // Amber
+  { bg: '#ffe4e6', text: '#e11d48' }, // Rose
+  { bg: '#e0e7ff', text: '#4f46e5' }, // Indigo
+];
+
+const getAvatarColor = (name) => {
+  if (!name) return avatarColors[0];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % avatarColors.length;
+  return avatarColors[index];
+};
 
 const PatientDashboard = ({ user }) => {
   const [patients, setPatients] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
   
   // Booking modal state
   const [showModal, setShowModal] = useState(false);
@@ -86,93 +106,166 @@ const PatientDashboard = ({ user }) => {
     }
   };
 
+  // Filter patients in real-time based on search input
+  const filteredPatients = patients.filter(patient => {
+    const name = (patient.patient_name || '').toLowerCase();
+    const phone = (patient.mobile_no || '').toLowerCase();
+    const query = searchQuery.toLowerCase();
+    return name.includes(query) || phone.includes(query);
+  });
+
   return (
     <div style={{ position: 'relative', minHeight: 'calc(100vh - 150px)' }}>
-      {/* Remove desktop title/metrics since we rely on MobileAppBar and mobile views */}
-      <div className="card" style={{ padding: 0, overflow: 'hidden', border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        
-        {isLoading ? (
-          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading patients...</div>
-        ) : patients.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No patients found.</div>
-        ) : (
-          <div>
-            {patients.map(patient => {
-              const initial = patient.patient_name ? patient.patient_name[0].toUpperCase() : 'P';
-              const phone = patient.mobile_no || '';
-              const waLink = `https://api.whatsapp.com/send?phone=${phone.startsWith('+') ? phone.replace(/\s+/g, '') : '+91' + phone.replace(/\s+/g, '')}`;
-
-              return (
-                <div className="list-tile" key={patient.id} style={{ flexDirection: 'column', alignItems: 'stretch' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                    <div className="list-tile-leading">{initial}</div>
-                    <div className="list-tile-content" style={{ flex: 1 }}>
-                      <div className="list-tile-title" style={{ fontSize: '1.1rem', fontWeight: 600 }}>{patient.patient_name}</div>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '0.5rem', borderTop: '1px solid #f1f5f9', paddingTop: '0.5rem' }}>
-                    <a href={`tel:${phone}`} style={{ padding: '0.5rem', color: 'var(--success)', background: '#dcfce7', borderRadius: '50%', display: 'flex' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    </a>
-                    <a href={waLink} target="_blank" rel="noreferrer" style={{ padding: '0.5rem', color: '#25D366', background: '#dcfce7', borderRadius: '50%', display: 'flex' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    </a>
-                    <button onClick={() => handleBookClick(patient)} style={{ padding: '0.5rem', color: '#0ea5e9', background: '#e0f2fe', borderRadius: '50%', display: 'flex', border: 'none', cursor: 'pointer' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+      {/* Dashboard Header Section */}
+      <div className="dashboard-header">
+        <div className="dashboard-title-area">
+          <h1 className="dashboard-title">Patients Directory</h1>
+          <p className="dashboard-subtitle">
+            {isLoading ? 'Loading patients...' : `${filteredPatients.length} patient${filteredPatients.length !== 1 ? 's' : ''} found`}
+          </p>
+        </div>
+        <div className="dashboard-actions">
+          <div className="search-container">
+            <Search size={18} color="var(--text-muted)" />
+            <input 
+              type="text" 
+              className="search-input" 
+              placeholder="Search by name or number..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
-        )}
+          {/* Add Patient button for desktop only (hidden on small screens) */}
+          <button 
+            className="btn btn-primary" 
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.5rem', 
+              padding: '0.6rem 1.25rem',
+              borderRadius: '12px',
+              fontSize: '0.9rem',
+              boxShadow: '0 4px 6px -1px rgba(14, 165, 233, 0.2)'
+            }}
+            onClick={() => navigate('/add-patient')}
+          >
+            <Plus size={18} />
+            <span>Add Patient</span>
+          </button>
+        </div>
       </div>
 
-      <button className="fab" onClick={() => navigate('/add-patient')}>
+      {isLoading ? (
+        <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+          <div className="loading-spinner" style={{ margin: '0 auto 1rem', width: '30px', height: '30px', border: '3px solid #e2e8f0', borderTopColor: 'var(--primary)', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          <span>Loading patients...</span>
+        </div>
+      ) : filteredPatients.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '4rem 2rem', background: 'var(--surface)', borderRadius: '16px', border: '1px dashed var(--border-color)' }}>
+          <User size={48} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.6 }} />
+          <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-main)' }}>No Patients Found</h3>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+            {searchQuery ? "Try searching for a different name or number." : "Start by registering a new patient."}
+          </p>
+        </div>
+      ) : (
+        <div className="patient-grid">
+          {filteredPatients.map(patient => {
+            const initial = patient.patient_name ? patient.patient_name[0].toUpperCase() : 'P';
+            const phone = patient.mobile_no || '';
+            const waLink = `https://api.whatsapp.com/send?phone=${phone.startsWith('+') ? phone.replace(/\s+/g, '') : '+91' + phone.replace(/\s+/g, '')}`;
+            const colors = getAvatarColor(patient.patient_name);
+
+            return (
+              <div className="patient-card" key={patient.id}>
+                <div className="patient-info">
+                  <div className="patient-avatar" style={{ backgroundColor: colors.bg, color: colors.text }}>
+                    {initial}
+                  </div>
+                  <div className="patient-details">
+                    <div className="patient-name" title={patient.patient_name}>
+                      {patient.patient_name}
+                    </div>
+                    {phone && (
+                      <div className="patient-phone">
+                        <Phone size={12} style={{ opacity: 0.7 }} />
+                        <span>{phone}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="patient-actions">
+                  {phone && (
+                    <>
+                      <a href={`tel:${phone}`} className="action-btn call" title="Call Patient">
+                        <Phone size={16} />
+                      </a>
+                      <a href={waLink} target="_blank" rel="noreferrer" className="action-btn whatsapp" title="Send WhatsApp Message">
+                        <MessageCircle size={16} />
+                      </a>
+                    </>
+                  )}
+                  <button onClick={() => handleBookClick(patient)} className="action-btn schedule" title="Schedule Appointment">
+                    <Calendar size={16} />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Global Floating Action Button */}
+      <button className="fab" onClick={() => navigate('/add-patient')} title="Register Patient">
         <Plus size={24} />
       </button>
 
       {/* Booking Modal */}
       {showModal && selectedPatient && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
-          <div className="card" style={{ width: '100%', maxWidth: '500px', margin: 0 }}>
-            <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>Book Appointment</h3>
-            <div style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Patient: {selectedPatient.patient_name}</div>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #f1f5f9', paddingBottom: '0.75rem', marginBottom: '1.25rem', fontSize: '1.25rem', fontWeight: 600 }}>Book Appointment</h3>
+            <div style={{ marginBottom: '1.25rem', padding: '0.75rem 1rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <User size={16} color="var(--primary)" />
+              <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{selectedPatient.patient_name}</span>
+            </div>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <div className="form-group" style={{ flex: 1 }}>
-                  <label>Date *</label>
-                  <input type="date" className="form-control" name="appointment_date" value={formData.appointment_date} onChange={handleChange} required />
-                </div>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Date *</label>
+                <input type="date" className="form-control" name="appointment_date" value={formData.appointment_date} onChange={handleChange} required style={{ borderRadius: '10px' }} />
               </div>
 
               <div style={{ display: 'flex', gap: '1rem' }}>
-                <div className="form-group" style={{ flex: 1 }}>
-                  <label>Start Time *</label>
-                  <input type="time" className="form-control" name="start_time" value={formData.start_time} onChange={handleChange} required />
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Start Time *</label>
+                  <input type="time" className="form-control" name="start_time" value={formData.start_time} onChange={handleChange} required style={{ borderRadius: '10px' }} />
                 </div>
-                <div className="form-group" style={{ flex: 1 }}>
-                  <label>End Time *</label>
-                  <input type="time" className="form-control" name="end_time" value={formData.end_time} onChange={handleChange} required />
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>End Time *</label>
+                  <input type="time" className="form-control" name="end_time" value={formData.end_time} onChange={handleChange} required style={{ borderRadius: '10px' }} />
                 </div>
               </div>
 
-              <div className="form-group">
-                <label>Purpose of Visit</label>
-                <input type="text" className="form-control" name="purpose" value={formData.purpose} onChange={handleChange} />
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Purpose of Visit</label>
+                <input type="text" className="form-control" name="purpose" value={formData.purpose} onChange={handleChange} placeholder="e.g. Regular Consultation" style={{ borderRadius: '10px' }} />
               </div>
 
-              <div className="form-group" style={{ background: '#f8fafc', padding: '1rem', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
-                <label className="checkbox-label" style={{ fontWeight: 600, color: '#16a34a' }}>
-                  <input type="checkbox" name="whatsapp_chk" checked={formData.whatsapp_chk} onChange={handleChange} /> 
-                  <span style={{ fontSize: '1.2rem', marginRight: '5px' }}>💬</span> Send WhatsApp Confirmation
-                </label>
-              </div>
+              <label className="whatsapp-badge">
+                <input 
+                  type="checkbox" 
+                  name="whatsapp_chk" 
+                  checked={formData.whatsapp_chk} 
+                  onChange={handleChange} 
+                  style={{ marginRight: '0.75rem', width: '16px', height: '16px', accentColor: '#22c55e', cursor: 'pointer' }}
+                /> 
+                <span style={{ fontSize: '0.9rem' }}>💬 Send WhatsApp Confirmation</span>
+              </label>
 
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>Schedule</button>
-                <button type="button" className="btn" style={{ flex: 1, background: '#e2e8f0' }} onClick={() => setShowModal(false)}>Cancel</button>
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.25rem' }}>
+                <button type="submit" className="btn btn-primary" style={{ flex: 1, borderRadius: '10px', padding: '0.7rem 1rem' }}>Schedule</button>
+                <button type="button" className="btn" style={{ flex: 1, background: '#f1f5f9', color: 'var(--text-muted)', borderRadius: '10px', padding: '0.7rem 1rem' }} onClick={() => setShowModal(false)}>Cancel</button>
               </div>
             </form>
           </div>
@@ -183,3 +276,4 @@ const PatientDashboard = ({ user }) => {
 };
 
 export default PatientDashboard;
+
