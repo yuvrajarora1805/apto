@@ -47,7 +47,7 @@ const PatientDashboard = ({ user }) => {
   const fetchPatients = async () => {
     try {
       // In a real app, you would pass admin_id from auth context
-      const res = await fetch('/api/patients?admin_id=1');
+      const res = await fetch(`/api/patients?admin_id=${user?.id || 1}`);
       const json = await res.json();
       if(json.success) {
         setPatients(json.data);

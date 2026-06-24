@@ -14,7 +14,7 @@ const TodaysAppointments = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch('/api/appointments?admin_id=1');
+      const res = await fetch(`/api/appointments?admin_id=${user?.id || 1}`);
       const json = await res.json();
       if(json.success) {
         // Only show completed for History

@@ -21,7 +21,7 @@ const FinancialDashboard = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch('/api/appointments?admin_id=1');
+      const res = await fetch(`/api/appointments?admin_id=${user?.id || 1}`);
       const json = await res.json();
       if(json.success) {
         const apps = json.data;
