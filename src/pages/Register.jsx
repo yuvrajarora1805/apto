@@ -85,7 +85,7 @@ const Register = () => {
             <input type="password" className="form-control" name="password" value={formData.password} onChange={handleChange} required />
           </div>
 
-          </div>
+
 
           <div className="form-group">
             <label style={{ marginBottom: '0.5rem', display: 'block' }}>Clinic Specialties</label>
