@@ -193,10 +193,10 @@ const AppointmentBook = ({ user }) => {
         )}
       </div>
 
-      {/* Edit Appointment Modal */}
+    {/* Edit Appointment Modal */}
       {showEditModal && selectedEvent && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div className="card" style={{ width: '100%', maxWidth: '400px', margin: 0, maxHeight: '90vh', overflowY: 'auto' }}>
+          <div className="card" style={{ width: '100%', maxWidth: '400px', margin: 0, maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', paddingBottom: '2rem' }}>
             <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>Edit Appointment</h3>
             
             <form onSubmit={handleEditSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -237,7 +237,7 @@ const AppointmentBook = ({ user }) => {
       {/* Schedule Appointment Modal */}
       {showModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div className="card" style={{ width: '100%', maxWidth: '500px', margin: 0, maxHeight: '90vh', overflowY: 'auto' }}>
+          <div className="card" style={{ width: '100%', maxWidth: '500px', margin: 0, maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', paddingBottom: '2rem' }}>
             <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>Schedule Appointment</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

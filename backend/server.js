@@ -211,8 +211,19 @@ app.post('/api/appointments', async (req, res) => {
     let dial_code = '91';
 
     if (whatsapp_chk) {
-      const [docRows] = await dbPool.query('SELECT * FROM clinic_doctors WHERE id = ? AND admin_id = ?', [doctor_id, admin_id]);
-      const doctor = docRows.length > 0 ? docRows[0] : { first_name: 'Paras', last_name: 'Arora', clinic_name: 'Arora Dental Implant Clinic', mobile_no: '07837880037' };
+      let doctor;
+      if (doctor_id) {
+        const [docRows] = await dbPool.query('SELECT * FROM clinic_doctors WHERE id = ? AND admin_id = ?', [doctor_id, admin_id]);
+        if (docRows.length > 0) doctor = docRows[0];
+      }
+      if (!doctor) {
+        const [adminRows] = await dbPool.query('SELECT first_name, last_name, clinic_name, mobile_no FROM doctors WHERE id = ?', [admin_id]);
+        if (adminRows.length > 0) {
+          doctor = adminRows[0];
+        } else {
+          doctor = { first_name: 'Doctor', last_name: '', clinic_name: 'Our Clinic', mobile_no: '' };
+        }
+      }
 
       // Format date from "2026-06-14" to "Jun 14"
       const dateParts = appointment_date.split('-');

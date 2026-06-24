@@ -290,8 +290,8 @@ const PatientDashboard = ({ user }) => {
 
       {/* Booking Modal */}
       {showModal && selectedPatient && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', paddingBottom: '2rem' }}>
             <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #f1f5f9', paddingBottom: '0.75rem', marginBottom: '1.25rem', fontSize: '1.25rem', fontWeight: 600 }}>Book Appointment</h3>
             <div style={{ marginBottom: '1.25rem', padding: '0.75rem 1rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <User size={16} color="var(--primary)" />
@@ -342,8 +342,8 @@ const PatientDashboard = ({ user }) => {
 
       {/* Edit Patient Modal */}
       {showEditPatientModal && (
-        <div className="modal-overlay">
-          <div className="modal-content" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+        <div className="modal-overlay" onClick={() => setShowEditPatientModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', paddingBottom: '2rem' }}>
             <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #f1f5f9', paddingBottom: '0.75rem', marginBottom: '1.25rem', fontSize: '1.25rem', fontWeight: 600 }}>Edit Patient</h3>
             
             <form onSubmit={handleEditPatientSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -426,7 +426,7 @@ const PatientDashboard = ({ user }) => {
       {/* Patient Details Modal */}
       {patientDetailsModalData && (
         <div className="modal-overlay" onClick={() => setPatientDetailsModalData(null)}>
-          <div className="modal-content" style={{ padding: '2rem', maxWidth: '400px', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content" style={{ padding: '2rem', maxWidth: '400px', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', paddingBottom: '2rem', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
             
             <button 
               onClick={() => setPatientDetailsModalData(null)} 
