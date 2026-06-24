@@ -185,6 +185,17 @@ app.put('/api/patients/:id', async (req, res) => {
   }
 });
 
+app.delete('/api/patients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await dbPool.query('DELETE FROM patients WHERE id = ?', [id]);
+    res.json({ success: true, message: 'Patient deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to delete patient. Ensure there are no dependent records.' });
+  }
+});
+
 app.post('/api/appointments', async (req, res) => {
   try {
     const { admin_id, patient_id, patient_name, mobile_no, appointment_date, start_time, end_time, doctor_id, purpose, whatsapp_chk } = req.body;

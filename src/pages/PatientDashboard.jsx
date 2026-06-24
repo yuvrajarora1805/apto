@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Search, Phone, MessageCircle, Calendar, User, Pencil } from 'lucide-react';
+import { Plus, Search, Phone, MessageCircle, Calendar, User, Pencil, Trash } from 'lucide-react';
 
 const avatarColors = [
   { bg: '#e0f2fe', text: '#0284c7' }, // Blue
@@ -156,6 +156,27 @@ const PatientDashboard = ({ user }) => {
         fetchPatients(); // Refresh the list
       } else {
         alert("Error updating patient");
+      }
+    } catch (err) {
+      alert("Failed to connect to backend server.");
+    }
+  };
+
+  const handleDeletePatient = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this patient? This action cannot be undone.")) {
+      return;
+    }
+    
+    try {
+      const response = await fetch(`/api/patients/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      if(data.success) {
+        setPatientDetailsModalData(null);
+        fetchPatients();
+      } else {
+        alert(data.message || "Error deleting patient");
       }
     } catch (err) {
       alert("Failed to connect to backend server.");
@@ -412,6 +433,9 @@ const PatientDashboard = ({ user }) => {
               </button>
               <button onClick={() => { setPatientDetailsModalData(null); handleBookClick(patientDetailsModalData); }} className="action-btn schedule" title="Schedule Appointment" style={{ width: '52px', height: '52px' }}>
                 <Calendar size={22} />
+              </button>
+              <button onClick={() => handleDeletePatient(patientDetailsModalData.id)} className="action-btn" title="Delete Patient" style={{ background: '#fef2f2', color: '#ef4444', width: '52px', height: '52px' }}>
+                <Trash size={22} />
               </button>
             </div>
           </div>
