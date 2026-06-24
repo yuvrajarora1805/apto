@@ -221,7 +221,7 @@ const Profile = ({ user }) => {
 
       {/* Delete Confirmation Modal */}
       {deleteConfirmModal.isOpen && (
-        <div className="modal-overlay" onClick={() => setDeleteConfirmModal({ isOpen: false, doctorId: null })}>
+        <div className="modal-overlay" style={{ zIndex: 1050 }} onClick={() => setDeleteConfirmModal({ isOpen: false, doctorId: null })}>
           <div className="modal-content" style={{ padding: '2rem', maxWidth: '400px', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '64px', height: '64px', borderRadius: '50%', background: '#fee2e2', color: '#ef4444', marginBottom: '1.5rem' }}>
               <Trash size={32} />
