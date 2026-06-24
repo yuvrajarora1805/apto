@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddPatient = ({ user }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     patient_name: '',
     mobile_no: '',
@@ -26,6 +28,7 @@ const AddPatient = ({ user }) => {
       if(data.success) {
         alert(data.message);
         setFormData({ patient_name: '', mobile_no: '', email: '', age: '', gender: 'Male', address: '' });
+        navigate('/patients');
       } else {
         alert("Error saving patient");
       }
@@ -35,7 +38,7 @@ const AddPatient = ({ user }) => {
   };
 
   return (
-    <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
+    <div className="card" style={{ maxWidth: '600px', margin: '0 auto', marginBottom: '80px' }}>
       <h2 style={{ color: 'var(--primary)', marginBottom: '1.5rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
         Register New Patient
       </h2>

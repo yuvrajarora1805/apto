@@ -65,7 +65,7 @@ function App() {
 function AppContent({ auth, setAuth }) {
   const location = useLocation();
   
-  let appBarTitle = "Clinicia";
+  let appBarTitle = "Apto";
   if (location.pathname === '/appointments') appBarTitle = "Appointments";
   if (location.pathname === '/patients') appBarTitle = "Patient Directory";
   if (location.pathname === '/history') appBarTitle = "History";
