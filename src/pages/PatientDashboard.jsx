@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Search, Phone, MessageCircle, Calendar, User } from 'lucide-react';
+import { Plus, Search, Phone, MessageCircle, Calendar, User, Pencil } from 'lucide-react';
 
 const avatarColors = [
   { bg: '#e0f2fe', text: '#0284c7' }, // Blue
@@ -36,6 +36,18 @@ const PatientDashboard = ({ user }) => {
     doctor_id: user?.id || 1,
     purpose: '',
     whatsapp_chk: true
+  });
+
+  // Edit patient modal state
+  const [showEditPatientModal, setShowEditPatientModal] = useState(false);
+  const [editPatientData, setEditPatientData] = useState({
+    id: '',
+    patient_name: '',
+    mobile_no: '',
+    email: '',
+    age: '',
+    gender: 'Male',
+    address: ''
   });
 
   const navigate = useNavigate();
@@ -106,6 +118,43 @@ const PatientDashboard = ({ user }) => {
     }
   };
 
+  const handleEditPatientClick = (patient) => {
+    setEditPatientData({
+      id: patient.id,
+      patient_name: patient.patient_name || '',
+      mobile_no: patient.mobile_no || '',
+      email: patient.email || '',
+      age: patient.age || '',
+      gender: patient.gender || 'Male',
+      address: patient.address || ''
+    });
+    setShowEditPatientModal(true);
+  };
+
+  const handleEditPatientChange = (e) => {
+    setEditPatientData({ ...editPatientData, [e.target.name]: e.target.value });
+  };
+
+  const handleEditPatientSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/patients/${editPatientData.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...editPatientData, admin_id: user?.id || 1 })
+      });
+      const data = await response.json();
+      if(data.success) {
+        setShowEditPatientModal(false);
+        fetchPatients(); // Refresh the list
+      } else {
+        alert("Error updating patient");
+      }
+    } catch (err) {
+      alert("Failed to connect to backend server.");
+    }
+  };
+
   // Filter patients in real-time based on search input
   const filteredPatients = patients.filter(patient => {
     const name = (patient.patient_name || '').toLowerCase();
@@ -119,13 +168,13 @@ const PatientDashboard = ({ user }) => {
       {/* Dashboard Header Section */}
       <div className="dashboard-header">
         <div className="dashboard-title-area">
-          <h1 className="dashboard-title">Patients Directory</h1>
+          <h1 className="dashboard-title desktop-only">Patients Directory</h1>
           <p className="dashboard-subtitle">
             {isLoading ? 'Loading patients...' : `${filteredPatients.length} patient${filteredPatients.length !== 1 ? 's' : ''} found`}
           </p>
         </div>
-        <div className="dashboard-actions">
-          <div className="search-container">
+        <div className="dashboard-actions" style={{ flex: 1, justifyContent: 'flex-end' }}>
+          <div className="search-container" style={{ margin: 0 }}>
             <Search size={18} color="var(--text-muted)" />
             <input 
               type="text" 
@@ -137,7 +186,7 @@ const PatientDashboard = ({ user }) => {
           </div>
           {/* Add Patient button for desktop only (hidden on small screens) */}
           <button 
-            className="btn btn-primary" 
+            className="btn btn-primary desktop-only" 
             style={{ 
               display: 'flex', 
               alignItems: 'center', 
@@ -205,6 +254,9 @@ const PatientDashboard = ({ user }) => {
                       </a>
                     </>
                   )}
+                  <button onClick={() => handleEditPatientClick(patient)} className="action-btn" title="Edit Patient" style={{ background: '#f1f5f9', color: '#64748b' }}>
+                    <Pencil size={16} />
+                  </button>
                   <button onClick={() => handleBookClick(patient)} className="action-btn schedule" title="Schedule Appointment">
                     <Calendar size={16} />
                   </button>
@@ -266,6 +318,58 @@ const PatientDashboard = ({ user }) => {
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.25rem' }}>
                 <button type="submit" className="btn btn-primary" style={{ flex: 1, borderRadius: '10px', padding: '0.7rem 1rem' }}>Schedule</button>
                 <button type="button" className="btn" style={{ flex: 1, background: '#f1f5f9', color: 'var(--text-muted)', borderRadius: '10px', padding: '0.7rem 1rem' }} onClick={() => setShowModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Patient Modal */}
+      {showEditPatientModal && (
+        <div className="modal-overlay">
+          <div className="modal-content" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+            <h3 style={{ marginTop: 0, color: 'var(--primary)', borderBottom: '1px solid #f1f5f9', paddingBottom: '0.75rem', marginBottom: '1.25rem', fontSize: '1.25rem', fontWeight: 600 }}>Edit Patient</h3>
+            
+            <form onSubmit={handleEditPatientSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Patient Name *</label>
+                <input type="text" className="form-control" name="patient_name" value={editPatientData.patient_name} onChange={handleEditPatientChange} required style={{ borderRadius: '10px' }} />
+              </div>
+
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Mobile Number *</label>
+                  <input type="text" className="form-control" name="mobile_no" value={editPatientData.mobile_no} onChange={handleEditPatientChange} required style={{ borderRadius: '10px' }} />
+                </div>
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Age</label>
+                  <input type="number" className="form-control" name="age" value={editPatientData.age} onChange={handleEditPatientChange} style={{ borderRadius: '10px' }} />
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Email ID</label>
+                  <input type="email" className="form-control" name="email" value={editPatientData.email} onChange={handleEditPatientChange} style={{ borderRadius: '10px' }} />
+                </div>
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Gender</label>
+                  <select className="form-control" name="gender" value={editPatientData.gender} onChange={handleEditPatientChange} style={{ borderRadius: '10px' }}>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Address</label>
+                <textarea className="form-control" name="address" value={editPatientData.address} onChange={handleEditPatientChange} rows="2" style={{ borderRadius: '10px' }} />
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.25rem' }}>
+                <button type="submit" className="btn btn-primary" style={{ flex: 1, borderRadius: '10px', padding: '0.7rem 1rem' }}>Save Changes</button>
+                <button type="button" className="btn" style={{ flex: 1, background: '#f1f5f9', color: 'var(--text-muted)', borderRadius: '10px', padding: '0.7rem 1rem' }} onClick={() => setShowEditPatientModal(false)}>Cancel</button>
               </div>
             </form>
           </div>
