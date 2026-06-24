@@ -293,8 +293,18 @@ app.get('/api/doctors', async (req, res) => {
     const [rows] = await dbPool.query(query, params);
     res.json({ success: true, data: rows });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ success: false, message: 'Failed to fetch doctors' });
+  }
+});
+
+app.delete('/api/doctors/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await dbPool.query('DELETE FROM clinic_doctors WHERE id = ?', [id]);
+    res.json({ success: true, message: 'Doctor deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Failed to delete doctor. Ensure there are no dependent records.' });
   }
 });
 

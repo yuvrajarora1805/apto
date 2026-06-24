@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RefreshCw, UserPlus, LogOut } from 'lucide-react';
+import { RefreshCw, UserPlus, LogOut, Trash } from 'lucide-react';
 
 const Profile = ({ user }) => {
   const [formData, setFormData] = useState({
@@ -49,6 +49,25 @@ const Profile = ({ user }) => {
       alert('Error adding doctor');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteDoctor = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this doctor?")) {
+      return;
+    }
+    try {
+      const res = await fetch(`/api/doctors/${id}`, {
+        method: 'DELETE'
+      });
+      const json = await res.json();
+      if(json.success) {
+        fetchDoctors();
+      } else {
+        alert(json.message || 'Failed to delete doctor');
+      }
+    } catch (err) {
+      alert('Error deleting doctor');
     }
   };
 
@@ -147,15 +166,24 @@ const Profile = ({ user }) => {
                   <div style={{ fontWeight: 'bold', color: 'var(--text-main)' }}>Dr. {doc.first_name} {doc.last_name}</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{doc.mobile_no}</div>
                 </div>
-                <span style={{ 
-                  padding: '0.25rem 0.5rem', 
-                  borderRadius: '999px', 
-                  fontSize: '0.75rem',
-                  background: doc.status === 'Approved' ? '#dcfce7' : '#fef3c7',
-                  color: doc.status === 'Approved' ? '#16a34a' : '#d97706'
-                }}>
-                  {doc.status || 'Active'}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ 
+                    padding: '0.25rem 0.5rem', 
+                    borderRadius: '999px', 
+                    fontSize: '0.75rem',
+                    background: doc.status === 'Approved' ? '#dcfce7' : '#fef3c7',
+                    color: doc.status === 'Approved' ? '#16a34a' : '#d97706'
+                  }}>
+                    {doc.status || 'Active'}
+                  </span>
+                  <button 
+                    onClick={() => handleDeleteDoctor(doc.id)} 
+                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#ef4444', padding: '0.5rem' }}
+                    title="Delete Doctor"
+                  >
+                    <Trash size={16} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
