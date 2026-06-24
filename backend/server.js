@@ -29,10 +29,12 @@ initDB().then(pool => {
 
 app.post('/api/register', async (req, res) => {
   try {
-    const { first_name, last_name, email, password, clinic_name } = req.body;
+    const { first_name, last_name, email, password, clinic_name, specialties } = req.body;
+    const specialtiesJSON = specialties ? JSON.stringify(specialties) : '[]';
+    
     const [result] = await dbPool.query(
-      "INSERT INTO doctors (first_name, last_name, email, password, clinic_name, role, status) VALUES (?, ?, ?, ?, ?, 'doctor', 'Pending')",
-      [first_name, last_name, email, password, clinic_name]
+      "INSERT INTO doctors (first_name, last_name, email, password, clinic_name, specialties, role, status) VALUES (?, ?, ?, ?, ?, ?, 'doctor', 'Pending')",
+      [first_name, last_name, email, password, clinic_name, specialtiesJSON]
     );
     res.json({ success: true, message: 'Registration successful! Pending admin approval.' });
   } catch (err) {

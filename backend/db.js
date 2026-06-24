@@ -30,6 +30,7 @@ async function initDB() {
         email VARCHAR(100) UNIQUE,
         password VARCHAR(255),
         clinic_name VARCHAR(255),
+        specialties TEXT,
         role VARCHAR(50) DEFAULT 'doctor',
         status VARCHAR(50) DEFAULT 'Pending',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -38,6 +39,12 @@ async function initDB() {
 
     try {
       await connection.query('ALTER TABLE doctors ADD COLUMN mobile_no VARCHAR(20)');
+    } catch (err) {
+      // Ignore if column already exists
+    }
+    
+    try {
+      await connection.query('ALTER TABLE doctors ADD COLUMN specialties TEXT');
     } catch (err) {
       // Ignore if column already exists
     }
