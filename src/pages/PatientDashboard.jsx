@@ -38,6 +38,13 @@ const PatientDashboard = ({ user }) => {
     whatsapp_chk: true
   });
 
+  // Patient Details Modal State
+  const [patientDetailsModalData, setPatientDetailsModalData] = useState(null);
+
+  const handlePatientCardClick = (patient) => {
+    setPatientDetailsModalData(patient);
+  };
+
   // Edit patient modal state
   const [showEditPatientModal, setShowEditPatientModal] = useState(false);
   const [editPatientData, setEditPatientData] = useState({
@@ -226,8 +233,8 @@ const PatientDashboard = ({ user }) => {
             const colors = getAvatarColor(patient.patient_name);
 
             return (
-              <div className="patient-card" key={patient.id}>
-                <div className="patient-info">
+              <div className="patient-card" key={patient.id} onClick={() => handlePatientCardClick(patient)} style={{ cursor: 'pointer' }}>
+                <div className="patient-info" style={{ marginBottom: 0 }}>
                   <div className="patient-avatar" style={{ backgroundColor: colors.bg, color: colors.text }}>
                     {initial}
                   </div>
@@ -242,24 +249,6 @@ const PatientDashboard = ({ user }) => {
                       </div>
                     )}
                   </div>
-                </div>
-                <div className="patient-actions">
-                  {phone && (
-                    <>
-                      <a href={`tel:${phone}`} className="action-btn call" title="Call Patient">
-                        <Phone size={16} />
-                      </a>
-                      <a href={waLink} target="_blank" rel="noreferrer" className="action-btn whatsapp" title="Send WhatsApp Message">
-                        <MessageCircle size={16} />
-                      </a>
-                    </>
-                  )}
-                  <button onClick={() => handleEditPatientClick(patient)} className="action-btn" title="Edit Patient" style={{ background: '#f1f5f9', color: '#64748b' }}>
-                    <Pencil size={16} />
-                  </button>
-                  <button onClick={() => handleBookClick(patient)} className="action-btn schedule" title="Schedule Appointment">
-                    <Calendar size={16} />
-                  </button>
                 </div>
               </div>
             );
@@ -372,6 +361,59 @@ const PatientDashboard = ({ user }) => {
                 <button type="button" className="btn" style={{ flex: 1, background: '#f1f5f9', color: 'var(--text-muted)', borderRadius: '10px', padding: '0.7rem 1rem' }} onClick={() => setShowEditPatientModal(false)}>Cancel</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Patient Details Modal */}
+      {patientDetailsModalData && (
+        <div className="modal-overlay" onClick={() => setPatientDetailsModalData(null)}>
+          <div className="modal-content" style={{ padding: '2rem', maxWidth: '400px', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
+            
+            <button 
+              onClick={() => setPatientDetailsModalData(null)} 
+              style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: 'var(--text-muted)' }}
+            >
+              &times;
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div className="patient-avatar" style={{ backgroundColor: getAvatarColor(patientDetailsModalData.patient_name).bg, color: getAvatarColor(patientDetailsModalData.patient_name).text, width: '64px', height: '64px', fontSize: '1.8rem' }}>
+                {patientDetailsModalData.patient_name ? patientDetailsModalData.patient_name[0].toUpperCase() : 'P'}
+              </div>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.4rem', color: 'var(--text-main)' }}>{patientDetailsModalData.patient_name}</h3>
+                {patientDetailsModalData.mobile_no && <div style={{ color: 'var(--text-muted)', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.35rem' }}><Phone size={14} /> {patientDetailsModalData.mobile_no}</div>}
+              </div>
+            </div>
+
+            <div style={{ background: '#f8fafc', padding: '1.25rem', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.95rem' }}>
+                <div><span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem', marginBottom: '0.2rem' }}>Age</span> <span style={{ fontWeight: 500 }}>{patientDetailsModalData.age || 'N/A'}</span></div>
+                <div><span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem', marginBottom: '0.2rem' }}>Gender</span> <span style={{ fontWeight: 500 }}>{patientDetailsModalData.gender || 'N/A'}</span></div>
+                <div style={{ gridColumn: '1 / -1' }}><span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem', marginBottom: '0.2rem' }}>Email</span> <span style={{ fontWeight: 500 }}>{patientDetailsModalData.email || 'N/A'}</span></div>
+                <div style={{ gridColumn: '1 / -1' }}><span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem', marginBottom: '0.2rem' }}>Address</span> <span style={{ fontWeight: 500 }}>{patientDetailsModalData.address || 'N/A'}</span></div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              {patientDetailsModalData.mobile_no && (
+                <>
+                  <a href={`tel:${patientDetailsModalData.mobile_no}`} className="action-btn call" style={{ width: '52px', height: '52px' }} title="Call Patient">
+                    <Phone size={22} />
+                  </a>
+                  <a href={`https://api.whatsapp.com/send?phone=${patientDetailsModalData.mobile_no.startsWith('+') ? patientDetailsModalData.mobile_no.replace(/\s+/g, '') : '+91' + patientDetailsModalData.mobile_no.replace(/\s+/g, '')}`} target="_blank" rel="noreferrer" className="action-btn whatsapp" style={{ width: '52px', height: '52px' }} title="Send WhatsApp Message">
+                    <MessageCircle size={22} />
+                  </a>
+                </>
+              )}
+              <button onClick={() => { setPatientDetailsModalData(null); handleEditPatientClick(patientDetailsModalData); }} className="action-btn" title="Edit Patient" style={{ background: '#f1f5f9', color: '#64748b', width: '52px', height: '52px' }}>
+                <Pencil size={22} />
+              </button>
+              <button onClick={() => { setPatientDetailsModalData(null); handleBookClick(patientDetailsModalData); }} className="action-btn schedule" title="Schedule Appointment" style={{ width: '52px', height: '52px' }}>
+                <Calendar size={22} />
+              </button>
+            </div>
           </div>
         </div>
       )}
