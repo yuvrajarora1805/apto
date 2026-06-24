@@ -9,6 +9,9 @@ const Profile = ({ user }) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [doctors, setDoctors] = useState([]);
+  
+  // Custom delete confirmation modal state
+  const [deleteConfirmModal, setDeleteConfirmModal] = useState({ isOpen: false, doctorId: null });
 
   useEffect(() => {
     fetchDoctors();
@@ -52,10 +55,14 @@ const Profile = ({ user }) => {
     }
   };
 
-  const handleDeleteDoctor = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this doctor?")) {
-      return;
-    }
+  const confirmDeleteDoctor = (id) => {
+    setDeleteConfirmModal({ isOpen: true, doctorId: id });
+  };
+
+  const executeDeleteDoctor = async () => {
+    const id = deleteConfirmModal.doctorId;
+    setDeleteConfirmModal({ isOpen: false, doctorId: null });
+    
     try {
       const res = await fetch(`/api/doctors/${id}`, {
         method: 'DELETE'
@@ -177,7 +184,7 @@ const Profile = ({ user }) => {
                     {doc.status || 'Active'}
                   </span>
                   <button 
-                    onClick={() => handleDeleteDoctor(doc.id)} 
+                    onClick={() => confirmDeleteDoctor(doc.id)} 
                     style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#ef4444', padding: '0.5rem' }}
                     title="Delete Doctor"
                   >
@@ -211,6 +218,37 @@ const Profile = ({ user }) => {
         <LogOut size={20} />
         Log Out
       </button>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirmModal.isOpen && (
+        <div className="modal-overlay" onClick={() => setDeleteConfirmModal({ isOpen: false, doctorId: null })}>
+          <div className="modal-content" style={{ padding: '2rem', maxWidth: '400px', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '64px', height: '64px', borderRadius: '50%', background: '#fee2e2', color: '#ef4444', marginBottom: '1.5rem' }}>
+              <Trash size={32} />
+            </div>
+            <h3 style={{ margin: '0 0 0.75rem', fontSize: '1.25rem', color: 'var(--text-main)', fontWeight: 'bold' }}>Delete Doctor</h3>
+            <p style={{ margin: '0 0 1.5rem', color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
+              Are you sure you want to delete this doctor? This action cannot be undone.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button 
+                onClick={() => setDeleteConfirmModal({ isOpen: false, doctorId: null })}
+                className="btn" 
+                style={{ flex: 1, background: '#f1f5f9', color: 'var(--text-main)', fontWeight: 600 }}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={executeDeleteDoctor}
+                className="btn btn-danger" 
+                style={{ flex: 1, background: '#ef4444', color: 'white', border: 'none', fontWeight: 600 }}
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

@@ -57,6 +57,9 @@ const PatientDashboard = ({ user }) => {
     address: ''
   });
 
+  // Delete patient confirmation modal state
+  const [deleteConfirmModal, setDeleteConfirmModal] = useState({ isOpen: false, patientId: null });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -162,10 +165,13 @@ const PatientDashboard = ({ user }) => {
     }
   };
 
-  const handleDeletePatient = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this patient? This action cannot be undone.")) {
-      return;
-    }
+  const confirmDeletePatient = (id) => {
+    setDeleteConfirmModal({ isOpen: true, patientId: id });
+  };
+
+  const handleDeletePatient = async () => {
+    const id = deleteConfirmModal.patientId;
+    setDeleteConfirmModal({ isOpen: false, patientId: null });
     
     try {
       const response = await fetch(`/api/patients/${id}`, {
@@ -386,6 +392,37 @@ const PatientDashboard = ({ user }) => {
         </div>
       )}
 
+      {/* Delete Patient Confirmation Modal */}
+      {deleteConfirmModal.isOpen && (
+        <div className="modal-overlay" onClick={() => setDeleteConfirmModal({ isOpen: false, patientId: null })}>
+          <div className="modal-content" style={{ padding: '2rem', maxWidth: '400px', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '64px', height: '64px', borderRadius: '50%', background: '#fee2e2', color: '#ef4444', marginBottom: '1.5rem' }}>
+              <Trash size={32} />
+            </div>
+            <h3 style={{ margin: '0 0 0.75rem', fontSize: '1.25rem', color: 'var(--text-main)', fontWeight: 'bold' }}>Delete Patient</h3>
+            <p style={{ margin: '0 0 1.5rem', color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
+              Are you sure you want to delete this patient? This action cannot be undone.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button 
+                onClick={() => setDeleteConfirmModal({ isOpen: false, patientId: null })}
+                className="btn" 
+                style={{ flex: 1, background: '#f1f5f9', color: 'var(--text-main)', fontWeight: 600 }}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleDeletePatient}
+                className="btn btn-danger" 
+                style={{ flex: 1, background: '#ef4444', color: 'white', border: 'none', fontWeight: 600 }}
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Patient Details Modal */}
       {patientDetailsModalData && (
         <div className="modal-overlay" onClick={() => setPatientDetailsModalData(null)}>
@@ -434,7 +471,7 @@ const PatientDashboard = ({ user }) => {
               <button onClick={() => { setPatientDetailsModalData(null); handleBookClick(patientDetailsModalData); }} className="action-btn schedule" title="Schedule Appointment" style={{ width: '52px', height: '52px' }}>
                 <Calendar size={22} />
               </button>
-              <button onClick={() => handleDeletePatient(patientDetailsModalData.id)} className="action-btn" title="Delete Patient" style={{ background: '#fef2f2', color: '#ef4444', width: '52px', height: '52px' }}>
+              <button onClick={() => confirmDeletePatient(patientDetailsModalData.id)} className="action-btn" title="Delete Patient" style={{ background: '#fef2f2', color: '#ef4444', width: '52px', height: '52px' }}>
                 <Trash size={22} />
               </button>
             </div>
