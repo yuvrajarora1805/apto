@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import moment from 'moment';
-import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, Phone, MessageCircle } from 'lucide-react';
 
 const MobileScheduleView = ({ appointments, onAddClick, onEventClick }) => {
   const [selectedDate, setSelectedDate] = useState(moment());
@@ -116,7 +116,8 @@ const MobileScheduleView = ({ appointments, onAddClick, onEventClick }) => {
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {dayAppointments.map(app => {
+            {dayAppointments.map(event => {
+              const app = event.resource || event;
               const initial = app.patient_name ? app.patient_name[0].toUpperCase() : 'A';
               
               let statusColor = '#fef3c7';
@@ -125,29 +126,42 @@ const MobileScheduleView = ({ appointments, onAddClick, onEventClick }) => {
               if(app.status === 'Arrived') { statusColor = '#dbeafe'; statusText = '#2563eb'; }
               if(app.status === 'Missed') { statusColor = '#fee2e2'; statusText = '#dc2626'; }
 
+              const phoneStr = app.mobile_no ? `${app.dial_code || '91'}${app.mobile_no}`.replace('+', '') : '';
+
               return (
                 <div 
                   className="list-tile"
-                  key={app.id} 
-                  onClick={() => onEventClick(app)}
-                  style={{ cursor: 'pointer', borderRadius: '8px', marginBottom: '0.5rem', border: '1px solid #eee' }}
+                  key={app.id || event.id} 
+                  style={{ borderRadius: '8px', marginBottom: '0.5rem', border: '1px solid #eee', display: 'flex', flexDirection: 'column' }}
                 >
-                  <div className="list-tile-leading" style={{ background: statusColor, color: statusText }}>{initial}</div>
-                  <div className="list-tile-content">
-                    <div className="list-tile-title">{app.patient_name}</div>
-                    <div className="list-tile-subtitle">{app.start_time} - {app.end_time}</div>
+                  <div style={{ display: 'flex', width: '100%', alignItems: 'center', cursor: 'pointer' }} onClick={() => onEventClick(event)}>
+                    <div className="list-tile-leading" style={{ background: statusColor, color: statusText }}>{initial}</div>
+                    <div className="list-tile-content" style={{ flex: 1 }}>
+                      <div className="list-tile-title">{app.patient_name || 'Unknown'}</div>
+                      <div className="list-tile-subtitle">{app.start_time} - {app.end_time}</div>
+                    </div>
+                    <div className="list-tile-trailing">
+                      <span style={{ 
+                        padding: '0.25rem 0.5rem', 
+                        borderRadius: '999px', 
+                        fontSize: '0.75rem',
+                        background: statusColor,
+                        color: statusText
+                      }}>
+                        {app.status || 'Scheduled'}
+                      </span>
+                    </div>
                   </div>
-                  <div className="list-tile-trailing">
-                    <span style={{ 
-                      padding: '0.25rem 0.5rem', 
-                      borderRadius: '999px', 
-                      fontSize: '0.75rem',
-                      background: statusColor,
-                      color: statusText
-                    }}>
-                      {app.status || 'Scheduled'}
-                    </span>
-                  </div>
+                  {phoneStr && (
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem 1rem', borderTop: '1px solid #f1f5f9', gap: '1.5rem' }}>
+                      <a href={`tel:+${phoneStr}`} onClick={(e) => e.stopPropagation()} style={{ color: '#0ea5e9', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 500 }}>
+                         <Phone size={16} /> Call
+                      </a>
+                      <a href={`https://api.whatsapp.com/send?phone=${phoneStr}`} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} style={{ color: '#25D366', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 500 }}>
+                         <MessageCircle size={16} /> WhatsApp
+                      </a>
+                    </div>
+                  )}
                 </div>
               );
             })}
