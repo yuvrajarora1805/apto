@@ -23,6 +23,7 @@ const getAvatarColor = (name) => {
 
 const PatientDashboard = ({ user }) => {
   const [patients, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   
@@ -33,7 +34,7 @@ const PatientDashboard = ({ user }) => {
     appointment_date: '',
     start_time: '09:00',
     end_time: '09:30',
-    doctor_id: user?.id || 1,
+    doctor_id: '',
     purpose: '',
     whatsapp_chk: true
   });
@@ -64,6 +65,7 @@ const PatientDashboard = ({ user }) => {
 
   useEffect(() => {
     fetchPatients();
+    fetchClinicDoctors();
   }, []);
 
   const fetchPatients = async () => {
@@ -81,13 +83,23 @@ const PatientDashboard = ({ user }) => {
     }
   };
 
+  const fetchClinicDoctors = async () => {
+    try {
+      const res = await fetch(`/api/doctors?admin_id=${user?.id || 1}`);
+      const json = await res.json();
+      if(json.success) setDoctors(json.data);
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
   const handleBookClick = (patient) => {
     setSelectedPatient(patient);
     const today = new Date();
     setFormData({
       ...formData,
       appointment_date: today.toISOString().split('T')[0],
-      doctor_id: user?.id || 1
+      doctor_id: ''
     });
     setShowModal(true);
   };
@@ -299,9 +311,22 @@ const PatientDashboard = ({ user }) => {
             </div>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div className="form-group" style={{ marginBottom: 0 }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Date *</label>
-                <input type="date" className="form-control" name="appointment_date" value={formData.appointment_date} onChange={handleChange} required style={{ borderRadius: '10px' }} />
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Date *</label>
+                  <input type="date" className="form-control" name="appointment_date" value={formData.appointment_date} onChange={handleChange} required style={{ borderRadius: '10px' }} />
+                </div>
+                <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)' }}>Doctor *</label>
+                  <select className="form-control" name="doctor_id" value={formData.doctor_id} onChange={handleChange} required style={{ borderRadius: '10px' }}>
+                    <option value="">Select Doctor</option>
+                    {doctors.map(doc => (
+                      <option key={doc.id} value={doc.id}>
+                        Dr. {doc.first_name} {doc.last_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div style={{ display: 'flex', gap: '1rem' }}>

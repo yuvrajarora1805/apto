@@ -9,6 +9,7 @@ const localizer = momentLocalizer(moment);
 const AppointmentBook = ({ user }) => {
   const [appointments, setAppointments] = useState([]);
   const [patients, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -21,7 +22,7 @@ const AppointmentBook = ({ user }) => {
     appointment_date: '',
     start_time: '09:00',
     end_time: '09:30',
-    doctor_id: user?.id || 1,
+    doctor_id: '',
     purpose: '',
     whatsapp_chk: true
   });
@@ -29,6 +30,7 @@ const AppointmentBook = ({ user }) => {
   useEffect(() => {
     fetchAppointments();
     fetchPatients();
+    fetchClinicDoctors();
     
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
@@ -65,6 +67,16 @@ const AppointmentBook = ({ user }) => {
       const res = await fetch(`/api/patients?admin_id=${user.id}`);
       const json = await res.json();
       if(json.success) setPatients(json.data);
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
+  const fetchClinicDoctors = async () => {
+    try {
+      const res = await fetch(`/api/doctors?admin_id=${user.id}`);
+      const json = await res.json();
+      if(json.success) setDoctors(json.data);
     } catch(err) {
       console.error(err);
     }
@@ -293,6 +305,17 @@ const AppointmentBook = ({ user }) => {
                 <div className="form-group" style={{ flex: 1 }}>
                   <label>Date *</label>
                   <input type="date" className="form-control" name="appointment_date" value={formData.appointment_date} onChange={handleChange} required />
+                </div>
+                <div className="form-group" style={{ flex: 1 }}>
+                  <label>Doctor *</label>
+                  <select className="form-control" name="doctor_id" value={formData.doctor_id} onChange={handleChange} required>
+                    <option value="">Select Doctor</option>
+                    {doctors.map(doc => (
+                      <option key={doc.id} value={doc.id}>
+                        Dr. {doc.first_name} {doc.last_name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
