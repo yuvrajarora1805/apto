@@ -37,13 +37,20 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _showError(String msg) {
+  void _showError(String msg, {String? actionLabel, VoidCallback? onAction}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(msg),
         backgroundColor: Colors.redAccent,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        action: actionLabel != null && onAction != null
+            ? SnackBarAction(
+                label: actionLabel,
+                textColor: Colors.white,
+                onPressed: onAction,
+              )
+            : null,
       )
     );
   }

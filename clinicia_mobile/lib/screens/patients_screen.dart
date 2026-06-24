@@ -408,11 +408,15 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         
                         scaffoldMessenger.showSnackBar(SnackBar(content: Text(res['message'] ?? 'Appointment Booked!')));
 
-                        if (whatsappChk && res['whatsapp_message'] != null) {
-                          String phone = res['mobile_no']?.toString() ?? patient['mobile_no'].toString();
+                        if (whatsappChk) {
+                          String phone = (res['mobile_no'] ?? patient['mobile_no']).toString();
                           if (!phone.startsWith('+')) phone = "${res['dial_code'] ?? '91'}$phone";
                           phone = phone.replaceAll('+', '').replaceAll(' ', '');
-                          final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(res['whatsapp_message'])}");
+                          
+                          String messageText = res['whatsapp_message'] ?? 
+                            "Dear ${res['patient_name'] ?? patient['patient_name']},\n\nYour appointment with Dr. Paras Arora has been scheduled on ${res['appointment_date'] ?? dateStr}, ${res['start_time'] ?? startStr}\n\nRegards,\nArora Dental Implant Clinic ,\nPh no: 07837880037";
+                          
+                          final url = Uri.parse("https://api.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(messageText)}");
                           if (await canLaunchUrl(url)) {
                             await launchUrl(url, mode: LaunchMode.externalApplication);
                           }
