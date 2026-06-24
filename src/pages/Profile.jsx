@@ -36,7 +36,7 @@ const Profile = ({ user }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          admin_id: 1, // dummy admin ID
+          admin_id: user?.id || 1,
           ...formData
         })
       });
